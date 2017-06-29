@@ -139,6 +139,56 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/29/test/">test</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/29/test/" class="archive-article-date">
+  	<time datetime="2017-06-29T06:24:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#哈哈</p>
+<p>##哈哈哈</p>
+<p>###哈哈哈</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/29/test/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Android艺术探索-View的事件体系" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -171,7 +221,7 @@
 <li>ACTION_MOVE：手指在屏幕上移动</li>
 <li>ACTION_UP:手指离开屏幕瞬间</li>
 <li>同时系统提供了两种方法用于获取坐标getX()/getY()跟getRawX()/getRawY(),需要说明的是getX()是相对View自身而言的，getRawX是相对手机屏幕左上角的<br>####TouchSlop<br>TouchSlop是系统所能识别出的被认为是滑动的最小距离，即手指在手机屏幕上滑动时，如果两次滑动距离小于这个常量，系统不认为你是在进行滑动操作，而且这个常量跟设备有关，不同设备值可能不一样</li>
-<li>通过ViewConfiguration.get(getContext().getScaledTouchSlop())来获取这个常量的值，利用这个值可以实现更好的用户体验<br>####VelocityTracker<br>VelocityTracker用于追踪手指在滑动过程中的速度，包括水平跟竖直方向的速度，获取速度前必须要先计算速度<br>用法：<br>VelocityTracker v = VelocityTracker.obtain();<br><br>v.addMovement(event);<br>v.computeCurrentVelocity(1000);<br>int xVelocity = v.getXVelocity()<br>速度 = （终点位置-起点位置）/时间段<br>最后当不需要使用的时候需要v.clear();v.recycle();huishou ziyuan<br>####GestureDetector<br>GestureDetector手势检测，用于辅助检测用户的单击，滑动，长按，双击，等行为使用方式比较简单跟速度追踪VelocityTracker类似，具体可以<strong>参考书的127页</strong><br>####Scroller<br>Scroller弹性滑动对象，用于实现View的弹性滑动，scrollTo()跟scrollBy()其实都是一瞬间完成，scroller需要结合view的computeScroll()方法实现弹性滑动</li>
+<li>通过ViewConfiguration.get(getContext().getScaledTouchSlop())来获取这个常量的值，利用这个值可以实现更好的用户体验<br>####VelocityTracker<br>VelocityTracker用于追踪手指在滑动过程中的速度，包括水平跟竖直方向的速度，获取速度前必须要先计算速度<br>用法：<br>VelocityTracker v = VelocityTracker.obtain();<br><br>v.addMovement(event);<br>v.computeCurrentVelocity(1000);<br>int xVelocity = v.getXVelocity()<br>速度 = （终点位置-起点位置）/时间段<br>最后当不需要使用的时候需要v.clear();v.recycle();huishou ziyuan<br>####GestureDetector<br>GestureDetector手势检测，用于辅助检测用户的单击，滑动，长按，双击，等行为使用方式比较简单跟速度追踪VelocityTracker类似，具体可以<strong>参考书的127页</strong><br>####Scroller<br>Scroller弹性滑动对象，用于实现View的弹性滑动，scrollTo()跟scrollBy()其实都是一瞬间完成，scroller需要结合view的computeScroll()方法实现弹性滑动，关于scroller的具体使用，可以参考郭霖的这篇博客<a href="http://blog.csdn.net/guolin_blog/article/details/48719871" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/48719871</a></li>
 </ul>
 </blockquote>
 
