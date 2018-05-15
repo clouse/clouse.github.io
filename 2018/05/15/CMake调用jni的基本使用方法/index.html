@@ -93,12 +93,16 @@
 
 
 
-<meta property="og:type" content="website">
+<meta name="description" content="#CMake在android端构建jni应用    CMake是google新推的jni使用工具，结合android studio使用更加简洁，这里简要描述Cmake的    使用规则 ##1.在工程目录的local.properties目录添加配置支持    ndk.dir=D\:\sdk\ndk-bundle    ndk安装目录    sdk.dir=D\:\sdk    sdk安装目录 #">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Clouse">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/05/15/CMake调用jni的基本使用方法/index.html">
 <meta property="og:site_name" content="Clouse">
+<meta property="og:description" content="#CMake在android端构建jni应用    CMake是google新推的jni使用工具，结合android studio使用更加简洁，这里简要描述Cmake的    使用规则 ##1.在工程目录的local.properties目录添加配置支持    ndk.dir=D\:\sdk\ndk-bundle    ndk安装目录    sdk.dir=D\:\sdk    sdk安装目录 #">
+<meta property="og:updated_time" content="2018-05-15T04:07:35.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Clouse">
+<meta name="twitter:description" content="#CMake在android端构建jni应用    CMake是google新推的jni使用工具，结合android studio使用更加简洁，这里简要描述Cmake的    使用规则 ##1.在工程目录的local.properties目录添加配置支持    ndk.dir=D\:\sdk\ndk-bundle    ndk安装目录    sdk.dir=D\:\sdk    sdk安装目录 #">
 
 
 
@@ -126,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/15/CMake调用jni的基本使用方法/"/>
 
 
 
 
 
-  <title>Clouse</title>
+  <title> | Clouse</title>
   
 
 
@@ -157,9 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -242,9 +244,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -270,9 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/15/CMake调用jni的基本使用方法/" itemprop="url">Unbenannt</a></h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -319,9 +319,7 @@
       
 
       
-        
-          
-            <p>#CMake在android端构建jni应用<br>    CMake是google新推的jni使用工具，结合android studio使用更加简洁，这里简要描述Cmake的<br>    使用规则</p>
+        <p>#CMake在android端构建jni应用<br>    CMake是google新推的jni使用工具，结合android studio使用更加简洁，这里简要描述Cmake的<br>    使用规则</p>
 <p>##1.在工程目录的local.properties目录添加配置支持<br>    ndk.dir=D\:\sdk\ndk-bundle    ndk安装目录<br>    sdk.dir=D\:\sdk    sdk安装目录</p>
 <p>##2.app目录下的build.gradle文件，Cmake主要配置<br>        apply plugin: ‘com.android.application’</p>
 <pre><code>android {
@@ -461,20 +459,27 @@ public class JniUtils {
 }
 </code></pre><p>最后生成so文件的地方<br>app-&gt;build-&gt;intermediate-&gt;cmake-&gt;debug/release</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
@@ -482,164 +487,38 @@ public class JniUtils {
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/29/Android艺术探索-View的事件体系/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Clouse">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Clouse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/29/Android艺术探索-View的事件体系/" itemprop="url">Android艺术探索--View的事件体系</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-29T09:49:13+08:00">
-                2017-06-29
-              </time>
+              <a href="/2017/06/29/Android艺术探索-View的事件体系/" rel="next" title="Android艺术探索--View的事件体系">
+                <i class="fa fa-chevron-left"></i> Android艺术探索--View的事件体系
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h2 id="View的基础知识"><a href="#View的基础知识" class="headerlink" title="View的基础知识"></a>View的基础知识</h2><h3 id="1-View的位置参数"><a href="#1-View的位置参数" class="headerlink" title="1.View的位置参数"></a>1.View的位置参数</h3><blockquote>
-<p>   View的位置主要由它的四个顶点来决定，分别对应View的四个属性：left,right,top,bottom。其中left对应的是View的左上角的横坐标，right对应的是右下角的横坐标，top对应的是左上角的纵坐标，bottom对应的是右上角的纵坐标。这些坐标都是相对父容器来说的这四个参数分别对应View的mLeft,mRight,mTop,mBottom成员变量，获取方式分别是getLeft(),getRight(),getTop(),getBottom(),由此可以通过宽度width = right - left 跟高度height = bottom - top</p>
-<p>从Android3.0开始又新增了x,y,translationX,translationY这几个参数，x，y对应的是view左上角的坐标，而translationX和translationY是View左上角相对父容器的偏移量，这几个参数也是相对父容器,translationX和translationY默认值是0，View在平移过程中top跟left表示的是原始左上角的位置信息<br>公式 x= left + translationX<br>公式 y= right + translationY</p>
-<h3 id="2-MotionEvent跟TouchSlop"><a href="#2-MotionEvent跟TouchSlop" class="headerlink" title="2.MotionEvent跟TouchSlop"></a>2.MotionEvent跟TouchSlop</h3><h4 id="MotionEvent"><a href="#MotionEvent" class="headerlink" title="MotionEvent"></a>MotionEvent</h4><p>手指接触屏幕后所产生的事件<br></p>
-<ul>
-<li>ACTION_DOWN：手指刚接触手机屏幕</li>
-<li>ACTION_MOVE：手指在屏幕上移动</li>
-<li>ACTION_UP:手指离开屏幕瞬间</li>
-<li>同时系统提供了两种方法用于获取坐标getX()/getY()跟getRawX()/getRawY(),需要说明的是getX()是相对View自身而言的，getRawX是相对手机屏幕左上角的<h4 id="TouchSlop"><a href="#TouchSlop" class="headerlink" title="TouchSlop"></a>TouchSlop</h4>TouchSlop是系统所能识别出的被认为是滑动的最小距离，即手指在手机屏幕上滑动时，如果两次滑动距离小于这个常量，系统不认为你是在进行滑动操作，而且这个常量跟设备有关，不同设备值可能不一样</li>
-<li>通过ViewConfiguration.get(getContext().getScaledTouchSlop())来获取这个常量的值，利用这个值可以实现更好的用户体验<h4 id="VelocityTracker"><a href="#VelocityTracker" class="headerlink" title="VelocityTracker"></a>VelocityTracker</h4>VelocityTracker用于追踪手指在滑动过程中的速度，包括水平跟竖直方向的速度，获取速度前必须要先计算速度<br>用法：<br>VelocityTracker v = VelocityTracker.obtain();<br><br>v.addMovement(event);<br>v.computeCurrentVelocity(1000);<br>int xVelocity = v.getXVelocity()<br>速度 = （终点位置-起点位置）/时间段<br>最后当不需要使用的时候需要v.clear();v.recycle();huishou ziyuan <h4 id="GestureDetector"><a href="#GestureDetector" class="headerlink" title="GestureDetector"></a>GestureDetector</h4>GestureDetector手势检测，用于辅助检测用户的单击，滑动，长按，双击，等行为使用方式比较简单跟速度追踪VelocityTracker类似，具体可以<strong>参考书的127页</strong><h4 id="Scroller"><a href="#Scroller" class="headerlink" title="Scroller"></a>Scroller</h4>Scroller弹性滑动对象，用于实现View的弹性滑动，scrollTo()跟scrollBy()其实都是一瞬间完成，scroller需要结合view的computeScroll()方法实现弹性滑动，关于scroller的具体使用，可以参考郭霖的这篇博客<a href="http://blog.csdn.net/guolin_blog/article/details/48719871" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/48719871</a><br>###View的滑动<br>####1.实现view的滑动的几种方式</li>
-<li>通过view自身提供的scrollTo/scrollBy方法</li>
-<li>通过动画给view施加平移效果来实现</li>
-<li>通过改变view的layoutparams使得view重新布局从而实现滑动<br><br><br>scrollTo/scrollBy方法<br>这两个属性对应的其实是mScrollX,mScrollY获取可以通过getScrollX()跟getScrollY（）获得这两个字段对应的值，需要理解的是mScrollX对应的是View的左边缘与View内容左边缘在水平方向的距离，mScrollY同理对应两者在竖直方向的距离,因此scrollTo等方法从左向右滑动mScrollX为负值，从上往下滑动mScrollY为负值<br><br><br>通过动画给view施加平移效果来实现<br>使用动画的方式主要是操作View的translationX跟translationY,View动画实际是对view的影像进行操作，并不能真正改变view的宽高/位置参数，如果不是属性动画还必须将fillafter设置为true才能保留动画结束时的状态<br><br><br>通过改变view的layoutparams使得view重新布局从而实现滑动方式比较简单这里不做赘述<br><br><br><strong>几种动画方式的对比</strong><br>View的scrollTo/scrollBy，操作简单，只能对view的内容滑动，而且不影像内容元素的点击事件<br><br>动画，操作简单，试用没有交互的view和实现复杂的动画效果，3.0以上利用属性动画能改变View本身的属性<br><br>改变布局参数：操作稍微复杂，适用于有交互的view<br>###弹性滑动<br>弹性滑动的思想就是将一次滑动分成若干次小的滑动，方法很多，比如通过Scroller,Handler/postDelayed,Thread/sleep等<br>##View的事件分发机制<br>此处先用一个伪代码来做一个Touch事件的过程分析<br><pre><code><br>public boolean dispatchTouchEvent(MotionEvent ev) {<pre><code>boolean consume = false
-if(onInterceptTouchEvent(ev)){
-    consume = onTouchEvent(ev)
-} else {
-    consume = child.dispatchEvent(ev)
-}
-return consume;
-</code></pre>}<br></code></pre><br>####在事件分发过程中，注意OnTouchListener跟OnTouchEvent还有OnClikListener的区别及优先级具体参见艺术探索P142，下面是关于Touch事件的几条结论的总结</li>
-<li>同一个事件序列是指从手指接触屏幕那一刻起，到手指离开屏幕那一刻结束，以down事件开始，中间含有数量不等的move事件，以up事件结束</li>
-<li>正常情况下，一个事件序列只能被一个view拦截且消耗</li>
-<li>某个view一旦决定拦截，那么这一个事件序列都只能由它来处理，并且它的onInterceptTouchEvent不会再被调用</li>
-<li>某个view一旦开始处理事件，如果它不消耗ACTION_DOWN事件（onTouchEvent返回了false），那么同一事件序列中的其它事件都不会再交给它处理</li>
-<li>如果view不消耗除ACTION_DOWN以外的其它事件，那么这个点击事件会消失，此时父view的onTouchEvent并不会被调用，并且当前view可以持续收到后续的事件，最终这些消失的点击事件会传递给activity处理</li>
-<li>viewgroup默认不拦截任何事件，android源码中的viewgroup的onterceptEvent方法默认返回false</li>
-<li>view没有onInterceptEvent方法，一旦有点击事件传给它，那么它的onTouchEvent方法就会被调用<br>view的onTouchEvent默认都会消耗事件，除非它是不可点击的（clickable跟longclickable同时为false），view的longclickable默认都为false，clickable属性要分情况</li>
-<li>view的enable属性不影像onTouchEvent的默认返回值</li>
-<li>onClick会发生的前提是当前view是可点击，并且收到了down和up事件</li>
-<li>事件传递的过程是由外向内的，即事件总是先传递给父元素，再由父元素分发给子view，通过requestDisallowInterceptTouchEvent方法可以在子元素中干预父元素的事件分发过程，但是action_down除外</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -647,6 +526,10 @@ return consume;
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -824,10 +707,10 @@ return consume;
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
