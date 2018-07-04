@@ -200,7 +200,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Accueil
           </a>
         </li>
       
@@ -253,6 +253,3884 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/android音视频打卡（二）AudioRecord-和-AudioTrack-API-完成音频-PCM-数据的采集和播放/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/11/android音视频打卡（二）AudioRecord-和-AudioTrack-API-完成音频-PCM-数据的采集和播放/" itemprop="url">android音视频打卡（二）AudioRecord 和 AudioTrack API 完成音频 PCM 数据的采集和播放</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-11T09:00:56+08:00">
+                2018-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/android音视频打卡（-）3种方法绘制图片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/08/android音视频打卡（-）3种方法绘制图片/" itemprop="url">android音视频打卡（-）3种方法绘制图片</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-08T10:42:18+08:00">
+                2018-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="在-Android-平台绘制一张图片，使用至少-3-种不同的-API，ImageView，SurfaceView，自定义-View"><a href="#在-Android-平台绘制一张图片，使用至少-3-种不同的-API，ImageView，SurfaceView，自定义-View" class="headerlink" title="在 Android 平台绘制一张图片，使用至少 3 种不同的 API，ImageView，SurfaceView，自定义 View"></a>在 Android 平台绘制一张图片，使用至少 3 种不同的 API，ImageView，SurfaceView，自定义 View</h1><h2 id="ImageView"><a href="#ImageView" class="headerlink" title="ImageView"></a>ImageView</h2><pre>
+task1Iv.setImageResource(R.mipmap.task1);
+</pre>
+## SurfaceView ##
+<pre>
+    final Paint paint = new Paint();
+        final Rect rect  = new Rect();
+        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.task1);
+
+        SurfaceHolder surfaceHolder = surfaceViewTask1.getHolder();
+        surfaceHolder.addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                surfaceViewTask1.getGlobalVisibleRect(rect);
+                int measuredWidth = surfaceViewTask1.getMeasuredWidth();
+                int width = rect.right - rect.left;
+                Log.e("ccc",measuredWidth+"----"+width);
+                Surface surface = holder.getSurface();
+
+                Canvas canvas =  surface.lockCanvas(rect);
+                canvas.drawBitmap(bitmap,null,rect,paint);
+                surface.unlockCanvasAndPost(canvas);
+                surface.release();
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+
+            }
+        });
+</pre>
+### 扩展surfaceView显示倒计时功能 ###
+<pre>
+public class Task1CustomSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
+    private MyThread mThread;
+    public Task1CustomSurfaceView(Context context) {
+        this(context,null);
+    }
+
+    public Task1CustomSurfaceView(Context context, AttributeSet attrs) {
+        this(context, attrs,0);
+    }
+
+    public Task1CustomSurfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        SurfaceHolder holder = getHolder();
+        holder.addCallback(this);
+    }
+
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        mThread = new MyThread(holder);
+        mThread.start();
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+
+    }
+    class MyThread extends Thread{
+        private Paint mPaint = new Paint();
+        private SurfaceHolder mHolder;
+        private DisplayMetrics displayMetrics;
+        MyThread(SurfaceHolder holder){
+            this.mHolder = holder;
+            displayMetrics = getResources().getDisplayMetrics();
+        }
+
+        @Override
+        public void run() {
+            try{
+                for(int i = 0; i<30;i++){ canvas="" canvas.drawcolor(color.white);="" mpaint.setcolor(color.gray);="" mpaint.settextsize(typedvalue.applydimension(typedvalue.complex_unit_sp,16,displaymetrics));="" canvas.drawtext("倒计时："+(30-i),50,50,mpaint);="" mholder.unlockcanvasandpost(canvas);="" thread.sleep(1000);="" }="" }catch="" (exception="" e){="" <="" pre="">
+## 自定义view的方式 ###
+<pre>
+public class MyCustomViewForTask1 extends View{
+    public MyCustomViewForTask1(Context context) {
+        this(context,null);
+    }
+
+    public MyCustomViewForTask1(Context context,AttributeSet attrs) {
+        super(context, attrs,0);
+    }
+
+    public MyCustomViewForTask1(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.drawColor(Color.WHITE);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.task1);
+        canvas.drawBitmap(bitmap,0,0,new Paint());
+    }
+}
+</pre></30;i++){></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/C-primer-学习笔记（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/08/C-primer-学习笔记（一）/" itemprop="url">C++ primer 学习笔记（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-08T09:35:50+08:00">
+                2018-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>C++中如果要使用输入输出工具，需要提供以下两行代码</p>
+<p><pre></pre></p>
+<p>#include <iostream><br>using namespace std;<br><br>C++中endl跟\n都是换行的功能</iostream></p>
+<h5 id="名称空间"><a href="#名称空间" class="headerlink" title="名称空间"></a>名称空间</h5><p>名称空间的作用主要为了解决不同库包含相同函数的情况<br>比如两个库A和B同时包含sayHello()函数<br>此时可以通过A：：sayHello()的方式调用A库的相关函数</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/kotlin基础-函数与lambda表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/30/kotlin基础-函数与lambda表达式/" itemprop="url">kotlin基础-函数与lambda表达式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T09:11:31+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><p>Kotlin 中的函数使用 fun 关键字声明：</p>
+<pre>
+fun double(x: Int): Int {
+    return 2*x
+}
+</pre>
+函数用法  
+调用函数使用传统的方法：  
+<pre>
+val result = double(2)
+</pre>
+调用成员函数使用点表示法：
+<pre>
+Sample().foo() // 创建类 Sample 实例并调用 foo
+</pre>
+参数  
+函数参数使用 Pascal 表示法定义，即 name: type。参数用逗号隔开。每个参数必须有显式类
+型：  
+<pre>
+fun powerOf(number: Int, exponent: Int) {
+    ……
+}
+</pre>
+默认参数  
+函数参数可以有默认值，当省略相应的参数时使用默认值。与其他语言相比，这可以减少重
+载数量：  
+<pre>
+fun read(b: Array<byte>, off: Int = 0, len: Int = b.size) {
+    ……
+}    
+</byte></pre>
+默认值通过类型后面的 = 及给出的值来定义。  
+覆盖方法总是使用与基类型方法相同的默认参数值。 当覆盖一个带有默认参数值的方法时，
+必须从签名中省略默认参数值：  
+<pre>
+open class A {
+    open fun foo(i: Int = 10) { …… }
+} 
+class B : A() {
+    override fun foo(i: Int) { …… } // 不能有默认值
+}    
+</pre>
+#### 命名参数 ####
+可以在调用函数时使用命名的函数参数。当一个函数有大量的参数或默认参数时这会非常方
+便。
+给定以下函数：  
+<pre>
+fun reformat(str: String,
+    normalizeCase: Boolean = true,
+    upperCaseFirstLetter: Boolean = true,
+    divideByCamelHumps: Boolean = false,
+    wordSeparator: Char = ' ') {
+        ……
+}
+</pre>
+我们可以使用默认参数来调用它：  
+reformat(str)  
+然而，当使用非默认参数调用它时，该调用看起来就像：  
+reformat(str, true, true, false, '_')  
+使用命名参数我们可以使代码更具有可读性：  
+<pre>
+reformat(str,
+    normalizeCase = true,
+    upperCaseFirstLetter = true,
+    divideByCamelHumps = false,
+    wordSeparator = '_'
+)
+</pre>
+并且如果我们不需要所有的参数：  
+reformat(str, wordSeparator = '_')  
+当一个函数调用混用位置参数与命名参数时，所有位置参数都要放在第一个命名参数之前。
+例如，允许调用 f(1, y = 2) 但不允许 f(x = 1, 2) 。  
+可以通过使用星号操作符将可变数量参数（vararg ） 以命名形式传入：  
+<pre>
+fun foo(vararg strings: String) { /* …… */ }
+foo(strings = *arrayOf("a", "b", "c"))
+foo(strings = "a") // 对于单个值不需要星号
+</pre>  
+请注意，在调用 Java 函数时不能使用命名参数语法，因为 Java 字节码并不总是保留函数参
+数的名称。  
+#### 返回 Unit 的函数 ####
+如果一个函数不返回任何有用的值，它的返回类型是 Unit 。 Unit 是一种只有一个值
+—— Unit 的类型。这个值不需要显式返回：  
+<pre>
+fun printHello(name: String?): Unit {
+    if (name != null)
+        println("Hello ${name}")
+    else
+        println("Hi there!")
+    // `return Unit` 或者 `return` 是可选的
+}
+Unit 返回类型声明也是可选的。上面的代码等同于：
+fun printHello(name: String?) {
+    ……
+}
+</pre>
+
+<p>单表达式函数<br>当函数返回单个表达式时，可以省略花括号并且在 = 符号之后指定代码体即可：</p>
+<pre>
+fun double(x: Int): Int = x * 2
+</pre>
+当返回值类型可由编译器推断时，显式声明返回类型是可选的：
+<pre>
+fun double(x: Int) = x * 2
+</pre>
+显式返回类型  
+具有块代码体的函数必须始终显式指定返回类型，除非他们旨在返回 Unit ，在这种情况下
+它是可选的。 Kotlin 不推断具有块代码体的函数的返回类型，因为这样的函数在代码体中可
+能有复杂的控制流，并且返回类型对于读者（有时甚至对于编译器） 是不明显的。  
+
+可变数量的参数（Varargs）  
+函数的参数（通常是最后一个） 可以用 vararg 修饰符标记：  
+<pre>
+fun <t> asList(vararg ts: T): List<t> {
+    val result = ArrayList<t>()
+    for (t in ts) // ts is an Array
+        result.add(t)
+    return result
+}
+</t></t></t></pre>
+允许将可变数量的参数传递给函数：  
+<pre>
+val list = asList(1, 2, 3)
+</pre>
+在函数内部，类型 T 的 vararg 参数的可见方式是作为 T 数组，即上例中的 ts 变量具
+有类型 Array <out t=""> 。
+只有一个参数可以标注为 vararg 。如果 vararg 参数不是列表中的最后一个参数， 可以使
+用命名参数语法传递其后的参数的值，或者，如果参数具有函数类型，则通过在括号外部传
+一个 lambda。
+当我们调用 vararg -函数时，我们可以一个接一个地传参，例如 asList(1, 2, 3) ，或者，
+如果我们已经有一个数组并希望将其内容传给该函数，我们使用伸展（spread） 操作符（在
+数组前面加 * ） ：
+<pre>
+val a = arrayOf(1, 2, 3)
+val list = asList(-1, 0, *a, 4)
+</pre>
+中缀表示法
+函数还可以用中缀表示法调用，当  
+<li>他们是成员函数或扩展函数；
+</li><li>他们只有一个参数；
+</li><li>他们用 infix 关键字标注。  
+<pre>
+// 给 Int 定义扩展
+infix fun Int.shl(x: Int): Int {
+    ……
+} /
+/ 用中缀表示法调用扩展函数
+1 shl 2
+// 等同于这样
+1.shl(2)
+</pre>
+函数作用域
+在 Kotlin 中函数可以在文件顶层声明，这意味着你不需要像一些语言如 Java、C# 或 Scala
+那样创建一个类来保存一个函数。此外除了顶层函数，Kotlin 中函数也可以声明在局部作用
+域、作为成员函数以及扩展函数  
+
+局部函数   
+Kotlin 支持局部函数，即一个函数在另一个函数内部：
+<pre>
+fun dfs(graph: Graph) {
+    fun dfs(current: Vertex, visited: Set<vertex>) {
+        if (!visited.add(current)) return
+        for (v in current.neighbors)
+            dfs(v, visited)
+    } 
+    dfs(graph.vertices[0], HashSet())
+}
+</vertex></pre>
+局部函数可以访问外部函数（即闭包） 的局部变量，所以在上例中，visited 可以是局部变
+量：  
+<pre>
+fun dfs(graph: Graph) {
+    val visited = HashSet<vertex>()
+    fun dfs(current: Vertex) {
+        if (!visited.add(current)) return
+        for (v in current.neighbors)
+            dfs(v)
+    } 
+dfs(graph.vertices[0])
+}
+</vertex></pre>
+成员函数  
+成员函数是在类或对象内部定义的函数：  
+<pre>
+class Sample() {
+    fun foo() { print("Foo") }
+}
+</pre>
+成员函数以点表示法调用：  
+<pre>
+Sample().foo() // 创建类 Sample 实例并调用 foo
+</pre>
+泛型函数  
+函数可以有泛型参数，通过在函数名前使用尖括号指定：  
+<pre>
+fun <t> singletonList(item: T): List<t> {
+    // ……
+}
+</t></t></pre>
+尾递归函数  
+Kotlin 支持一种称为尾递归的函数式编程风格。 这允许一些通常用循环写的算法改用递归函
+数来写，而无堆栈溢出的风险。 当一个函数用 tailrec 修饰符标记并满足所需的形式时，编
+译器会优化该递归，留下一个快速而高效的基于循环的版本：  
+<pre>
+tailrec fun findFixPoint(x: Double = 1.0): Double
+= if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
+</pre>
+这段代码计算余弦的不动点（fixpoint of cosine） ，这是一个数学常数。 它只是重复地从 1.0
+开始调用 Math.cos，直到结果不再改变，产生0.7390851332151607的结果。最终代码相当
+于这种更传统风格的代码：  
+<pre>
+private fun findFixPoint(): Double {
+    var x = 1.0
+    while (true) {
+        val y = Math.cos(x)
+        if (x == y) return y
+        x = y
+    }
+}
+</pre>
+要符合 tailrec 修饰符的条件的话，函数必须将其自身调用作为它执行的最后一个操作。在
+递归调用后有更多代码时，不能使用尾递归，并且不能用在 try/catch/finally 块中。目前尾部
+递归只在 JVM 后端中支持。  
+
+### 高阶函数 ###
+高阶函数是将函数用作参数或返回值的函数。 这种函数的一个很好的例子是 lock() ，它接
+受一个锁对象和一个函数，获取锁，运行函数并释放锁：  
+<pre>
+fun <t> lock(lock: Lock, body: () -> T): T {
+    lock.lock()
+    try {
+        return body()
+    } 
+    finally {
+        lock.unlock()
+    }
+}
+</t></pre>
+让我们来检查上面的代码： body 拥有函数类型： () -> T ， 所以它应该是一个不带参数并
+且返回 T 类型值的函数。 它在 try -代码块内部调用、被 lock 保护，其结果
+由 lock（） 函数返回。   
+如果我们想调用 lock() 函数，我们可以把另一个函数传给它作为参数（参见函数引用） ：  
+<pre>
+fun toBeSynchronized() = sharedResource.operation()
+val result = lock(lock, ::toBeSynchronized)
+</pre>
+通常会更方便的另一种方式是传一个 lambda 表达式：  
+<pre>
+val result = lock(lock, { sharedResource.operation() })
+</pre>
+</li><li>Lambda 表达式在下文会有更详细的描述，但为了继续这一段，让我们看一个简短的概述：  
+</li><li>lambda 表达式总是被大括号括着；
+</li><li>其参数（如果有的话） 在 -> 之前声明（参数类型可以省略） ；
+</li><li>函数体（如果存在的话） 在 -> 后面。  
+在 Kotlin 中有一个约定，如果函数的最后一个参数是一个函数，并且你传递一个 lambda 表达
+式作为相应的参数，你可以在圆括号之外指定它：
+<pre>
+lock (lock) {
+    sharedResource.operation()
+}
+</pre>
+高阶函数的另一个例子是 map() ：  
+<pre>
+fun <t, r=""> List<t>.map(transform: (T) -> R): List<r> {
+    val result = arrayListOf<r>()
+    for (item in this)
+        result.add(transform(item))
+    return result
+}
+</r></r></t></t,></pre>
+该函数可以如下调用:  
+<pre>
+val doubled = ints.map { value -> value * 2 }
+</pre>
+请注意，如果 lambda 是该调用的唯一参数，则调用中的圆括号可以完全省略。
+
+
+it ：单个参数的隐式名称
+另一个有用的约定是，如果函数字面值只有一个参数， 那么它的声明可以省略（连同 -> ） ，其名称是 it 。   
+<pre>
+ints.map { it * 2 }
+</pre>
+这些约定可以写LINQ-风格的代码:  
+<pre>
+strings.filter { it.length == 5 }.sortedBy { it }.map { it.toUpperCase() }
+</pre>
+下划线用于未使用的变量（自 1.1 起）  
+如果 lambda 表达式的参数未使用，那么可以用下划线取代其名称：  
+<pre>
+map.forEach { _, value -> println("$value!") }
+</pre>
+
+<h4 id="Lambda-表达式与匿名函数"><a href="#Lambda-表达式与匿名函数" class="headerlink" title="Lambda 表达式与匿名函数"></a>Lambda 表达式与匿名函数</h4><p>一个 lambda 表达式或匿名函数是一个“函数字面值”，即一个未声明的函数， 但立即做为表达<br>式传递。考虑下面的例子  </p>
+<pre>
+max(strings, { a, b -> a.length < b.length })
+</pre>
+函数 max 是一个高阶函数，换句话说它接受一个函数作为第二个参数。 其第二个参数是一
+个表达式，它本身是一个函数，即函数字面值。写成函数的话，它相当于：
+<pre>
+fun compare(a: String, b: String): Boolean = a.length < b.length
+</pre>
+**函数类型**
+对于接受另一个函数作为参数的函数，我们必须为该参数指定函数类型。 例如上述函数 max
+定义如下：  
+<pre>
+fun <t> max(collection: Collection<t>, less: (T, T) -> Boolean): T? {
+    var max: T? = null
+    for (it in collection)
+        if (max == null || less(max, it))
+            max = it
+    return max
+}
+</t></t></pre>
+参数 less 的类型是 (T, T) -> Boolean ，即一个接受两个类型 T 的参数并返回一个布尔值
+的函数： 如果第一个参数小于第二个那么该函数返回 true。
+在上面第 4 行代码中， less 作为一个函数使用：通过传入两个 T 类型的参数来调用。
+如上所写的是就函数类型，或者可以有命名参数，如果你想文档化每个参数的含义的话。  
+<pre>
+val compare: (x: T, y: T) -> Int = ……
+</pre>
+如要声明一个函数类型的可空变量，请将整个函数类型括在括号中并在其后加上问号：  
+var sum: ((Int, Int) -> Int)? = null  
+
+#### Lambda 表达式语法 ####
+Lambda 表达式的完整语法形式，即函数类型的字面值如下：  
+<pre>
+val sum = { x: Int, y: Int -> x + y }
+</pre>
+lambda 表达式总是被大括号括着， 完整语法形式的参数声明放在大括号内，并有可选的类型
+标注， 函数体跟在一个 -> 符号之后。如果推断出的该 lambda 的返回类型不是 Unit ，那
+么该 lambda 主体中的最后一个（或可能是单个） 表达式会视为返回值。  
+如果我们把所有可选标注都留下，看起来如下：  
+<pre>
+val sum: (Int, Int) -> Int = { x, y -> x + y }
+</pre>
+一个 lambda 表达式只有一个参数是很常见的。 如果 Kotlin 可以自己计算出签名，它允许我
+们不声明唯一的参数，并且将隐含地为我们声明其名称为 it ：  
+ints.filter { it > 0 } // 这个字面值是“(it: Int) -> Boolean”类型的  
+我们可以使用限定的返回语法从 lambda 显式返回一个值。否则，将隐式返回最后一个表达式
+的值。因此，以下两个片段是等价的：  
+<pre>
+ints.filter {
+    val shouldFilter = it > 0
+    shouldFilter
+} 
+ints.filter {
+    val shouldFilter = it > 0
+    return@filter shouldFilter
+}
+</pre>
+#### 匿名函数 ####
+上面提供的 lambda 表达式语法缺少的一个东西是指定函数的返回类型的能力。在大多数情况
+下，这是不必要的。因为返回类型可以自动推断出来。然而，如果确实需要显式指定，可以
+使用另一种语法： 匿名函数 。   
+<pre>
+fun(x: Int, y: Int): Int = x + y
+</pre>
+匿名函数看起来非常像一个常规函数声明，除了其名称省略了。其函数体可以是表达式（如
+上所示） 或代码块：  
+<pre>
+fun(x: Int, y: Int): Int {
+    return x + y
+}
+</pre>
+参数和返回类型的指定方式与常规函数相同，除了能够从上下文推断出的参数类型可以省
+略：  
+<pre>
+ints.filter(fun(item) = item > 0)
+</pre>
+匿名函数的返回类型推断机制与正常函数一样：对于具有表达式函数体的匿名函数将自动推
+断返回类型，而具有代码块函数体的返回类型必须显式指定（或者已假定为 Unit ） 。
+请注意，匿名函数参数总是在括号内传递。 允许将函数留在圆括号外的简写语法仅适用于
+lambda 表达式。
+Lambda表达式与匿名函数之间的另一个区别是非局部返回的行为。一个不带标签的 return
+语句总是在用 fun 关键字声明的函数中返回。这意味着 lambda 表达式中的 return 将从包
+含它的函数返回，而匿名函数中的 return 将从匿名函数自身返回。  
+#### 闭包 ####
+Lambda 表达式或者匿名函数（以及局部函数和对象表达式） 可以访问其 闭包 ，即在外部作
+用域中声明的变量。 与 Java 不同的是可以修改闭包中捕获的变量：
+<pre>
+var sum = 0
+ints.filter { it > 0 }.forEach {
+    sum += it
+} 
+print(sum)
+</pre>
+Kotlin 提供了使用指定的 接收者对象 调用函数字面值的功能。 在函数字面值的函数体中，可
+以调用该接收者对象上的方法而无需任何额外的限定符。 这类似于扩展函数，它允许你在函
+数体内访问接收者对象的成员。 其用法的最重要的示例之一是类型安全的 Groovy-风格构建
+器。
+这样的函数字面值的类型是一个带有接收者的函数类型：  
+<pre>
+sum : Int.(other: Int) -> Int
+该函数字面值可以这样调用，就像它是接收者对象上的一个方法一样：
+1.sum(2)
+</pre>
+匿名函数语法允许你直接指定函数字面值的接收者类型。 如果你需要使用带接收者的函数类
+型声明一个变量，并在之后使用它，这将非常有用。  
+<pre>
+val sum = fun Int.(other: Int): Int = this + other
+</pre>
+当接收者类型可以从上下文推断时，lambda 表达式可以用作带接收者的函数字面值。  
+<pre>
+class HTML {
+    fun body() { …… }
+} 
+fun html(init: HTML.() -> Unit): HTML {
+val html = HTML() // 创建接收者对象
+html.init() // 将该接收者对象传给该 lambda
+return html
+} 
+html { // 带接收者的 lambda 由此开始
+    body() // 调用该接收者对象的一个方法
+}
+</pre>
+#### 内联函数 ####
+使用高阶函数会带来一些运行时的效率损失：每一个函数都是一个对象，并且会捕获一个闭
+包。 即那些在函数体内会访问到的变量。 内存分配（对于函数对象和类） 和虚拟调用会引入
+运行时间开销。
+但是在许多情况下通过内联化 lambda 表达式可以消除这类的开销。 下述函数是这种情况的
+很好的例子。即 lock() 函数可以很容易地在调用处内联。 考虑下面的情况：  
+<pre>
+lock(l) { foo() }
+</pre>
+编译器没有为参数创建一个函数对象并生成一个调用。取而代之，编译器可以生成以下代
+码：  
+<pre>
+l.lock()
+try {
+    foo()
+} 
+finally {
+    l.unlock()
+}
+</pre>
+这个不是我们从一开始就想要的吗？
+为了让编译器这么做，我们需要使用 inline 修饰符标记 lock() 函数：  
+<pre>
+inline fun lock<t>(lock: Lock, body: () -> T): T {
+    // ……
+}
+</t></pre>
+inline 修饰符影响函数本身和传给它的 lambda 表达式：所有这些都将内联到调用处。
+内联可能导致生成的代码增加；不过如果我们使用得当（即避免内联过大函数） ，性能上会
+有所提升，尤其是在循环中的“超多态（megamorphic） ”调用处  
+
+禁用内联
+如果你只想被（作为参数） 传给一个内联函数的 lamda 表达式中只有一些被内联，你可以用
+noinline 修饰符标记一些函数参数：  
+<pre>
+inline fun foo(inlined: () -> Unit, noinline notInlined: () -> Unit) {
+    // ……
+}
+</pre>
+可以内联的 lambda 表达式只能在内联函数内部调用或者作为可内联的参数传递， 但是
+noinline 的可以以任何我们喜欢的方式操作：存储在字段中、传送它等等。
+需要注意的是，如果一个内联函数没有可内联的函数参数并且没有具体化的类型参数，编译
+器会产生一个警告，因为内联这样的函数很可能并无益处（如果你确认需要内联，则可以用
+@Suppress("NOTHING_TO_INLINE") 注解关掉该警告） 。  
+#### 非局部返回 ####
+在 Kotlin 中，我们可以只使用一个正常的、非限定的 return 来退出一个命名或匿名函数。
+这意味着要退出一个 lambda 表达式，我们必须使用一个标签，并且在 lambda 表达式内部禁
+止使用裸 return ，因为 lambda 表达式不能使包含它的函数返回：  
+<pre>
+fun foo() {
+    ordinaryFunction {
+        return // 错误：不能使 `foo` 在此处返回
+    }
+}
+</pre>
+但是如果 lambda 表达式传给的函数是内联的，该 return 也可以内联，所以它是允许的：  
+<pre>
+fun foo() {
+    inline Function {
+        return // OK：该 lambda 表达式是内联的
+    }
+}
+</pre>
+这种返回（位于 lambda 表达式中，但退出包含它的函数） 称为非局部返回。 我们习惯了在
+循环中用这种结构，其内联函数通常包含：  
+<pre>
+fun hasZeros(ints: List<int>): Boolean {
+    ints.forEach {
+    if (it == 0) 
+        return true // 从 hasZeros 返回
+    } 
+    return false
+}
+</int></pre>
+请注意，一些内联函数可能调用传给它们的不是直接来自函数体、而是来自另一个执行上下
+文的 lambda 表达式参数，例如来自局部对象或嵌套函数。在这种情况下，该 lambda 表达式
+中也不允许非局部控制流。为了标识这种情况，该 lambda 表达式参数需要用 crossinline
+修饰符标记:  
+<pre>
+inline fun f(crossinline body: () -> Unit) {
+    val f = object: Runnable {
+        override fun run() = body()
+    } 
+    // ……
+}
+</pre>
+**break 和 continue 在内联的 lambda 表达式中还不可用，但我们也计划支持它们。  **
+
+#### 具体化的类型参数 ####
+有时候我们需要访问一个作为参数传给我们的一个类型：  
+<pre>
+inline fun <reified t=""> TreeNode.findParentOfType(): T? {
+    var p = parent
+    while (p != null && p !is T) {
+        p = p.parent
+    } 
+    return p as T?
+}
+</reified></pre>
+我们使用 reified 修饰符来限定类型参数，现在可以在函数内部访问它了， 几乎就像是一个
+普通的类一样。由于函数是内联的，不需要反射，正常的操作符如 !is 和 as 现在都能用
+了。此外，我们还可以按照上面提到的方式调用
+它： myTree.findParentOfType<mytreenodetype>() 。
+
+内联属性（自 1.1 起）  
+inline 修饰符可用于没有幕后字段的属性的访问器。 你可以标注独立的属性访问器：  
+你也可以标注整个属性，将它的两个访问器都标记为内联  
+<pre>
+val foo: Foo
+    inline get() = Foo()
+var bar: Bar
+    get() = ……
+    inline set(v) { …… }
+
+
+
+inline var bar: Bar
+    get() = ……
+    set(v) { …… }
+</pre>
+**公有 API 内联函数的限制**
+当一个内联函数是 public 或 protected 而不是 private 或 internal 声明的一部分时，
+就会认为它是一个模块级的公有 API。可以在其他模块中调用它，并且也可以在调用处内联这
+样的调用。
+这带来了一些由模块做这样变更时导致的二进制兼容的风险——声明一个内联函数但调用它
+的模块在它修改后并没有重新编译。
+为了消除这种由非公有 API 变更引入的不兼容的风险，公有 API 内联函数体内不允许使用非
+公有声明，即，不允许使用 private 与 internal 声明以及其部件。
+一个 internal 声明可以由 @PublishedApi 标注，这会允许它在公有 API 内联函数中使用。
+当一个 internal 内联函数标记有 @PublishedApi 时，也会像公有函数一样检查其函数体  
+
+### 协程 ###
+#### 阻塞 vs 挂起 ####
+**挂起函数**
+当我们调用标记有特殊修饰符 suspend 的函数时，会发生挂起：  
+<pre>
+suspend fun doSomething(foo: Foo): Bar {
+……
+}
+</pre>
+kotlin.coroutines.experimental 中仅有的“应用程序级”函数是  
+<li>buildSequence()
+</li><li>buildIterator()  
+<pre>
+import kotlin.coroutines.experimental.*
+fun main(args: Array<string>) {
+    //sampleStart
+    val fibonacciSeq = buildSequence {
+        var a = 0
+        var b = 1
+        yield(1)
+        while (true) {
+            yield(a + b)
+            val tmp = a + b
+            a = b
+            b = tmp
+        }
+    }
+    //sampleEnd
+    // 输出前五个斐波纳契数字
+    println(fibonacciSeq.take(8).toList())
+}
+</string></pre>
+这通过创建一个协程生成一个惰性的、潜在无限的斐波那契数列，该协程通过调用 yield()
+函数来产生连续的斐波纳契数。当在这样的序列的迭代器上迭代每一步，都会执行生成下一
+个数的协程的另一部分。因此，我们可以从该序列中取出任何有限的数字列表，例如
+fibonacciSeq.take(8).toList() 结果是 [1, 1, 2, 3, 5, 8, 13, 21] 。协程足够廉价使这很
+实用。  
+
+buildIterator() 的工作方式类似于 buildSequence() ，但返回一个惰性迭代器。
+可以通过为 SequenceBuilder 类写挂起扩展（带有上文描述的 @RestrictsSuspension 注解）
+来为 buildSequence() 添加自定义生产逻辑（custom yielding logic） 
+
+kotlin 的协程怎么用
+在 kotlin 上，使用协程你只需要知道两个方法和他们的返回类型，就可以很熟练的用上协程了。分别是：  
+<pre>
+fun launch(): Job
+fun async(): Deferred
+</pre>
+从方法名我们就能看出，launch表示启动一个协程。  
+<pre>
+public fun launch(
+    context: CoroutineContext,
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    block: suspend CoroutineScope.() -> Unit
+): Job {
+}
+</pre>
+
+<p>launch()方法接收三个参数，通常很少用到第二个参数。<br>第一个参数是一个协程的上下文，CoroutineContext不仅可以用于在协程跳转的时刻传递数据，同时最主要的功能，是用于表明协程运行与恢复时的上下文环境。<br>通常Android在用的时候都是传一个UI就表示在 UI 线程启动协程，或者传一个CommonPool表示在异步启动协程，还有一个是Unconfined表示不指定，在哪个线程调用就在哪个线程恢复。  </p>
+<p><pre><br>fun test() {<br>    launch(UI) {<br>        val isUIThread = Thread.currentThread() == Looper.getMainLooper().thread<br>        println(“UI::===$isUIThread”)<br>    }<br>    launch(CommonPool) {<br>        val isUIThread = Thread.currentThread() == Looper.getMainLooper().thread<br>        println(“CommonPool::===$isUIThread”)<br>    }<br>}<br></pre><br>Job对象<br>launch()方法会返回一个job对象，job对象常用的方法有三个，叫start、join和cancel。分别对应了协程的启动、切换至当前协程、取消。<br>例如下面是start()方法的使用示例：  </p>
+<p><pre><br>fun test() {<br>    //当启动类型设置成LAZY时，协程不会立即启动，而是手动调用start()后他才会启动。<br>    val job = launch(UI, CoroutineStart.LAZY) {<br>        println(“hello”)<br>    }<br>    job.start()<br>}<br></pre><br>join()方法就比较特殊，他是一个suspend方法。suspend 修饰的方法(或闭包)只能调用被suspend修饰过的方法(或闭包)。 方法声明如下：  </p>
+<p><pre><br>public suspend fun join()<br></pre><br>因此，join()方法只能在协程体内部使用，跟他的功能：切换至当前协程所吻合。  </p>
+<p><pre><br>fun test() {<br>    val job1 = launch(UI, CoroutineStart.LAZY) {<br>        println(“hello1”)<br>    }<br>    val job2 = launch(UI) {<br>        println(“hello2”)<br>        job1.join()<br>        println(“hello3”)<br>    }<br>}</pre></p>
+<p>这段代码执行后将会输出<br>hello2<br>hello1<br>hello3<br><br>async()方法<br>async()方法也是创建一个协程并启动，甚至连方法的声明都跟launch()方法一模一样。<br>不同的是，async()方法的返回值，返回的是一个Deferred对象。这个接口是Job接口的子类。<br>因此上文介绍的所有方法，都可以用于Deferred的对象。</p>
+<p>Deferred最大的用处在于他特有的一个方法await()：  </p>
+<p><pre><br>public suspend fun await(): T<br></pre><br>await()可以返回当前协程的执行结果，也就是你可以这样写代码：  </p>
+<p><pre><br>fun test() {<br>    val deferred1 = async(CommonPool) {<br>        “hello1”<br>    }<br>    val deferred2 = async(UI) {<br>        println(“hello2”)<br>        println(deferred1.await())<br>    }<br>}<br></pre><br>你发现神奇的地方了吗，我让一个工作在主线程的协程，获取到了一个异步协程的返回值。<br>这意味着，我们以后网络请求、图片加载、数据库、文件操作什么的，都可以丢到一个异步的协程中去，然后在同步代码中直接取返回值，而不再需要去写回调了。<br>这就是我们经常使用的一个最大特性。<br><strong>kotlin 协程使用示例</strong>  </p>
+<p><pre><br>fun test() {<br>    //每秒输出两个数字<br>    val job1 = launch(Unconfined, CoroutineStart.LAZY) {<br>        var count = 0<br>        while (true) {<br>            count++<br>            //delay()表示将这个协程挂起500ms<br>            delay(500)<br>            println(“count::$count”)<br>        }<br>    }</pre></p>
+<pre><code>//job2会立刻启动
+val job2 = async(CommonPool) {
+    job1.start()
+    &quot;ZhangTao&quot;
+}
+
+launch(UI) {
+    delay(3000)
+    job1.cancel()
+    //await()的规则是：如果此刻job2已经执行完则立刻返回结果，否则等待job2执行
+    println(job2.await())
+}
+</code></pre><p>}<br><br><strong>kotlin协程补充</strong></p>
+<p><pre><br>launch (UI){<br>        folders.listFiles().filter {<br>            it.name.endsWith(“png”)<br>        }.forEach {<br>            val job1 = async(CommonPool) {<br>                getImgeFromFile(it.absoluteFile)<br>            }<br>            imageLayout.loadImg(job1.await())<br>        }<br>    }<br></pre><br>kotlin 的语法会让很多人觉得launch()、async()是两个协程方法。其实不然，真正的协程是launch()传入的闭包参数。当launch()调用的时候，会启动一个协程（本质上并不一定是立即启动，下一篇文章解释）。<br>async()方法调用的时候又启动了一个协程，此刻外部协程的状态(包括CPU、方法调用、变量信息)会被暂存，进而切换到async()启动的协程执行。<br>在本例子中，launch()、async()这两个方法都显式传入了两个参数：</p>
+<p>1、第一个参数是一个协程的上下文，类型是CoroutineContext。<br>CoroutineContext不仅可以用于在协程跳转的时刻传递数据，同时最主要的功能，也是在本例中的作用是用于表明协程运行与恢复时的上下文环境。<br>例如launch()方法中的UI参数，他实际上是一个封装了Handle的CoroutineContext对象。<br><strong>suspend</strong><br>一个协程方法(或闭包)必须被 suspend 修饰，同时 suspend 修饰的方法(或闭包)只能被suspend修饰过的方法(或闭包)调用。<br>suspend修饰后代码发生了怎样的变化？</p>
+<p>我们知道，kotlin的闭包(lambda)在被编译后是转换成了内部类的对象，而一个被suspend修饰的闭包，就是一个特殊的内部类。例如这段例子：<br>原理请参考：<br><a href="https://kymjs.com/code/2017/11/06/01/" target="_blank" rel="external">https://kymjs.com/code/2017/11/06/01/</a></p>
+</li></mytreenodetype></li></out>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/25/Kotlin基础（2）-类与对象-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/25/Kotlin基础（2）-类与对象-2/" itemprop="url">Kotlin基础（2）-类与对象(2)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-25T16:05:12+08:00">
+                2018-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>Kotlin 中的类也可以有类型参数：  </p>
+<pre>
+class Box<t>(t: T) {
+    var value = t
+}
+val box: Box<int> = Box<int>(1)
+</int></int></t></pre>
+但是如果类型参数可以推断出来，例如从构造函数的参数或者从其他途径，允许省略类型参
+数：  
+<pre>
+val box = Box(1) // 1 具有类型 Int，所以编译器知道我们说的是 Box<int>。
+</int></pre>
+### 型变 ###
+Java 类型系统中最棘手的部分之一是通配符类型（参见 Java Generics FAQ） 。 而 Kotlin 中
+没有。 相反，它有两个其他的东西：声明处型变（declaration-site variance） 与类型投影
+（type projections） 。   
+首先，让我们思考为什么 Java 需要那些神秘的通配符。在 Effective Java 解释了该问题——
+第28条：利用有限制通配符来提升 API 的灵活性。 首先，Java 中的泛型是不型变的，这意
+味着 List<string> 并不是 List<object> 的子类型。 为什么这样？ 如果 List 不是不型变
+的，它就没比 Java 的数组好到哪去，因为如下代码会通过编译然后导致运行时异常：
+<pre>
+// Java
+List<string> strs = new ArrayList<string>();
+List<object> objs = strs; // ！！！即将来临的问题的原因就在这里。Java 禁止这样！
+objs.add(1); // 这里我们把一个整数放入一个字符串列表
+String s = strs.get(0); // ！！！ ClassCastException：无法将整数转换为字符串
+</object></string></string></pre>
+#### 声明处型变 ####
+我们可以标注 Source
+的类型参数 T 来确保它仅从 Source<t> 成员中返回（生产） ，并从不被消费。 为此，我们
+提供 out 修饰符：  
+<pre>
+abstract class Source<out t=""> {
+abstract fun nextT(): T
+} 
+fun demo(strs: Source<string>) {
+    val objects: Source<any> = strs // 这个没问题，因为 T 是一个 out-参数
+    // ……
+}
+</any></string></out></pre>
+一般原则是：当一个类 C 的类型参数 T 被声明为 out 时，它就只能出现在 C 的成员的输
+出-位置，但回报是 C<base> 可以安全地作为 C<derived> 的超类。   
+out修饰符称为型变注解，并且由于它在类型参数声明处提供，所以我们讲声明处型变。 这与
+Java 的使用处型变相反，其类型用途通配符使得类型协变。
+
+另外除了 out，Kotlin 又补充了一个型变注释：in。它使得一个类型参数逆变：只可以被消费
+而不可以被生产。逆变类的一个很好的例子是 Comparable ：  
+<pre>
+abstract class Comparable<in t=""> {
+    abstract fun compareTo(other: T): Int
+} 
+fun demo(x: Comparable<number>) {
+x.compareTo(1.0) // 1.0 拥有类型 Double，它是 Number 的子类型
+// 因此，我们可以将 x 赋给类型为 Comparable <double> 的变量
+val y: Comparable<double> = x // OK！
+}
+</double></double></number></in></pre>
+#### 类型投影 ####
+这里我们遇到同样熟悉的问题： Array <t> 在 T 上是不型变的，因此 Array <int> 和
+Array <any> 都不是另一个的子类型。为什么？ 再次重复，因为 copy 可能做坏事，也就是
+说，例如它可能尝试写一个 String 到 from ， 并且如果我们实际上传递一个 Int 的数组，
+一段时间后将会抛出一个 ClassCastException 异常。  
+那么，我们唯一要确保的是 copy() 不会做任何坏事。我们想阻止它写到 from ，我们可
+以：  
+<pre>
+fun copy(from: Array<out any="">, to: Array<any>) {
+// ……
+}
+</any></out></pre>  
+这里发生的事情称为类型投影：我们说 from 不仅仅是一个数组，而是一个受限制的（投影
+的） 数组：我们只可以调用返回类型为类型参数 T 的方法，如上，这意味着我们只能调用
+get() 。这就是我们的使用处型变的用法，并且是对应于 Java 的 Array<? extends
+Object> 、 但使用更简单些的方式。
+你也可以使用 in 投影一个类型：  
+<pre>
+fun fill(dest: Array<in string="">, value: String) {
+// ……
+}
+</in></pre>
+Array<in string=""> 对应于 Java 的 Array<? super String> ，也就是说，你可以传递一个
+CharSequence 数组或一个 Object 数组给 fill() 函数。 
+#### 泛型函数 ####
+<pre>
+fun <t> singletonList(item: T): List<t> {
+// ……
+} 
+fun <t> T.basicToString() : String { // 扩展函数
+// ……
+}
+</t></t></t></pre>
+#### 泛型约束 ####
+能够替换给定类型参数的所有可能类型的集合可以由泛型约束限制。  
+上界  
+<pre>
+fun <t :="" comparable<t="">> sort(list: List<t>) {
+// ……
+}
+</t></t></pre>
+冒号之后指定的类型是上界：只有 Comparable<t> 的子类型可以替代 T 。   
+默认的上界（如果没有声明） 是 Any? 。在尖括号中只能指定一个上界。 如果同一类型参数
+需要多个上界，我们需要一个单独的 where-子句：  
+<pre>
+fun <t> cloneWhenGreater(list: List<t>, threshold: T): List<t>
+where T : Comparable,
+T : Cloneable {
+    return list.filter { it > threshold }.map { it.clone() }
+}
+</t></t></t></pre>  
+### 嵌套类与内部类 ###
+类可以嵌套在其他类中：
+<pre>
+class Outer {
+private val bar: Int = 1
+    class Nested {
+        fun foo() = 2
+    }
+} 
+val demo = Outer.Nested().foo() // == 2
+</pre>
+**内部类**
+类可以标记为 inner 以便能够访问外部类的成员。内部类会带有一个对外部类的对象的引
+用：  
+<pre>
+class Outer {
+    private val bar: Int = 1
+    inner class Inner {
+        fun foo() = bar
+    }
+} 
+val demo = Outer().Inner().foo() // == 1
+</pre>
+**匿名内部类**
+使用对象表达式创建匿名内部类实例：  
+<pre>
+window.addMouseListener(object: MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) {
+        // ……
+    } 
+    override fun mouseEntered(e: MouseEvent) {
+        // ……
+    }
+})
+</pre>
+如果对象是函数式 Java 接口（即具有单个抽象方法的 Java 接口） 的实例， 你可以使用带接
+口类型前缀的lambda表达式创建它：  
+<pre>
+val listener = ActionListener { println("clicked") }
+</pre>
+#### 枚举类 ####
+枚举类的最基本的用法是实现类型安全的枚举： 
+<pre>
+enum class Direction {
+    NORTH, SOUTH, WEST, EAST
+}
+</pre>
+每个枚举常量都是一个对象。枚举常量用逗号分隔。  
+**初始化**
+因为每一个枚举都是枚举类的实例，所以他们可以是这样初始化过的：
+<pre>
+enum class Color(val rgb: Int) {
+    RED(0xFF0000),
+    GREEN(0x00FF00),
+    BLUE(0x0000FF)
+}
+</pre>
+匿名类
+枚举常量也可以声明自己的匿名类：  
+<pre>
+enum class ProtocolState {
+    WAITING {
+        override fun signal() = TALKING
+    },
+    TALKING {
+        override fun signal() = WAITING
+    };
+    abstract fun signal(): ProtocolState
+}
+</pre>
+及相应的方法、以及覆盖基类的方法。注意，如果枚举类定义任何成员，要使用分号将成员
+定义中的枚举常量定义分隔开，就像在 Java 中一样
+
+**使用枚举常量**
+就像在 Java 中一样，Kotlin 中的枚举类也有合成方法允许列出定义的枚举常量以及通过名称
+获取枚举常量。这些方法的签名如下（假设枚举类的名称是 EnumClass ） ：
+<pre>
+EnumClass.valueOf(value: String): EnumClass
+EnumClass.values(): Array<enumclass>
+</enumclass></pre>
+如果指定的名称与类中定义的任何枚举常量均不匹配， valueOf() 方法将抛出
+IllegalArgumentException 异常。  
+
+
+自 Kotlin 1.1 起，可以使用 enumValues<t>() 和 enumValueOf<t>() 函数以泛型的方式访问枚
+举类中的常量 ：
+<pre>
+enum class RGB { RED, GREEN, BLUE }
+inline fun <reified t="" :="" enum<t="">> printAllValues() {
+    print(enumValues<t>().joinToString { it.name })
+}
+printAllValues<rgb>() // 输出 RED, GREEN, BLUE
+</rgb></t></reified></pre>
+每个枚举常量都具有在枚举类声明中获取其名称和位置的属性：
+<pre>
+val name: String
+val ordinal: Int
+</pre>
+枚举常量还实现了 Comparable 接口， 其中自然顺序是它们在枚举类中定义的顺序  
+### 对象表达式和对象声明 ###
+有时候，我们需要创建一个对某个类做了轻微改动的类的对象，而不用为之显式声明新的子
+类。 Java 用匿名内部类 处理这种情况。 Kotlin 用对象表达式和对象声明对这个概念稍微概
+括了下。  
+#### 对象表达式  ####
+要创建一个继承自某个（或某些） 类型的匿名类的对象，我们会这么写：
+<pre>
+window.addMouseListener(object : MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) {
+        // ……
+    } 
+    override fun mouseEntered(e: MouseEvent) {
+        // ……
+    }
+})
+</pre>
+如果超类型有一个构造函数，则必须传递适当的构造函数参数给它。 多个超类型可以由跟在
+冒号后面的逗号分隔的列表指定：  
+<pre>
+open class A(x: Int) {
+    public open val y: Int = x
+} 
+interface B {……}
+val ab: A = object : A(1), B {
+    override val y = 15
+}
+</pre>
+任何时候，如果我们只需要“一个对象而已”，并不需要特殊超类型，那么我们可以简单地写：  
+<pre>
+fun foo() {
+    val adHoc = object {
+    var x: Int = 0
+    var y: Int = 0
+} 
+print(adHoc.x + adHoc.y)
+}
+</pre>
+请注意，匿名对象可以用作只在本地和私有作用域中声明的类型。如果你使用匿名对象作为
+公有函数的返回类型或者用作公有属性的类型，那么该函数或属性的实际类型会是匿名对象
+声明的超类型，如果你没有声明任何超类型，就会是 Any 。在匿名对象中添加的成员将无法
+访问。  
+<pre>
+class C {
+    // 私有函数，所以其返回类型是匿名对象类型
+    private fun foo() = object {
+    val x: String = "x"
+} 
+// 公有函数，所以其返回类型是 Any
+fun publicFoo() = object {
+    val x: String = "x"
+} 
+fun bar() {
+    val x1 = foo().x // 没问题
+    val x2 = publicFoo().x // 错误：未能解析的引用“x”
+}
+}
+</pre>
+就像 Java 匿名内部类一样，对象表达式中的代码可以访问来自包含它的作用域的变量。
+（与 Java 不同的是，这不仅限于 final 变量。）  
+**对象声明**
+单例模式是一种非常有用的模式，而 Kotlin（继 Scala 之后） 使单例声明变得很容易：  
+<pre>
+object DataProviderManager {
+    fun registerDataProvider(provider: DataProvider) {
+    // ……
+} 
+val allDataProviders: Collection<dataprovider>
+    get() = // ……
+}
+</dataprovider></pre>
+这称为对象声明。并且它总是在 object 关键字后跟一个名称。 就像变量声明一样，对象声
+明不是一个表达式，不能用在赋值语句的右边。  
+要引用该对象，我们直接使用其名称即可： DataProviderManager.registerDataProvider(……)
+这些对象可以有超类型，
+注意：对象声明不能在局部作用域（即直接嵌套在函数内部） ，但是它们可以嵌套到其他对
+象声明或非内部类中。  
+
+#### 伴生对象 ####
+类内部的对象声明可以用 companion 关键字标记：  
+<pre>
+class MyClass {
+    companion object Factory {
+        fun create(): MyClass = MyClass()
+    }
+}
+</pre>
+该伴生对象的成员可通过只使用类名作为限定符来调用  
+val instance = MyClass.create()  
+可以省略伴生对象的名称，在这种情况下将使用名称 Companion ：
+<pre>
+class MyClass {
+    companion object {
+    }
+} 
+val x = MyClass.Companion
+</pre>
+请注意，即使伴生对象的成员看起来像其他语言的静态成员，在运行时他们仍然是真实对象
+的实例成员，而且，例如还可以实现接口：
+<pre>
+interface Factory<t> {
+    fun create(): T
+} 
+class MyClass {
+    companion object : Factory<myclass> {
+        override fun create(): MyClass = MyClass()
+    }
+}
+</myclass></t></pre>
+对象表达式和对象声明之间的语义差异
+<li>对象表达式是在使用他们的地方立即执行（及初始化） 的；
+</li><li>对象声明是在第一次被访问到时延迟初始化的；
+</li><li>伴生对象的初始化是在相应的类被加载（解析） 时，与 Java 静态初始化器的语义相匹
+配。
+
+
+### 委托 ###
+#### 类委托 #####
+委托模式已经证明是实现继承的一个很好的替代方式， 而 Kotlin 可以零样板代码地原生支持
+它。 类 Derived 可以继承一个接口 Base ，并将其所有共有的方法委托给一个指定的对象：  
+<pre>
+interface Base {
+    fun print()
+} 
+class BaseImpl(val x: Int) : Base {
+    override fun print() { print(x) }
+} 
+class Derived(b: Base) : Base by b
+    fun main(args: Array<string>) {
+    val b = BaseImpl(10)
+    Derived(b).print() // 输出 10
+}
+</string></pre>
+Derived 的超类型列表中的 by -子句表示 b 将会在 Derived 中内部存储。 并且编译器将
+生成转发给 b 的所有 Base 的方法。  
+请注意，覆盖会以你所期望的方式工作：编译器会使用你的 override 实现取代委托对象中
+的实现。如果我们为 Derived 添加 override fun print() { print("abc") } ，该程序会输
+出“abc”而不是“10”。  
+#### 委托属性 ####
+有一些常见的属性类型，虽然我们可以在每次需要的时候手动实现它们， 但是如果能够为大
+家把他们只实现一次并放入一个库会更好。例如包括：  
+</li><li>延迟属性（lazy properties） : 其值只在首次访问时计算；
+</li><li>可观察属性（observable properties） : 监听器会收到有关此属性变更的通知；
+</li><li>把多个属性储存在一个映射（map） 中，而不是每个存在单独的字段中。
+为了涵盖这些（以及其他） 情况，Kotlin 支持 委托属性:  
+<pre>
+class Example {
+    var p: String by Delegate()
+}
+</pre>
+语法是： val/var <属性名>: <类型> by <表达式> 。在 by 后面的表达式是该 委托， 因为属性
+对应的 get() （和 set() ） 会被委托给它的 getValue() 和 setValue() 方法。 属性的委
+托不必实现任何的接口，但是需要提供一个 getValue() 函数（和 setValue() ——对于
+var 属性） 。 例如:  
+<pre>
+class Delegate {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+        return "$thisRef, thank you for delegating '${property.name}' to me!"
+    } 
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        println("$value has been assigned to '${property.name} in $thisRef.'")
+    }
+}
+</*></*></pre>
+#### 延迟属性 Lazy ####
+lazy() 是接受一个 lambda 并返回一个 Lazy <t> 实例的函数，返回的实例可以作为实现延
+迟属性的委托： 第一次调用 get() 会执行已传递给 lazy() 的 lambda 表达式并记录结
+果， 后续调用 get() 只是返回记录的结果。  
+<pre>
+val lazyValue: String by lazy {
+    println("computed!")
+    "Hello"
+} 
+fun main(args: Array<string>) {
+    println(lazyValue)
+    println(lazyValue)
+}
+输出结果：
+computed!
+Hello
+Hello
+</string></pre>
+默认情况下，对于 lazy 属性的求值是同步锁的（synchronized） ：该值只在一个线程中计
+算，并且所有线程会看到相同的值。如果初始化委托的同步锁不是必需的，这样多个线程可
+以同时执行，那么将 LazyThreadSafetyMode.PUBLICATION 作为参数传递给 lazy() 函数。 而
+如果你确定初始化将总是发生在单个线程，那么你可以使用 LazyThreadSafetyMode.NONE 模
+式， 它不会有任何线程安全的保证和相关的开销。  
+
+可观察属性 Observable  
+Delegates.observable() 接受两个参数：初始值和修改时处理程序（handler） 。 每当我们给
+属性赋值时会调用该处理程序（在赋值后执行） 。它有三个参数：被赋值的属性、旧值和新
+值：  
+<pre>
+import kotlin.properties.Delegates
+class User {
+    var name: String by Delegates.observable("<no name="">") {
+        prop, old, new ->
+        println("$old -> $new")
+    }
+} 
+fun main(args: Array<string>) {
+    val user = User()
+    user.name = "first"
+    user.name = "second"
+}
+</string></no></pre>
+如果你想能够截获一个赋值并“否决”它，就使用 vetoable() 取代 observable() 。 在属性被
+赋新值生效之前会调用传递给 vetoable 的处理程序。  
+
+**把属性储存在映射中**
+一个常见的用例是在一个映射（map） 里存储属性的值。 这经常出现在像解析 JSON 或者做
+其他“动态”事情的应用中。 在这种情况下，你可以使用映射实例自身作为委托来实现委托属
+性。  
+<pre>
+class User(val map: Map<string, any?="">) {
+    val name: String by map
+    val age: Int by map
+}
+val user = User(mapOf(
+    "name" to "John Doe",
+    "age" to 25
+))
+
+</string,></pre>
+这也适用于 var 属性，如果把只读的 Map 换成 MutableMap 的话：
+<pre>
+class MutableUser(val map: MutableMap<string, any?="">) {
+    var name: String by map
+    var age: Int by map
+}
+</string,></pre>
+**局部委托属性（自 1.1 起）**
+你可以将局部变量声明为委托属性。 例如，你可以使一个局部变量惰性初始化：  
+<pre>
+fun example(computeFoo: () -> Foo) {
+    val memoizedFoo by lazy(computeFoo)
+    if (someCondition && memoizedFoo.isValid()) {
+        memoizedFoo.doSomething()
+    }
+}
+</pre>
+**属性委托要求**
+对于一个只读属性（即 val 声明的） ，委托必须提供一个名为 getValue 的函数，该函数接
+受以下参数：  
+<li>thisRef —— 必须与 属性所有者 类型（对于扩展属性——指被扩展的类型） 相同或者
+是它的超类型；
+</li><li>property —— 必须是类型 KProperty<*> 或其超类型。
+
+这个函数必须返回与属性相同的类型（或其子类型） 。  
+对于一个可变属性（即 var 声明的） ，委托必须额外提供一个名为 setValue 的函数，该函
+数接受以下参数：  
+<li>thisRef —— 同 getValue() ；
+</li><li>property —— 同 getValue() ；
+</li><li>new value —— 必须和属性同类型或者是它的超类型。
+getValue() 或/和 setValue() 函数可以通过委托类的成员函数提供或者由扩展函数提供。
+当你需要委托属性到原本未提供的这些函数的对象时后者会更便利。 两函数都需要用
+operator 关键字来进行标记   
+委托类可以实现包含所需 operator 方法的 ReadOnlyProperty 或 ReadWriteProperty 接口之
+一。 这俩接口是在 Kotlin 标准库中声明的：
+<pre>
+interface ReadOnlyProperty<in r,="" out="" t=""> {
+    operator fun getValue(thisRef: R, property: KProperty<*>): T
+} 
+interface ReadWriteProperty<in r,="" t=""> {
+    operator fun getValue(thisRef: R, property: KProperty<*>): T
+    operator fun setValue(thisRef: R, property: KProperty<*>, value: T)
+}
+</*></*></in></*></in></pre>
+
+<p><strong>提供委托（自 1.1 起）</strong><br>通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右<br>侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来创建属性<br>委托实例。<br>provideDelegate 的一个可能的使用场景是在创建属性时（而不仅在其 getter 或 setter 中）<br>检查属性一致性。<br>例如，如果要在绑定之前检查属性名称，可以这样写：  </p>
+<p><pre><br>class ResourceLoader<t>(id: ResourceID<t>) {<br>    operator fun provideDelegate(<br>    thisRef: MyUI,<br>    prop: KProperty&lt;*&gt;<br>    ): ReadOnlyProperty<myui, t=""> {<br>        checkProperty(thisRef, prop.name)<br>        // 创建委托<br>}<br>    private fun checkProperty(thisRef: MyUI, name: String) { …… }<br>}<br>fun <t> bindResource(id: ResourceID<t>): ResourceLoader<t> { …… }<br>class MyUI {<br>    val image by bindResource(ResourceID.image_id)<br>    val text by bindResource(ResourceID.text_id)<br>}<br></t></t></t></myui,></t></t></pre><br>provideDelegate 的参数与 getValue 相同：  </p>
+<p><li>thisRef —— 必须与 属性所有者 类型（对于扩展属性——指被扩展的类型） 相同或者<br>是它的超类型；</li></p>
+<p><li>property —— 必须是类型 KProperty&lt;*&gt; 或其超类型<br>在创建 MyUI 实例期间，为每个属性调用 provideDelegate 方法，并立即执行必要的验证。<br>如果没有这种拦截属性与其委托之间的绑定的能力，为了实现相同的功能， 你必须显式传递<br>属性名，这不是很方便<br>请注意， provideDelegate 方法只影响辅助属性的创建，并不会影响为 getter 或 setter 生成<br>的代码。</li></p>
+</li></*></li></t></表达式></类型></属性名></li></t></t></t></in></any></int></t></derived></t></object></string>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/Kotlin基础（2）-类与对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/23/Kotlin基础（2）-类与对象/" itemprop="url">Kotlin基础（2）-类与对象</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T16:18:25+08:00">
+                2018-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>内容概要  </p>
+<p><li>类与继承</li></p>
+<p><li>属性与字段</li></p>
+<p><li>接口</li></p>
+<p><li>可见性修饰符</li></p>
+<p><li>扩展</li></p>
+<p><li>数据类</li></p>
+<p><li>密封类</li></p>
+<p><li>泛型</li></p>
+<p><li>嵌套类</li></p>
+<p><li>枚举类</li></p>
+<p><li>对象</li></p>
+<p><li>委托</li></p>
+<p><li>委托属性</li></p>
+<h2 id="类和继承"><a href="#类和继承" class="headerlink" title="类和继承"></a>类和继承</h2><h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>Kotlin 中使用关键字 class 声明类<br>类声明由类名、类头（指定其类型参数、主构造函数等） 和由大括号包围的类体构成。类头<br>和类体都是可选的； 如果一个类没有类体，可以省略花括号  </p>
+<h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>在 Kotlin 中的一个类可以有一个主构造函数和一个或多个次构造函数。主构造函数是类头的<br>一部分：它跟在类名（和可选的类型参数） 后。  </p>
+<pre>
+class Person constructor(firstName: String) {
+}
+</pre>
+如果主构造函数没有任何注解或者可见性修饰符，可以省略这个 constructor 关键字。
+<pre>
+class Person(firstName: String) {
+}
+</pre>
+主构造函数不能包含任何的代码。初始化的代码可以放到以 init 关键字作为前缀的初始化
+块（initializer blocks） 中：  
+<pre>
+class Customer(name: String) {
+    init {
+        logger.info("Customer initialized with value ${name}")
+    }
+}
+</pre>
+注意，主构造的参数可以在初始化块中使用。它们也可以在类体内声明的属性初始化器中使
+用：
+<pre>
+class Customer(name: String) {
+    val customerKey = name.toUpperCase()
+}
+</pre>
+事实上，声明属性以及从主构造函数初始化属性，Kotlin 有简洁的语法：
+<pre>
+class Person(val firstName: String, val lastName: String, var age: Int) {
+// ……
+}
+</pre>
+与普通属性一样，主构造函数中声明的属性可以是可变的（var ） 或只读的（val ） 。
+如果构造函数有注解或可见性修饰符，这个 constructor 关键字是必需的，并且这些修饰符
+在它前面：  
+<pre>
+class Customer public @Inject constructor(name: String) { …… }
+</pre>
+
+<p><strong>次构造函数</strong><br>类也可以声明前缀有 constructor 的次构造函数：  </p>
+<pre>
+class Person {
+    constructor(parent: Person) {
+        parent.children.add(this)
+    }
+}
+</pre>
+如果类有一个主构造函数，每个次构造函数需要委托给主构造函数， 可以直接委托或者通过
+别的次构造函数间接委托。委托到同一个类的另一个构造函数用 this 关键字即可：
+<pre>
+class Person(val name: String) {
+    constructor(name: String, parent: Person) : this(name) {
+        parent.children.add(this)
+    }
+}
+</pre>
+如果一个非抽象类没有声明任何（主或次） 构造函数，它会有一个生成的不带参数的主构造
+函数。构造函数的可见性是 public。如果你不希望你的类有一个公有构造函数，你需要声明一
+个带有非默认可见性的空的主构造函数：  
+<pre>
+class DontCreateMe private constructor () {
+}
+</pre>
+
+
+<p><strong>创建类的实例</strong><br>要创建一个类的实例，我们就像普通函数一样调用构造函数：  </p>
+<pre>
+val invoice = Invoice()
+val customer = Customer("Joe Smith")
+</pre>
+注意 Kotlin 并没有 new 关键字。
+创建嵌套类、内部类和匿名内部类的类实例在嵌套类中有述  
+
+**类成员**
+类可以包含：
+<li>构造函数和初始化块
+</li><li>函数
+</li><li>属性
+</li><li>嵌套类和内部类
+</li><li>对象声明
+
+### 继承 ###
+在 Kotlin 中所有类都有一个共同的超类 Any ，这对于没有超类型声明的类是默认超类：
+<pre>
+class Example // 从 Any 隐式继承
+</pre>
+Any 不是 java.lang.Object ；尤其是，它除了 equals() 、 hashCode() 和 toString() 外没
+有任何成员。 更多细节请查阅Java互操作性部分。   
+
+要声明一个显式的超类型，我们把类型放到类头的冒号之后：
+<pre>
+open class Base(p: Int)
+class Derived(p: Int) : Base(p)
+</pre>
+如果该类有一个主构造函数，其基类型可以（并且必须） 用（基类型的） 主构造函数参数就
+地初始化。    
+如果类没有主构造函数，那么每个次构造函数必须使用 super 关键字初始化其基类型，或委
+托给另一个构造函数做到这一点。 注意，在这种情况下，不同的次构造函数可以调用基类型
+的不同的构造函数：  
+<pre>
+class MyView : View {
+    constructor(ctx: Context) : super(ctx)
+    constructor(ctx: Context, attrs: AttributeSet) : super(ctx, attrs)
+}
+</pre>
+类上的 open 标注与 Java 中 final 相反，它允许其他类从这个类继承。默认情况下，在
+Kotlin 中所有的类都是 final， 对应于 Effective Java书中的第 17 条：要么为继承而设计，并
+提供文档说明，要么就禁止继承。   
+
+**覆盖方法**  
+我们之前提到过，Kotlin 力求清晰显式。与 Java 不同，Kotlin 需要显式标注可覆盖的成员
+（我们称之为开放） 和覆盖后的成员：  
+<pre>
+open class Base {
+    open fun v() {}
+    fun nv() {}
+}
+class Derived() : Base() {
+    override fun v() {}
+}
+</pre>
+Derived.v() 函数上必须加上 override标注。如果没写，编译器将会报错。 如果函数没有标注
+open 如 Base.nv() ，则子类中不允许定义相同签名的函数， 不论加不加 override。在一个
+final 类中（没有用 open 标注的类） ，开放成员是禁止的。  
+
+标记为 override 的成员本身是开放的，也就是说，它可以在子类中覆盖。如果你想禁止再
+次覆盖，使用 final 关键字：
+<pre>
+open class AnotherDerived() : Base() {
+    final override fun v() {}
+}
+</pre>
+**属性覆盖**与方法覆盖类似；在超类中声明然后在派生类中重新声明的属性必须以 override
+开头，并且它们必须具有兼容的类型。每个声明的属性可以由具有初始化器的属性或者具有
+getter 方法的属性覆盖。  
+<pre>
+open class Foo {
+    open val x: Int get() { …… }
+} 
+class Bar1 : Foo() {
+    override val x: Int = ……
+}
+</pre>
+你也可以用一个 var 属性覆盖一个 val 属性，但反之则不行。这是允许的，因为一个
+val 属性本质上声明了一个 getter 方法，而将其覆盖为 var 只是在子类中额外声明一个
+setter 方法。  
+请注意，你可以在主构造函数中使用 override 关键字作为属性声明的一部分。
+<pre>
+interface Foo {
+    val count: Int
+} 
+class Bar1(override val count: Int) : Foo
+class Bar2 : Foo {
+    override var count: Int = 0
+}
+</pre>
+**调用超类实现**
+派生类中的代码可以使用 super 关键字调用其超类的函数与属性访问器的实现：  
+<pre>
+open class Foo {
+open fun f() { println("Foo.f()") }
+open val x: Int get() = 1
+} 
+class Bar : Foo() {
+    override fun f() {
+        super.f()
+        println("Bar.f()")
+    } 
+override val x: Int get() = super.x + 1
+}
+</pre>
+在一个内部类中访问外部类的超类，可以通过由外部类名限定的 super 关键字来实
+现： super@Outer ：  
+<pre>
+class Bar : Foo() {
+    override fun f() { /* …… */ }
+    override val x: Int get() = 0
+    inner class Baz {
+        fun g() {
+            super@Bar.f() // 调用 Foo 实现的 f()
+            println(super@Bar.x) // 使用 Foo 实现的 x 的 getter
+        }
+    }
+}
+</pre>
+覆盖规则
+在 Kotlin 中，实现继承由下述规则规定：如果一个类从它的直接超类继承相同成员的多个实
+现， 它必须覆盖这个成员并提供其自己的实现（也许用继承来的其中之一） 。 为了表示采用
+从哪个超类型继承的实现，我们使用由尖括号中超类型名限定的 super ，如 super<base> ：  
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">open class A &#123;  </div><div class="line">	open fun f() &#123; print(&quot;A&quot;) &#125;  </div><div class="line">	fun a() &#123; print(&quot;a&quot;) &#125;  </div><div class="line">&#125;   </div><div class="line">interface B &#123;  </div><div class="line">	fun f() &#123; print(&quot;B&quot;) &#125; // 接口成员默认就是“open”的  </div><div class="line">	fun b() &#123; print(&quot;b&quot;) &#125;  </div><div class="line">&#125;   </div><div class="line">class C() : A(), B &#123;  </div><div class="line">	// 编译器要求覆盖 f()：  </div><div class="line">	override fun f() &#123;  </div><div class="line">		super&lt;A&gt;.f() // 调用 A.f() </div><div class="line">		super&lt;B&gt;.f() // 调用 B.f()  </div><div class="line">	&#125;</div><div class="line">&#125;  </div><div class="line">&lt;/pre&gt;</div></pre></td></tr></table></figure>
+
+同时继承 A 和 B 没问题，并且 a() 和 b() 也没问题因为 C 只继承了每个函数的一个
+实现。 但是 f() 由 C 继承了两个实现，所以我们必须在 C 中覆盖 f() 并且提供我们自
+己的实现来消除歧义。  
+
+**抽象类**
+类和其中的某些成员可以声明为 abstract 。 抽象成员在本类中可以不用实现。 需要注意的
+是，我们并不需要用 open 标注一个抽象类或者函数——因为这不言而喻。  
+我们可以用一个抽象成员覆盖一个非抽象的开放成员
+<pre>
+open class Base {
+open fun f() {}
+} 
+abstract class Derived : Base() {
+    override abstract fun f()
+}
+</pre>
+#### 伴生对象 ####
+与 Java 或 C# 不同，在 Kotlin 中类没有静态方法。在大多数情况下，它建议简单地使用包级
+函数。   
+
+如果你需要写一个可以无需用一个类的实例来调用、但需要访问类内部的函数（例如，工厂
+方法） ，你可以把它写成该类内对象声明中的一员。  
+更具体地讲，如果在你的类内声明了一个伴生对象， 你就可以使用像在 Java/C# 中调用静态
+方法相同的语法来调用其成员，只使用类名作为限定符。  
+<pre>
+val instance = MyClass.create()
+</pre>
+可以省略伴生对象的名称，在这种情况下将使用名称 Companion ：
+请注意，即使伴生对象的成员看起来像其他语言的静态成员，在运行时他们仍然是真实对象
+的实例成员，而且，例如还可以实现接口：
+<pre>
+interface Factory<t> {
+    fun create(): T
+} 
+class MyClass {
+    companion object : Factory<myclass> {
+        override fun create(): MyClass = MyClass()
+    }
+}
+</myclass></t></pre>
+当然，在 JVM 平台，如果使用 @JvmStatic 注解，你可以将伴生对象的成员生成为真正的静
+态方法和字段。更详细信息请参见Java 互操作性一节 。  
+
+### 属性和字段 ###
+声明属性  
+Kotlin的类可以有属性。 属性可以用关键字 var 声明为可变的，否则使用只读关键字 val 。  
+<pre>
+class Address {
+    var name: String = ……
+    var street: String = ……
+    var city: String = ……
+    var state: String? = ……
+    var zip: String = ……
+}
+</pre>
+
+<p>要使用一个属性，只要用名称引用它即可，就像 Java 中的字段：</p>
+<pre>
+fun copyAddress(address: Address): Address {
+    val result = Address() // Kotlin 中没有“new”关键字
+    result.name = address.name // 将调用访问器
+    result.street = address.street
+    // ……
+    return result
+}
+</pre>
+声明一个属性的完整语法是
+<pre>
+var < propertyName >[: < PropertyType >] [= < property_initializer >]
+[< getter >]
+[< setter >]
+</pre>
+其初始器（initializer） 、getter 和 setter 都是可选的。属性类型如果可以从初始器 （或者从
+其 getter 返回值，如下文所示） 中推断出来，也可以省略。  
+<pre>
+var allByDefault: Int? // 错误：需要显式初始化器，隐含默认 getter 和 setter
+var initialized = 1 // 类型 Int、默认 getter 和 setter
+</pre>
+一个只读属性的语法和一个可变的属性的语法有两方面的不同：1、只读属性的用 val 开始
+代替 var 2、只读属性不允许 setter
+<pre>
+val simple: Int? // 类型 Int、默认 getter、必须在构造函数中初始化
+val inferredType = 1 // 类型 Int 、默认 getter
+</pre>
+我们可以编写自定义的访问器，非常像普通函数，刚好在属性声明内部。这里有一个自定义
+getter 的例子:
+<pre>
+val isEmpty: Boolean
+get() = this.size == 0
+
+var stringRepresentation: String
+get() = this.toString()
+set(value) {
+    setDataFromString(value) // 解析字符串并赋值给其他属性
+}
+</pre>
+按照惯例，setter 参数的名称是 value ，但是如果你喜欢你可以选择一个不同的名称。  
+自 Kotlin 1.1 起，如果可以从 getter 推断出属性类型，则可以省略它  
+
+如果你需要改变一个访问器的可见性或者对其注解，但是不需要改变默认的实现， 你可以定
+义访问器而不定义其实现:
+<pre>
+var setterVisibility: String = "abc"
+private set // 此 setter 是私有的并且有默认实现
+var setterWithAnnotation: Any? = null
+@Inject set // 用 Inject 注解此 setter
+</pre>
+
+<p>幕后字段<br>Kotlin 中类不能有字段。然而，当使用自定义访问器时，有时有一个幕后字段（backing<br>field） 有时是必要的。为此 Kotlin 提供一个自动幕后字段，它可通过使用 field 标识符访<br>问。</p>
+<pre>
+var counter = 0 // 此初始器值直接写入到幕后字段
+set(value) {
+    if (value >= 0)
+        field = value
+}
+</pre>
+field 标识符只能用在属性的访问器内。
+如果属性至少一个访问器使用默认实现，或者自定义访问器通过 field 引用幕后字段，将会
+为该属性生成一个幕后字段。  
+
+幕后属性
+如果你的需求不符合这套“隐式的幕后字段”方案，那么总可以使用 幕后属性（backing
+property） ：
+<pre>
+private var _table: Map<string, int="">? = null
+public val table: Map<string, int="">
+    get() {
+        if (_table == null) {
+            _table = HashMap() // 类型参数已推断出
+        } 
+    return _table ?: throw AssertionError("Set to null by another thread")
+}
+</string,></string,></pre>
+从各方面看，这正是与 Java 相同的方式。因为通过默认 getter 和 setter 访问私有属性会被优
+化，所以不会引入函数调用开销。  
+
+#### 编译期常量 ####
+已知值的属性可以使用 const 修饰符标记为 编译期常量。 这些属性需要满足以下要求：
+</li><li>位于顶层或者是 object 的一个成员
+</li><li>用 String 或原生类型 值初始化
+</li><li>没有自定义 getter
+这些属性可以用在注解中：  
+<pre>
+const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
+@Deprecated(SUBSYSTEM_DEPRECATED) fun foo() { …… }
+</pre>
+#### 延迟初始化属性 ####
+一般地，属性声明为非空类型必须在构造函数中初始化。 然而，这经常不方便。例如：属性
+可以通过依赖注入来初始化， 或者在单元测试的 setup 方法中初始化。 这种情况下，你不能
+在构造函数内提供一个非空初始器。 但你仍然想在类体中引用该属性时避免空检查。
+为处理这种情况，你可以用 lateinit 修饰符标记该属性：  
+<pre>
+public class MyTest {
+    lateinit var subject: TestSubject
+    @SetUp fun setup() {
+        subject = TestSubject()
+    } 
+    @Test fun test() {
+        subject.method() // 直接解引用
+    }
+}
+</pre>
+该修饰符只能用于在类体中（不是在主构造函数中） 声明的 var 属性，并且仅当该属性没有
+自定义 getter 或 setter 时。该属性必须是非空类型，并且不能是原生类型。
+在初始化前访问一个 lateinit 属性会抛出一个特定异常，该异常明确标识该属性被访问及
+它没有初始化的事实。  
+#### 委托属性-具体见后面的详细介绍 ####
+最常见的一类属性就是简单地从幕后字段中读取（以及可能的写入） 。 另一方面，使用自定
+义 getter 和 setter 可以实现属性的任何行为。 介于两者之间，属性如何工作有一些常见的模
+式。一些例子：惰性值、 通过键值从映射读取、访问数据库、访问时通知侦听器等等。
+这些常见行为可以通过使用委托属性实现为库。
+
+
+### 接口 ###
+Kotlin 的接口与 Java 8 类似，既包含抽象方法的声明，也包含实现。与抽象类不同的是，接
+口无法保存状态。它可以有属性但必须声明为抽象或提供访问器实现。
+使用关键字 interface 来定义接口  
+<pre>
+interface MyInterface {
+    fun bar()
+    fun foo() {
+        // 可选的方法体
+    }
+}
+</pre>
+实现接口  
+一个类或者对象可以实现一个或多个接口。  
+接口中的属性  
+你可以在接口中定义属性。在接口中声明的属性要么是抽象的，要么提供访问器的实现。在
+接口中声明的属性不能有幕后字段（backing field） ，因此接口中声明的访问器不能引用它
+们
+<pre>
+interface MyInterface {
+    val prop: Int // 抽象的
+    val propertyWithImplementation: String
+    get() = "foo"
+    fun foo() {
+        print(prop)
+    }
+}
+class Child : MyInterface {
+    override val prop: Int = 29
+}
+</pre>
+
+<p>解决覆盖冲突  </p>
+<pre>
+interface A {
+    fun foo() { print("A") }
+    fun bar()
+} 
+interface B {
+    fun foo() { print("B") }
+    fun bar() { print("bar") }
+} 
+class C : A {
+    override fun bar() { print("bar") }
+} 
+class D : A, B {
+    override fun foo() {
+        super< A >.foo()
+        super< B >.foo()
+    } 
+    override fun bar() {
+        super< B >.bar()
+    }
+}
+</pre>
+上例中，接口 A 和 B 都定义了方法 foo() 和 bar()。 两者都实现了 foo(), 但是只有 B 实现了
+bar() (bar() 在 A 中没有标记为抽象， 因为没有方法体时默认为抽象） 。因为 C 是一个实现了
+A 的具体类，所以必须要重写 bar() 并实现这个抽象方法 然而，如果我们从 A 和 B 派生 D，我们需要实现我们从多个接口继承的所有方法，并指明 D
+应该如何实现它们。这一规则既适用于继承单个实现（bar()） 的方法也适用于继承多个实现
+（foo()） 的方法  
+
+#### 可见性修饰符 ####
+类、对象、接口、构造函数、方法、属性和它们的 setter 都可以有 可见性修饰符。 （getter
+总是与属性有着相同的可见性。） 在 Kotlin 中有这四个可见性修饰符： private 、
+protected 、 internal 和 public 。 如果没有显式指定修饰符的话，默认可见性是
+public 。  
+##### 包名 #####
+函数、属性和类、对象和接口可以在顶层声明，即直接在包内：
+</li><li>如果你不指定任何可见性修饰符，默认为 public ，这意味着你的声明将随处可见；
+</li><li>如果你声明为 private ，它只会在声明它的文件内可见；
+</li><li>如果你声明为 internal ，它会在相同模块内随处可见；
+</li><li>protected 不适用于顶层声明。
+类和接口  
+对于类内部声明的成员：  
+</li><li>private 意味着只在这个类内部（包含其所有成员） 可见；
+</li><li>protected —— 和 private 一样 + 在子类中可见。
+</li><li>internal —— 能见到类声明的 本模块内 的任何客户端都可见其 internal 成员；
+</li><li>public —— 能见到类声明的任何客户端都可见其 public 成员  
+注意 对于Java用户：Kotlin 中外部类不能访问内部类的 private 成员。
+如果你覆盖一个 protected 成员并且没有显式指定其可见性，该成员还会是 protected 可
+见性。  
+<pre>
+open class Outer {
+    private val a = 1
+    protected open val b = 2
+    internal val c = 3
+    val d = 4 // 默认 public
+protected class Nested {
+    public val e: Int = 5
+}
+} 
+class Subclass : Outer() {
+    // a 不可见
+    // b、c、d 可见
+    // Nested 和 e 可见
+    override val b = 5 // “b”为 protected
+} 
+class Unrelated(o: Outer) {
+    // o.a、o.b 不可见
+    // o.c 和 o.d 可见（相同模块）
+    // Outer.Nested 不可见，Nested::e 也不可见
+}
+</pre>
+
+<h4 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h4><p>要指定一个类的的主构造函数的可见性，使用以下语法（注意你需要添加一个显式<br>constructor 关键字） ：</p>
+<pre>
+class C private constructor(a: Int) { …… }
+</pre>
+这里的构造函数是私有的。默认情况下，所有构造函数都是 public ，这实际上等于类可见的
+地方它就可见（即 一个 internal 类的构造函数只能在相同模块内可见)  
+
+#### 局部声明 ####
+局部变量、函数和类不能有可见性修饰符
+
+#### 模块 ####
+可见性修饰符 internal 意味着该成员只在相同模块内可见。更具体地说， 一个模块是编译
+在一起的一套 Kotlin 文件：
+</li><li>一个 IntelliJ IDEA 模块；
+</li><li>一个 Maven 项目；
+</li><li>一个 Gradle 源集；
+</li><li>一次 ＜kotlinc＞ Ant 任务执行所编译的一套文件
+
+### 扩展 ###
+#### 扩展函数 ####
+声明一个扩展函数，我们需要用一个 接收者类型 也就是被扩展的类型来作为他的前缀。 下面
+代码为 MutableList<int> 添加一个 swap 函数：  
+<pre>
+fun MutableList<int>.swap(index1: Int, index2: Int) {
+    val tmp = this[index1] // “this”对应该列表
+    this[index1] = this[index2]
+    this[index2] = tmp
+}
+</int></pre>
+这个 this 关键字在扩展函数内部对应到接收者对象（传过来的在点符号前的对象） 现在，
+我们对任意 MutableList<int> 调用该函数了：  
+当然，这个函数对任何 MutableList<t> 起作用，我们可以泛化它：
+<pre>
+fun <t> MutableList<t>.swap(index1: Int, index2: Int) {
+    val tmp = this[index1] // “this”对应该列表
+    this[index1] = this[index2]
+    this[index2] = tmp
+}
+</t></t></pre>
+为了在接收者类型表达式中使用泛型，我们要在函数名前声明泛型参数。  
+**扩展是静态解析的**
+扩展不能真正的修改他们所扩展的类。通过定义一个扩展，你并没有在一个类中插入新成
+员， 仅仅是可以通过该类型的变量用点表达式去调用这个新函数。我们想强调的是扩展函数是静态分发的，即他们不是根据接收者类型的虚方法。 这意味着调
+用的扩展函数是由函数调用所在的表达式的类型来决定的， 而不是由表达式运行时求值结果
+决定的。  
+<pre>
+open class C
+class D: C()
+fun C.foo() = "c"
+fun D.foo() = "d"
+fun printFoo(c: C) {
+    println(c.foo())
+} 
+printFoo(D())
+</pre>
+这个例子会输出 "c"，因为调用的扩展函数只取决于参数 c 的声明类型，该类型是 C 类。
+如果一个类定义有一个成员函数和一个扩展函数，而这两个函数又有相同的接收者类型、相
+同的名字并且都适用给定的参数，这种情况总是取成员函数。  
+如果我们调用 C 类型 c 的 c.foo() ，它将输出“member”，而不是“extension”。
+当然，扩展函数重载同样名字但不同签名成员函数也完全可以
+**可空接收者**
+注意可以为可空的接收者类型定义扩展。这样的扩展可以在对象变量上调用， 即使其值为
+null，并且可以在函数体内检测 this == null ，这能让你在没有检测 null 的时候调用 Kotlin
+中的toString()：检测发生在扩展函数的内部。  
+<pre>
+fun Any?.toString(): String {
+    if (this == null) return "null"
+        // 空检测之后，“this”会自动转换为非空类型，所以下面的 toString()
+        // 解析为 Any 类的成员函数
+    return toString()
+}
+</pre>
+
+<p><strong>扩展属性</strong></p>
+<pre>
+val <t> List<t>.lastIndex: Int
+    get() = size - 1
+</t></t></pre>
+注意：由于扩展没有实际的将成员插入类中，因此对扩展属性来说幕后字段是无效的。这就
+是为什么扩展属性不能有初始化器。他们的行为只能由显式提供的 getters/setters 定义。  
+**伴生对象的扩展**
+如果一个类定义有一个伴生对象 ，你也可以为伴生对象定义扩展函数和属性：
+<pre>
+class MyClass {
+    companion object { } // 将被称为 "Companion"
+} 
+fun MyClass.Companion.foo() {
+    // ……
+}
+</pre>
+就像伴生对象的其他普通成员，只需用类名作为限定符去调用他们  
+**扩展的作用域**
+大多数时候我们在顶层定义扩展，即直接在包里
+<pre>
+package foo.bar
+fun Baz.goo() { …… }
+</pre>
+要使用所定义包之外的一个扩展，我们需要在调用方导入它：  
+**扩展声明为成员**
+在一个类内部你可以为另一个类声明扩展。在这样的扩展内部，有多个 隐式接收者 —— 其中
+的对象成员可以无需通过限定符访问。扩展声明所在的类的实例称为 分发接收者，扩展方法
+调用所在的接收者类型的实例称为 扩展接收者  
+<pre>
+class D {
+    fun bar() { …… }
+} 
+class C {
+    fun baz() { …… }
+    fun D.foo() {
+        bar() // 调用 D.bar
+        baz() // 调用 C.baz
+    } 
+    fun caller(d: D) {
+        d.foo() // 调用扩展函数
+    }
+}
+</pre>
+对于分发接收者和扩展接收者的成员名字冲突的情况，扩展接收者优先。要引用分发接收者
+的成员你可以使用 限定的 this 语法  
+<pre>
+class C {
+    fun D.foo() {
+        toString() // 调用 D.toString()
+        this@C.toString() // 调用 C.toString()
+    }
+}
+</pre>
+声明为成员的扩展可以声明为 open 并在子类中覆盖。这意味着这些函数的分发对于分发接
+收者类型是虚拟的，但对于扩展接收者类型是静态的。  
+<pre>
+open class D {
+} 
+class D1 : D() {
+} 
+open class C {
+    open fun D.foo() {
+        println("D.foo in C")
+    } 
+    open fun D1.foo() {
+        println("D1.foo in C")
+    } 
+    fun caller(d: D) {
+        d.foo() // 调用扩展函数
+    }
+} 
+class C1 : C() {
+    override fun D.foo() {
+        println("D.foo in C1")
+    } 
+    override fun D1.foo() {
+        println("D1.foo in C1")
+    }
+} 
+C().caller(D()) // 输出 "D.foo in C"
+C1().caller(D()) // 输出 "D.foo in C1" —— 分发接收者虚拟解析
+C().caller(D1()) // 输出 "D.foo in C" —— 扩展接收者静态解析
+</pre>
+### 数据类 ###
+我们经常创建一些只保存数据的类。 在这些类中，一些标准函数往往是从数据机械推导而来
+的。在 Kotlin 中，这叫做 数据类 并标记为 data  
+<pre>
+data class User(val name: String, val age: Int)
+</pre>
+编译器自动从主构造函数中声明的所有属性导出以下成员
+<li>equals() / hashCode() 对；
+</li><li>toString() 格式是 "User(name=John, age=42)" ；
+</li><li>componentN() 函数 按声明顺序对应于所有属性；
+</li><li>copy() 函数（见下文）  
+为了确保生成的代码的一致性和有意义的行为，数据类必须满足以下要求：
+</li><li>主构造函数需要至少有一个参数；
+</li><li>主构造函数的所有参数需要标记为 val 或 var ；
+</li><li>数据类不能是抽象、开放、密封或者内部的；
+</li><li>（在1.1之前） 数据类只能实现接口。
+
+此外，成员生成遵循关于成员继承的这些规则：  
+</li><li>如果在数据类体中有显式实现 equals() 、 hashCode() 或者 toString() ，或者这些函
+数在父类中有 final 实现，那么不会生成这些函数，而会使用现有函数；
+</li><li>如果超类型具有 open 的 componentN() 函数并且返回兼容的类型， 那么会为数据类生
+成相应的函数，并覆盖超类的实现。如果超类型的这些函数由于签名不兼容或者是 final
+而导致无法覆盖，那么会报错；
+</li><li>不允许为 componentN() 以及 copy() 函数提供显式实现。
+自 1.1 起，数据类可以扩展其他类（示例请参见密封类） 。  
+在 JVM 中，如果生成的类需要含有一个无参的构造函数，则所有的属性必须指定默认值。  
+<pre>
+data class User(val name: String = "", val age: Int = 0)
+</pre>
+**复制**
+在很多情况下，我们需要复制一个对象改变它的一些属性，但其余部分保持不变。 copy()
+函数就是为此而生成。对于上文的 User 类，其实现会类似下面这样：  
+<pre>
+fun copy(name: String = this.name, age: Int = this.age) = User(name, age)
+</pre>
+这让我们可以写：
+<pre>
+val jack = User(name = "Jack", age = 1)
+val olderJack = jack.copy(age = 2)
+</pre>
+数据类和解构声明  
+为数据类生成的 Component 函数 使它们可在解构声明中使用：  
+<pre>
+val jane = User("Jane", 35)
+val (name, age) = jane
+println("$name, $age years of age") // 输出 "Jane, 35 years of age"
+</pre>
+**标准数据类  **
+标准库提供了 Pair 和 Triple 。尽管在很多情况下命名数据类是更好的设计选择， 因为它
+们通过为属性提供有意义的名称使代码更具可读性。   
+#### 密封类 ####
+密封类用来表示受限的类继承结构：当一个值为有限集中的类型、而不能有任何其他类型
+时。在某种意义上，他们是枚举类的扩展：枚举类型的值集合也是受限的，但每个枚举常量
+只存在一个实例，而密封类的一个子类可以有可包含状态的多个实例。
+要声明一个密封类，需要在类名前面添加 sealed 修饰符。虽然密封类也可以有子类，但是
+所有子类都必须在与密封类自身相同的文件中声明。（在 Kotlin 1.1 之前， 该规则更加严
+格：子类必须嵌套在密封类声明的内部） 。  
+<pre>
+sealed class Expr
+data class Const(val number: Double) : Expr()
+data class Sum(val e1: Expr, val e2: Expr) : Expr()
+object NotANumber : Expr()
+</pre>
+（上文示例使用了 Kotlin 1.1 的一个额外的新功能：数据类扩展包括密封类在内的其他类的可
+能性。 ）
+一个密封类是自身抽象的，它不能直接实例化并可以有抽象（abstract ） 成员。
+密封类不允许有非- private 构造函数（其构造函数默认为 private ） 。
+请注意，扩展密封类子类的类（间接继承者） 可以放在任何位置，而无需在同一个文件中。
+使用密封类的关键好处在于使用 when 表达式 的时候，如果能够验证语句覆盖了所有情况，
+就不需要为该语句再添加一个 else 子句了。当然，这只有当你用 when 作为表达式（使用
+结果） 而不是作为语句时才有用  
+<pre>
+fun eval(expr: Expr): Double = when(expr) {
+    is Const -> expr.number
+    is Sum -> eval(expr.e1) + eval(expr.e2)
+    NotANumber -> Double.NaN
+    // 不再需要 `else` 子句，因为我们已经覆盖了所有的情况
+}
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li></t></int></int></li>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/kotlin基础（1）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/23/kotlin基础（1）/" itemprop="url">kotlin基础（1）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T09:04:29+08:00">
+                2018-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>概要</p>
+<p><li>基本类型</li></p>
+<p><li>包 </li></p>
+<p><li>控制流</li></p>
+<p><li>返回与跳转</li></p>
+<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><h3 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h3><p>Kotlin 处理数字在某种程度上接近 Java，但是并不完全相同。例如，对于数字没有隐式拓宽<br>转换（如 Java 中 int 可以隐式转换为 long ——译者注)，另外有些情况的字面值略有不<br>同。  </p>
+<table><br><tr><br><th>Type</th><br><th>Nmae</th><br></tr><br><tr><br><td>Double</td><br><td>64</td><br></tr><br><tr><br><td>Float</td><br><td>32</td><br></tr><br><tr><br><td>Long</td><br><td>64</td><br></tr><br><tr><br><td>Int</td><br><td>32</td><br></tr><br><tr><br><td>Short</td><br><td>16</td><br></tr><br><tr><br><td>Byte</td><br><td>8</td><br></tr><br></table>
+
+<p>注意在 Kotlin 中字符不是数字<br>字面常量<br>数值常量字面值有以下几种:</p>
+<p><li>十进制: 123</li></p>
+<p><li>Long 类型用大写 L 标记: 123L</li></p>
+<p><li>十六进制: 0x0F</li></p>
+<p><li>二进制: 0b00001011<br>注意: 不支持八进制<br>Kotlin 同样支持浮点数的常规表示方法:  </li></p>
+<p><li>默认 double： 123.5 、 123.5e10</li></p>
+<p><li>Float 用 f 或者 F 标记: 123.5f</li></p>
+<p>数字字面值中的下划线（自 1.1 起）<br>你可以使用下划线使数字常量更易读：  </p>
+<pre>
+val oneMillion = 1_000_000
+val creditCardNumber = 1234_5678_9012_3456L
+val socialSecurityNumber = 999_99_9999L
+val hexBytes = 0xFF_EC_DE_5E
+val bytes = 0b11010010_01101001_10010100_10010010
+</pre>
+
+<p>表示方式<br>在 Java 平台数字是物理存储为 JVM 的原生类型，除非我们需要一个可空的引用（如<br>Int? ） 或泛型。 后者情况下会把数字装箱。<br>注意数字装箱不必保留同一性:</p>
+<pre>
+val a: Int = 10000
+print(a === a) // 输出“true”
+val boxedA: Int? = a
+val anotherBoxedA: Int? = a
+print(boxedA === anotherBoxedA) // ！！！输出“false”！！！
+</pre>
+另一方面，它保留了相等性:
+<pre>
+val a: Int = 10000
+print(a == a) // 输出“true”
+val boxedA: Int? = a
+val anotherBoxedA: Int? = a
+print(boxedA == anotherBoxedA) // 输出“true”
+</pre>
+
+
+<p>显式转换<br>由于不同的表示方式，较小类型并不是较大类型的子类型。 如果它们是的话，就会出现下述<br>问题：</p>
+<pre>
+// 假想的代码，实际上并不能编译：
+val a: Int? = 1 // 一个装箱的 Int (java.lang.Integer)
+val b: Long? = a // 隐式转换产生一个装箱的 Long (java.lang.Long)
+print(a == b) // 惊！这将输出“false”鉴于 Long 的 equals() 检测其他部分也是 Long
+</pre>
+所以同一性还有相等性都会在所有地方悄无声息地失去。
+
+
+因此较小的类型不能隐式转换为较大的类型。 这意味着在不进行显式转换的情况下我们不能
+把 Byte 型值赋给一个 Int 变量。
+<pre>
+val b: Byte = 1 // OK, 字面值是静态检测的
+val i: Int = b // 错误
+</pre>
+我们可以显式转换来拓宽数字  
+<pre>
+val i: Int = b.toInt() // OK: 显式拓宽
+</pre>
+
+<p>每个数字类型支持如下的转换:  </p>
+<p><li>toByte(): Byte</li></p>
+<p><li>toShort(): Short</li></p>
+<p><li>toInt(): Int</li></p>
+<p><li>toLong(): Long</li></p>
+<p><li>toFloat(): Float</li></p>
+<p><li>toDouble(): Double</li></p>
+<p><li>toChar(): Char</li></p>
+<p>缺乏隐式类型转换并不显著，因为类型会从上下文推断出来，而算术运算会有重载做适当转<br>换，例如：</p>
+<pre>
+val l = 1L + 3 // Long + Int => Long
+</pre>
+
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><p>这是完整的位运算列表（只用于 Int 和 Long ） ：</p>
+<p><li>shl(bits) – 有符号左移 (Java 的 &lt;&lt; )</li></p>
+<p><li>shr(bits) – 有符号右移 (Java 的 &gt;&gt; )</li></p>
+<p><li>ushr(bits) – 无符号右移 (Java 的 &gt;&gt;&gt; )</li></p>
+<p><li>and(bits) – 位与</li></p>
+<p><li>or(bits) – 位或</li></p>
+<p><li>xor(bits) – 位异或</li></p>
+<p><li>inv() – 位非</li></p>
+<p>浮点数比较</p>
+<p><li>相等性检测： a == b 与 a != b</li></p>
+<p><li>比较操作符： a &lt; b 、 a &gt; b 、 a &lt;= b 、 a &gt;= b</li></p>
+<p><li>区间实例以及区间检测： a..b 、 x in a..b 、 x !in a..b  </li></p>
+<h3 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h3><p>字符用 Char 类型表示。它们不能直接当作数字<br>字符字面值用单引号括起来: ‘1’ 。 特殊字符可以用反斜杠转义。 支持这几个转义序<br>列： \t 、 \b 、 \n 、 \r 、 \’ 、 \” 、 \ 和 \$ 。 编码其他字符要用 Unicode 转义序<br>列语法： ‘\uFF00’ 。<br>我们可以显式把字符转换为 Int 数字：  </p>
+<pre>
+fun decimalDigitValue(c: Char): Int {
+    if (c !in '0'..'9') throw IllegalArgumentException("Out of range")
+    return c.toInt() - '0'.toInt() // 显式转换为数字
+}
+</pre>
+当需要可空引用时，像数字、字符会被装箱。装箱操作不会保留同一性。  
+
+### 布尔 ###
+布尔用 Boolean 类型表示，它有两个值： true 和 false 。  
+若需要可空引用布尔会被装箱。  
+内置的布尔运算有：  
+<li>|| – 短路逻辑或
+</li><li>&& – 短路逻辑与
+</li><li>! - 逻辑非
+
+### 数组 ###
+数组在 Kotlin 中使用 Array 类来表示，它定义了 get 和 set 函数（按照运算符重载约定
+这会转变为 [] ） 和 size 属性，以及一些其他有用的成员函数：  
+<pre>
+class Array<t> private constructor() {
+            val size: Int
+            operator fun get(index: Int): T
+            operator fun set(index: Int, value: T): Unit
+            operator fun iterator(): Iterator<t>
+            // ……
+}
+</t></t></pre>
+
+<p>我们可以使用库函数 arrayOf() 来创建一个数组并传递元素值给它，这样 arrayOf(1, 2, 3)<br>创建了 array [1, 2, 3]。 或者，库函数 arrayOfNulls() 可以用于创建一个指定大小、元素都<br>为空的数组。  </p>
+<p>另一个选项是用接受数组大小和一个函数参数的工厂函数，用作参数的函数能够返回给定索<br>引的每个元素初始值：</p>
+<pre>
+// 创建一个 Array<string> 初始化为 ["0", "1", "4", "9", "16"]
+val asc = Array(5, { i -> (i * i).toString() })
+</string></pre>
+注意: 与 Java 不同的是，Kotlin 中数组是不型变的（invariant） 。这意味着 Kotlin 不让我们把
+Array<string> 赋值给 Array<any> ，以防止可能的运行时失败（但是你可以使用 Array<out any=""> , 参见类型投影） 。  
+
+Kotlin 也有无装箱开销的专门的类来表示原生类型数组: ByteArray 、
+ShortArray 、 IntArray 等等。这些类和 Array 并没有继承关系，但是它们有同样的方法属
+性集。它们也都有相应的工厂方法:
+<pre>
+val x: IntArray = intArrayOf(1, 2, 3)
+x[0] = x[1] + x[2]
+</pre>
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>原生字符串 使用三个引号（””” ） 分界符括起来，内部没有转义并且可以包含换行和任何其<br>他字符:</p>
+<pre>
+val text = """
+        for (c in "foo")
+        print(c)
+"""
+</pre>
+你可以通过 trimMargin() 函数去除前导空格：
+<pre>
+val text = """
+    |Tell me and I forget.
+        |Teach me and I remember.
+    |Involve me and I learn.
+  |(Benjamin Franklin)
+""".trimMargin()
+</pre>
+默认 | 用作边界前缀，但你可以选择其他字符并作为参数传入，比如 trimMargin(">")  
+
+字符串模板
+字符串可以包含模板表达式 ，即一些小段代码，会求值并把结果合并到字符串中。 模板表达
+式以美元符（$ ） 开头，由一个简单的名字构成:
+<pre>
+val i = 10
+val s = "i = $i" // 求值结果为 "i = 10"
+</pre>
+或者用花括号括起来的任意表达式:
+<pre>
+val s = "abc"
+val str = "$s.length is ${s.length}" // 求值结果为 "abc.length is 3"
+</pre>
+
+<p>原生字符串和转义字符串内部都支持模板。 如果你需要在原生字符串中表示字面值 $ 字符<br>（它不支持反斜杠转义） ，你可以用下列语法：</p>
+<pre>
+val price = """
+${'$'}9.99
+"""
+</pre>
+## 包 ##
+源文件通常以包声明开头:  
+源文件所有内容（无论是类还是函数） 都包含在声明的包内。  
+默认导入  
+<pre>
+kotlin.*
+kotlin.annotation.*
+kotlin.collections.*
+kotlin.comparisons.* （自 1.1 起）
+kotlin.io.*
+kotlin.ranges.*
+kotlin.sequences.*
+kotlin.text.*
+根据目标平台还会导入额外的包：
+JVM:
+java.lang.*
+kotlin.jvm.*
+</pre>
+
+<p>如果出现名字冲突，可以使用 as 关键字在本地重命名冲突项来消歧义：  </p>
+<pre>
+import foo.Bar // Bar 可访问
+import bar.Bar as bBar // bBar 代表“bar.Bar”
+</pre>
+
+<p>关键字 import 并不仅限于导入类；也可用它来导入其他声明：  </p>
+<p><li>顶层函数及属性；</li></p>
+<p><li>在对象声明中声明的函数和属性;</li></p>
+<p><li>枚举常量。<br>与 Java 不同，Kotlin 没有单独的“import static”语法； 所有这些声明都用 import 关键字导<br>入。  </li></p>
+<p>顶层声明的可见性<br>如果顶层声明是 private 的，它是声明它的文件所私有的（参见 可见性修饰符）  </p>
+<h2 id="控制流：if、when、for、while"><a href="#控制流：if、when、for、while" class="headerlink" title="控制流：if、when、for、while"></a>控制流：if、when、for、while</h2><h3 id="If-表达式"><a href="#If-表达式" class="headerlink" title="If 表达式"></a>If 表达式</h3><p>在 Kotlin 中， if 是一个表达式，即它会返回一个值。 因此就不需要三元运算符（条件 ? 然<br>后 : 否则） ，因为普通的 if 就能胜任这个角色。</p>
+<pre>
+// 作为表达式
+val max = if (a > b) a else b
+</pre>
+if 的分支可以是代码块，最后的表达式作为该块的值：
+<pre>
+val max = if (a > b) {
+    print("Choose a")
+    a
+} else {
+    print("Choose b")
+    b
+}
+</pre>
+如果你使用 if 作为表达式而不是语句（例如：返回它的值或者把它赋给变量） ，该表达式
+需要有 else 分支。  
+
+### When 表达式 ###
+when 取代了类 C 语言的 switch 操作符。其最简单的形式如下：
+<pre>
+when (x) {
+    1 -> print("x == 1")
+    2 -> print("x == 2")
+    else -> { // 注意这个块
+        print("x is neither 1 nor 2")
+    }
+}
+</pre>
+when 将它的参数和所有的分支条件顺序比较，直到某个分支满足条件。 when 既可以被当
+做表达式使用也可以被当做语句使用。如果它被当做表达式， 符合条件的分支的值就是整个
+表达式的值，如果当做语句使用， 则忽略个别分支的值。（像 if 一样，每一个分支可以是
+一个代码块，它的值是块中最后的表达式的值。）  
+
+如果其他分支都不满足条件将会求值 else 分支。 如果 when 作为一个表达式使用，则必须
+有 else 分支， 除非编译器能够检测出所有的可能情况都已经覆盖了。  
+
+如果很多分支需要用相同的方式处理，则可以把多个分支条件放在一起，用逗号分隔：
+<pre>
+when (x) {
+    0, 1 -> print("x == 0 or x == 1")
+    else -> print("otherwise")
+}
+</pre>
+
+<p>when 也可以用来取代 if - else if 链。 如果不提供参数，所有的分支条件都是简单的布<br>尔表达式，而当一个分支的条件为真时则执行该分支：  </p>
+<pre>
+when {
+    x.isOdd() -> print("x is odd")
+    x.isEven() -> print("x is even")
+    else -> print("x is funny")
+}
+</pre>
+### For 循环 ###
+for 循环可以对任何提供迭代器（iterator） 的对象进行遍历，这相当于像 C# 这样的语言中
+的 foreach 循环。语法如下：  
+<pre>
+for (item in collection) print(item)
+</pre>
+如上所述， for 可以循环遍历任何提供了迭代器的对象。即：  
+有一个成员函数或者扩展函数 iterator() ，它的返回类型有一个成员函数或者扩展函数 next() ，并且有一个成员函数或者扩展函数 hasNext() 返回 Boolean 。这三个函数都需要标记为 operator 。  
+
+如果你想要通过索引遍历一个数组或者一个 list，你可以这么做：
+<pre>
+for (i in array.indices) {
+    print(array[i])
+}
+</pre>
+注意这种“在区间上遍历”会编译成优化的实现而不会创建额外对象。
+或者你可以用库函数 withIndex ：
+<pre>
+for ((index, value) in array.withIndex()) {
+    println("the element at $index is $value")
+}
+</pre>
+### While 循环 ###
+while 和 do .. while 照常使用
+
+### 循环中的Break和continue ###
+在循环中 Kotlin 支持传统的 break 和 continue 操作符。参见返回和跳转。
+Kotlin 有三种结构化跳转表达式：  
+<li>return 。默认从最直接包围它的函数或者匿名函数返回。
+</li><li>break 。终止最直接包围它的循环。
+</li><li>continue 。继续下一次最直接包围它的循环。
+所有这些表达式都可以用作更大表达式的一部分：  
+<pre>
+val s = person.name ?: return
+</pre>
+这些表达式的类型是 Nothing 类型。  
+
+
+Break 与 Continue 标签  
+在 Kotlin 中任何表达式都可以用标签（label ） 来标记。 标签的格式为标识符后跟 @ 符
+号，例如： abc@ 、 fooBar@ 都是有效的标签（参见语法） 。 要为一个表达式加标签，我们
+只要在其前加标签即可。  
+<pre>
+loop@ for (i in 1..100) {
+for (j in 1..100) {
+    if (……) break@loop
+    }
+}
+</pre>
+
+<p><strong>标签处返回</strong><br>Kotlin 有函数字面量、局部函数和对象表达式。因此 Kotlin 的函数可以被嵌套。 标签限制的<br>return 允许我们从外层函数返回。 最重要的一个用途就是从 lambda 表达式中返回。回想<br>一下我们这么写的时候：  </p>
+<p><pre><br>fun foo() {<br>ints.forEach {<br>    if (it == 0) return // nonlocal return from inside lambda directly to the caller of foo()<br>        print(it)<br>    }<br>}<br></pre><br>这个 return 表达式从最直接包围它的函数即 foo 中返回。 （注意，这种非局部的返回只<br>支持传给内联函数的 lambda 表达式。） 如果我们需要从 lambda 表达式中返回，我们必须<br>给它加标签并用以限制 return 。  </p>
+<p><pre><br>fun foo() {<br>    ints.forEach lit@ {<br>        if (it == 0) return@lit<br>            print(it)<br>        }<br>}<br></pre><br>现在，它只会从 lambda 表达式中返回。通常情况下使用隐式标签更方便。 该标签与接受该<br>lambda 的函数同名。</p>
+<p><pre><br>fun foo() {<br>ints.forEach {<br>    if (it == 0) return@forEach<br>    print(it)<br>    }<br>}<br></pre><br>或者，我们用一个匿名函数替代 lambda 表达式。 匿名函数内部的 return 语句将从该匿名<br>函数自身返回</p>
+<p><pre><br>fun foo() {<br>ints.forEach(fun(value: Int) {<br>    if (value == 0) return // local return to the caller of the anonymous fun,i.e. the forEach loop<br>    print(value)<br>})<br>}<br></pre><br>当要返一个回值的时候，解析器优先选用标签限制的 return</p>
+</li></out></any></string></li>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/Kotlin基础语法概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/Kotlin基础语法概述/" itemprop="url">Kotlin基础语法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T08:52:31+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="定义包"><a href="#定义包" class="headerlink" title="定义包"></a>定义包</h3><p>包的声明应处于源文件顶部<br>目录与包的结构无需匹配：源代码可以在文件系统的任意位置。<br>package my.demo<br>import java.util.*  </p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>带有两个 Int 参数、返回 Int 的函数：  </p>
+<pre>
+fun sum(a: Int, b: Int): Int {
+return a + b
+}
+</pre>
+将表达式作为函数体、返回值类型自动推断的函数：
+<pre>
+fun sum(a: Int, b: Int) = a + b
+</pre>
+函数返回无意义的值：
+<pre>
+fun printSum(a: Int, b: Int): Unit {
+println("sum of $a and $b is ${a + b}")
+}
+</pre>
+Unit 返回类型可以省略：
+<pre>
+fun printSum(a: Int, b: Int) {
+println("sum of $a and $b is ${a + b}")
+}
+</pre>
+### 定义局部变量 ###
+一次赋值（只读） 的局部变量:
+<pre>
+val a: Int = 1 // 立即赋值
+val b = 2 // 自动推断出 `Int` 类型
+val c: Int // 如果没有初始值类型不能省略
+c = 3 // 明确赋值
+</pre>
+可变变量：
+<pre>
+var x = 5 // 自动推断出 `Int` 类型
+x += 1
+</pre>
+### 注释 ###
+<pre>
+// 这是一个行注释
+/* 这是一个多行的
+块注释。 */
+</pre>
+### 使用字符串模板 ###
+<pre>
+var a = 1
+// 模板中的简单名称：
+val s1 = "a is $a"
+a = 2
+// 模板中的任意表达式：
+val s2 = "${s1.replace("is", "was")}, but now is $a"
+</pre>
+### 使用条件表达式 ###
+使用 if 作为表达式:
+<pre>
+//sampleStart
+fun maxOf(a: Int, b: Int) = if (a > b) a else b
+//sampleEnd
+</pre>
+### 使用可空值及 null 检测 ###
+当某个变量的值可以为 null 的时候，必须在声明处的类型后添加 ? 来标识该引用可为
+空。  
+举个例子：  
+如果 str 的内容不是数字返回 null ：
+<pre>
+fun parseInt(str: String): Int? {
+// ……
+}
+</pre>
+使用返回可空值的函数:  
+<pre>
+fun parseInt(str: String): Int? {
+return str.toIntOrNull()
+}
+</pre>
+### 使用类型检测及自动类型转换  ###
+is 运算符检测一个表达式是否某类型的一个实例。 如果一个不可变的局部变量或属性已经
+判断出为某类型，那么检测后的分支中可以直接当作该类型使用，无需显式转换：  
+<pre>
+fun getStringLength(obj: Any): Int? {
+if (obj is String) {
+// `obj` 在该条件分支内自动转换成 `String`
+return obj.length
+} /
+/ 在离开类型检测分支后，`obj` 仍然是 `Any` 类型
+return null
+}
+</pre>
+### 使用 for 循环 ###
+<pre>
+val items = listOf("apple", "banana", "kiwi")
+for (item in items) {
+println(item)
+}
+</pre>
+### 使用 while 循环 ###
+<pre>
+val items = listOf("apple", "banana", "kiwi")
+var index = 0
+while (index < items.size) {
+    println("item at $index is ${items[index]}")
+index++
+}
+</pre>
+### 使用 when 表达式 ###
+<pre>
+fun describe(obj: Any): String =
+when (obj) {
+    1 -> "One"
+    "Hello" -> "Greeting"
+    is Long -> "Long"
+    !is String -> "Not a string"
+    else -> "Unknown"
+}
+</pre>
+### 使用区间（range） ###
+使用 in 运算符来检测某个数字是否在指定区间内：  
+<pre>
+val x = 10
+val y = 9
+if (x in 1..y+1) {
+    println("fits in range")
+}
+</pre>
+区间迭代:
+<pre>
+for (x in 1..5) {
+    print(x)
+}
+</pre>
+数列迭代：
+<pre>
+for (x in 1..10 step 2) {
+    print(x)
+} 
+for (x in 9 downTo 0 step 3) {
+    print(x)
+}
+</pre>
+### 使用集合 ###
+对集合进行迭代:
+<pre>
+fun main(args: Array<string>) {
+    val items = listOf("apple", "banana", "kiwi")
+    //sampleStart
+    for (item in items) {
+        println(item)
+    }
+    //sampleEnd
+}
+</string></pre>
+使用 in 运算符来判断集合内是否包含某实例：
+<pre>
+val items = setOf("apple", "banana", "kiwi")
+//sampleStart
+when {
+    "orange" in items -> println("juicy")
+    "apple" in items -> println("apple is fine too")
+}
+//sampleEnd
+</pre>
+使用 lambda 表达式来过滤（filter） 和映射（map） 集合：
+<pre>
+val fruits = listOf("banana", "avocado", "apple", "kiwi")
+//sampleStart
+fruits
+.filter { it.startsWith("a") }
+.sortedBy { it }
+.map { it.toUpperCase() }
+.forEach { println(it) }
+</pre>
+### 创建基本类及其实例： ###
+<pre>
+fun main(args: Array<string>) {
+//sampleStart
+val rectangle = Rectangle(5.0, 2.0) // 不需要“new”关键字
+val triangle = Triangle(3.0, 4.0, 5.0)
+//sampleEnd
+println("Area of rectangle is ${rectangle.calculateArea()}, its perimeter is ${rec
+tangle.perimeter}")
+println("Area of triangle is ${triangle.calculateArea()}, its perimeter is ${trian
+gle.perimeter}")
+} 
+abstract class Shape(val sides: List<double>) {
+    val perimeter: Double get() = sides.sum()
+abstract fun calculateArea(): Double
+} 
+interface RectangleProperties {
+val isSquare: Boolean
+} 
+class Rectangle(
+    var height: Double,
+    var length: Double
+) : Shape(listOf(height, length, height, length)), RectangleProperties {
+    override val isSquare: Boolean get() = length == height
+    override fun calculateArea(): Double = height * length
+} 
+class Triangle(
+var sideA: Double,
+var sideB: Double,
+var sideC: Double
+) : Shape(listOf(sideA, sideB, sideC)) {
+override fun calculateArea(): Double {
+val s = perimeter / 2
+return Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC))
+}
+}
+</double></string></pre>
+### 习惯用法 ### 
+创建 DTOs（POJOs/POCOs）  
+<pre>
+data class Customer(val name: String, val email: String)
+</pre>
+会为 Customer 类提供以下功能：  
+<li>所有属性的 getters （对于 var 定义的还有 setters）
+</li><li>equals()
+</li><li>hashCode()
+</li><li>toString()
+</li><li>copy()
+</li><li>所有属性的 component1() 、 component2() ……等等（参见数据类）
+
+
+函数的默认参数
+<pre>
+fun foo(a: Int = 0, b: String = "") { …… }
+</pre>
+
+
+<p>过滤 list</p>
+<pre>
+val positives = list.filter { x -> x > 0 }
+或者更短
+val positives = list.filter { it > 0 }
+</pre>
+
+
+<p>String 内插</p>
+<pre>
+println("Name $name")
+</pre>
+
+
+<p>类型判断</p>
+<pre>
+when (x) {
+is Foo //-> ……
+is Bar //-> ……
+else //-> ……
+}
+</pre>
+
+
+<p>遍历 map/pair型list</p>
+<pre>
+for ((k, v) in map) {
+    println("$k -> $v")
+}
+</pre>
+
+<p>使用区间</p>
+<pre>
+for (i in 1..100) { …… } // 闭区间：包含 100
+for (i in 1 until 100) { …… } // 半开区间：不包含 100
+for (x in 2..10 step 2) { …… }
+for (x in 10 downTo 1) { …… }
+if (x in 1..10) { …… }
+</pre>
+
+<p>只读 list</p>
+<pre>
+val list = listOf("a", "b", "c")
+</pre>
+
+<p>只读 map</p>
+<pre>
+val map = mapOf("a" to 1, "b" to 2, "c" to 3)
+</pre>
+
+<p>访问 map</p>
+<pre>
+println(map["key"])
+map["key"] = value
+</pre>
+
+<p>延迟属性</p>
+<pre>
+val p: String by lazy {
+// 计算该字符串
+}
+</pre>
+
+
+<p>扩展函数</p>
+<pre>
+fun String.spaceToCamelCase() { …… }
+"Convert this to camelcase".spaceToCamelCase()
+</pre>
+
+<p>创建单例</p>
+<pre>
+fun main(args:Array<string>){
+    val resource1 = Resource
+    val resource2 = Resource
+    println(resource1 == resource2)
+
+}
+object Resource {
+    val name = "Name"
+}
+</string></pre>
+输出结果为：true
+
+If not null 缩写
+<pre>
+val files = File("Test").listFiles()
+println(files?.size)
+</pre>
+
+<p>If not null and else 缩写</p>
+<pre>
+val files = File("Test").listFiles()
+println(files?.size ?: "empty")
+</pre>
+
+<p>if null 执行一个语句</p>
+<pre>
+val data = ……
+val email = data["email"] ?: throw IllegalStateException("Email is missing!")
+</pre>
+
+<p>if not null 执行代码</p>
+<pre>
+val data = ……
+data?.let {
+    …… // 代码会执行到此处, 假如data不为null
+}
+</pre>
+
+<p>映射可空值（如果非空的话）</p>
+<pre>
+val data = ……
+val mapped = data?.let { transformData(it) } ?: defaultValueIfDataIsNull
+</pre>
+
+
+<p>返回 when 表达式</p>
+<pre>
+fun transform(color: String): Int {
+    return when (color) {
+        "Red" -> 0
+        "Green" -> 1
+        "Blue" -> 2
+        else -> throw IllegalArgumentException("Invalid color param value")
+    }
+}
+</pre>
+
+<p>“try/catch”表达式</p>
+<pre>
+fun test() {
+    val result = try {
+        count()
+    } catch (e: ArithmeticException) {
+        throw IllegalStateException(e)
+    } // 使用 result
+}
+</pre>
+
+<p>“if”表达式</p>
+<pre>
+    fun foo(param: Int) {
+        val result = if (param == 1) {
+            "one"
+        } else if (param == 2) {
+            "two"
+        } else {
+            "three"
+        }
+}
+</pre>
+
+
+<p>返回类型为 Unit 的方法的 Builder 风格用法</p>
+<pre>
+fun arrayOfMinusOnes(size: Int): IntArray {
+    return IntArray(size).apply { fill(-1) }
+}
+</pre>
+单表达式函数
+<pre>
+fun theAnswer() = 42
+</pre>
+等价于
+<pre>
+fun theAnswer(): Int {
+    return 42
+}
+</pre>
+单表达式函数与其它惯用法一起使用能简化代码，例如和 when 表达式一起使用：
+<pre>
+fun transform(color: String): Int = when (color) {
+    "Red" -> 0
+    "Green" -> 1
+    "Blue" -> 2
+    else -> throw IllegalArgumentException("Invalid color param value")
+}
+</pre>
+对一个对象实例调用多个方法 （ with ）
+<pre>
+class Turtle {
+    fun penDown()
+    fun penUp()
+    fun turn(degrees: Double)
+    fun forward(pixels: Double)
+} 
+val myTurtle = Turtle()
+with(myTurtle) { // 画一个 100 像素的正方形
+    penDown()
+    for(i in 1..4) {
+        forward(100.0)
+        turn(90.0)
+    } 
+    penUp()
+}
+</pre>
+Java 7 的 try with resources
+<pre>
+val stream = Files.newInputStream(Paths.get("/some/file.txt"))
+    stream.buffered().reader().use { reader ->
+    println(reader.readText())
+}
+</pre>
+对于需要泛型信息的泛型函数的适宜形式
+<pre>
+// public final class Gson {
+// ……
+// public <t> T fromJson(JsonElement json, Class<t> classOfT) throws    JsonSyntaxException {
+// ……
+inline fun <reified t:="" any=""> Gson.fromJson(json: JsonElement): T = this.fromJson(json,T::class.java)
+</reified></t></t></pre>
+
+<p>使用可空布尔</p>
+<pre>
+val b: Boolean? = ……
+if (b == true) {
+    ……
+} else {
+    // `b` 是 false 或者 null
+}
+</pre>
+### 编码规范 ###
+命名风格
+</li><li>如果拿不准的时候，默认使用Java的编码规范，比如：  
+</li><li>使用驼峰法命名（并避免命名含有下划线）
+</li><li>类型名以大写字母开头
+</li><li>方法和属性以小写字母开头
+</li><li>使用 4 个空格缩进
+</li><li>公有函数应撰写函数文档，这样这些文档才会出现在 Kotlin Doc 中  
+
+冒号  
+类型和超类型之间的冒号前要有一个空格，而实例和类型之间的冒号前不要有空格：  
+<pre>
+interface Foo<out t="" :="" any=""> : Bar {
+    fun foo(a: Int): T
+}
+</out></pre>
+
+<p>Lambda表达式<br>在lambda表达式中, 大括号左右要加空格，分隔参数与代码体的箭头左右也要加空格 。<br>lambda表达应尽可能不要写在圆括号中  </p>
+<p><pre><br>list.filter { it &gt; 10 }.map { element -&gt; element * 2 }<br></pre><br>在非嵌套的短lambda表达式中，最好使用约定俗成的默认参数 it 来替代显式声明参数名 。<br>在嵌套的有参数的lambda表达式中，参数应该总是显式声明。  </p>
+<p>类头格式化<br>有少数几个参数的类可以写成一行：  </p>
+<p><pre>class Person(id: Int, name: String)</pre><br>具有较长类头的类应该格式化，以使每个主构造函数参数位于带有缩进的单独一行中。 此<br>外，右括号应该另起一行。如果我们使用继承，那么超类构造函数调用或者实现接口列表应<br>位于与括号相同的行上：  </p>
+<p><pre><br>class Person(<br>        id: Int,<br>        name: String,<br>        surname: String<br>        ) : Human(id, name) {<br>            // ……<br>}<br></pre><br>对于多个接口，应首先放置超类构造函数调用，然后每个接口应位于不同的行中：  </p>
+<p><pre><br>class Person(<br>    id: Int,<br>    name: String,<br>    surname: String<br>    ) : Human(id, name),<br>    KotlinMaker {<br>        // ……<br>}<br></pre><br>构造函数参数可以使用常规缩进或连续缩进（双倍的常规缩进）  </p>
+<p>Unit<br>如果函数返回 Unit 类型，该返回类型应该省略：</p>
+<p><pre><br>fun foo() { // 省略了 “: Unit”<br>}<br></pre><br>函数还是属性<br>很多场合无参的函数可与只读属性互换。 尽管语义相近，也有一些取舍的风格约定。<br>底层算法优先使用属性而不是函数：  </p>
+<p><li>不会抛出任何异常</li></p>
+<p><li>编码规范</li></p>
+<p><li>52O(1) 复杂度</li></p>
+<p><li>计算廉价（或缓存第一次运行）</li></p>
+<p><li>不同调用返回相同结果</li></p>
+</li>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/RxJava2系列基础操作（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/16/RxJava2系列基础操作（一）/" itemprop="url">RxJava2系列基础操作（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T15:04:41+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#RxJava2基本操作 #<br>什么是Rxjava：处理异步操作的网络库<br>优点：随着程序逻辑越来越复杂依然能够保持代码逻辑的简洁性，本身是响应式编程的模式<br>响应式编程是一种基于异步数据流概念的编程模式  </p>
+<h1 id="基本类-Base-Class"><a href="#基本类-Base-Class" class="headerlink" title="基本类 Base Class"></a>基本类 Base Class</h1><pre><code>io.reactivex.Flowable: 0..N flows, 支持响应式编程跟背压
+io.reactivex.Observable: 0..N flows, 不支持背压
+io.reactivex.Single: a flow of exactly 1 item or an error,
+io.reactivex.Completable: a flow without items but only a completion or error signal,
+io.reactivex.Maybe: a flow with no items, exactly one item or an error.
+</code></pre><h2 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h2><pre><code>Observable.create(new ObservableOnSubscribe&lt;Integer&gt;() {
+    @Override
+    public void subscribe(ObservableEmitter&lt;Integer&gt; emitter) throws Exception {
+        emitter.onNext(1);
+        emitter.onNext(2);
+        emitter.onNext(3);
+        emitter.onComplete();
+    }
+}).subscribe(new Observer&lt;Integer&gt;() {
+    @Override
+    public void onSubscribe(Disposable d) {
+        System.out.println(&quot;start subscribe&quot;);
+    }
+
+    @Override
+    public void onNext(Integer integer) {
+        System.out.println(&quot;receive data &quot;+integer);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        System.out.println(&quot;error&quot;);
+    }
+
+    @Override
+    public void onComplete() {
+        System.out.println(&quot;complete&quot;);
+    }
+});
+</code></pre><p>打印结果：<br>        start subscribe<br>        receive data 1<br>        receive data 2<br>        receive data 3<br>        complete<br>术语解释：<br>Observable：被观察者<br>Observer： 观察者<br>create（）：创建被观察者<br>subscribe（）：观察者开始订阅<br>Disposable：在RxJava 2.x 中，新增的Disposable可以做到切断的操作，让Observer观察者不再接收上游事件  </p>
+<p>Consumer 即消费者，用于接收单个值<br>BiConsumer 则是接收两个值，<br>Function 用于变换对象，<br>Predicate 用于判断。</p>
+<h2 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h2><p>subScribeOn（）： 用于指定 subscribe() 时所发生的线程<br>observeOn（）：方法用于指定下游 Observer 回调发生的线程<br>线程切换需要注意的：<br>1.简单地说，subscribeOn() 指定的就是发射事件的线程，observerOn 指定的就是订阅者接收事件的线程。<br>2.多次指定发射事件的线程只有第一次指定的有效，也就是说多次调用 subscribeOn() 只有第一次的有效，其余的会被忽略。<br>3.但多次指定订阅者接收线程是可以的，也就是说每调用一次 observerOn()，下游的线程就会切换一次。</p>
+<h3 id="RxJava内置了线程选项"><a href="#RxJava内置了线程选项" class="headerlink" title="RxJava内置了线程选项"></a>RxJava内置了线程选项</h3><ul>
+<li>Schedulers.io() 代表io操作的线程, 通常用于网络,读写文件等io密集型的操作</li>
+<li>Schedulers.computation() 代表CPU计算密集型的操作, 例如需要大量计算的操作</li>
+<li>Schedulers.newThread() 代表一个常规的新线程</li>
+<li>AndroidSchedulers.mainThread() 代表Android的主线程<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3>map 操作符可以将一个 Observable 对象通过某种关系转换为另一个Observable 对象<br><pre><br>  Observable.create(new ObservableOnSubscribe<integer>() {<pre><code>    @Override
+    public void subscribe(ObservableEmitter&lt;Integer&gt; emitter) throws Exception {
+        emitter.onNext(new Integer(65));
+        emitter.onNext(new Integer(66));
+        emitter.onNext(new Integer(67));
+        emitter.onComplete();
+    }
+}).map(new Function&lt;Integer, String&gt;() {
+    @Override
+    public String apply(Integer integer) throws Exception {
+        char c = (char) integer.intValue();
+        return new String(new char[]{c});
+    }
+}).subscribe(new Consumer&lt;String&gt;() {
+    @Override
+    public void accept(String s) throws Exception {
+        System.out.println(s);
+    }
+});
+</code></pre></integer></pre><br>输出结果：<br><pre><br>A<br>B<br>C<br></pre><h3 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h3>concat 可以做到不交错的发射两个甚至多个 Observable 的发射事件，两个 Observable 的泛型应当保持一致,并且只有前一个 Observable 终止(onComplete) 后才会订阅下一个 Observable<br><pre><br>public static StringBuffer data = new StringBuffer();<br>  public static void main(String[] args){<pre><code>final String cacheData = null;
+Observable cacheObservable = Observable.create(new ObservableOnSubscribe&lt;String&gt;() {
+    @Override
+    public void subscribe(ObservableEmitter emitter) throws Exception {
+        if(cacheData == null || cacheData.length()&lt;=0){
+            emitter.onComplete();
+        }else{
+            data.append(&quot;cacheObservable从缓存读取数据&quot;);
+            data.append(cacheData);
+            emitter.onNext(cacheData);
+        }
+    }
+});
+Observable netWorkObservable = Observable.create(new ObservableOnSubscribe&lt;String&gt;() {
+    @Override
+    public void subscribe(ObservableEmitter emitter) throws Exception {
+        data.append(&quot;netWorkObservable从网络加载数据&quot;);
+        emitter.onNext(&quot;网络数据&quot;);
+        emitter.onComplete();
+    }
+});
+Observable.concat(cacheObservable,netWorkObservable).subscribe(new Consumer&lt;String&gt;() {
+    @Override
+    public void accept(String s) throws Exception {
+        System.out.println(s+&quot;--&gt;&quot;+data.toString());
+    }
+});
+</code></pre>  }<br></pre><br>此处示例代码主要用于模仿的场景是先读取缓存，然后从从网络请求加载数据，最后刷新UI界面  </li>
+</ul>
+<h3 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h3><p>flatMap 实现多个网络请求依次依赖<br>flatMap 操作符可以将一个发射数据的 Observable 变换为多个 Observables ，然后将它们发射的数据合并后放到一个单独的 Observable<br>例如用户注册成功后需要自动登录，我们只需要先通过注册接口注册用户信息，注册成功后马上调用登录接口进行自动登录即可  </p>
+<p><pre><br>        Observable registerObserver = Observable.create(new ObservableOnSubscribe<string>() {<br>            @Override<br>            public void subscribe(ObservableEmitter emitter) throws Exception {<br>                emitter.onNext(“注册失败”);<br>                emitter.onComplete();<br>            }<br>        });<br>        final Observable loginObservable = Observable.create(new ObservableOnSubscribe<string>() {<br>            @Override<br>            public void subscribe(ObservableEmitter emitter) throws Exception {<br>                emitter.onNext(“登录成功”);<br>                emitter.onComplete();<br>            }<br>        });<br>        registerObserver.flatMap(new Function<string,observable<string>&gt;() {<br>            @Override<br>            public Observable<string> apply(String s) throws Exception {<br>                if(s.equalsIgnoreCase(“注册成功”)){<br>                    return  loginObservable;<br>                }else{<br>                    return null;<br>                }<br>            }<br>        }).subscribe(new Observer<string>() {<br>            @Override<br>            public void onSubscribe(Disposable d) {</string></string></string,observable<string></string></string></pre></p>
+<pre><code>    }
+
+    @Override
+    public void onNext(String o) {
+        System.out.println(&quot;注册后自动登录成功&quot;);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        System.out.println(&quot;注册后自动登录失败&quot;);
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
+});
+</code></pre><p><br>个人思考，假如是该处代码，如果要知道是登录出错，还是注册出错，判断Throwable e的错误类型就知道了，注册成功后添加一些操作需要在registerObserver添加一个doOnNext()的逻辑  </p>
+<h3 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h3><p>zip 操作符可以将多个 Observable 的数据结合为一个数据源再发射出去。 </p>
+<p><pre><br>Observable intObservable = Observable.create(new ObservableOnSubscribe<integer>() {<br>            @Override<br>            public void subscribe(ObservableEmitter emitter) throws Exception {<br>                emitter.onNext(new Integer(5));<br>                emitter.onComplete();<br>            }<br>        });<br>        final Observable charObservable = Observable.create(new ObservableOnSubscribe<character>() {<br>            @Override<br>            public void subscribe(ObservableEmitter emitter) throws Exception {<br>                emitter.onNext(new Character(‘A’));<br>                emitter.onComplete();<br>            }<br>        });<br>        Observable.zip(intObservable, charObservable, new BiFunction<integer,character,string>() {<br>            @Override<br>            public String apply(Integer integer, Character character) throws Exception {<br>                char tempChar = (char) (character + integer.intValue());<br>                return new String(new char[]{tempChar});<br>            }<br>        }).subscribe(new Consumer<string>() {</string></integer,character,string></character></integer></pre></p>
+<pre><code>    @Override
+    public void accept(String s) throws Exception {
+        System.out.println(&quot;合并后的数据为：&quot;+s);
+    }
+});
+</code></pre><p><br>此处示例代码并没有实际意义，实际例子比说说一个界面需要多个接口的数据返回，然后更新界面，此时可以用zip合并多个请求  </p>
+<h3 id="interval-操作符实现心跳间隔任务"><a href="#interval-操作符实现心跳间隔任务" class="headerlink" title="interval 操作符实现心跳间隔任务"></a>interval 操作符实现心跳间隔任务</h3><p><pre><br>Disposable disposable = Flowable.interval(1, TimeUnit.SECONDS)<br>                .subscribe(new Consumer<long>() {<br>                    @Override<br>                    public void accept(Long aLong) throws Exception {<br>                        System.out.println(aLong + “—-&gt;”);<br>                    }<br>                });<br></long></pre><br>同样的代码运行在eclipse的java代码可能不执行<br>原因是我们的操作不是阻塞的：我们创建了一个每隔一段时间就发射数据的 Observable，然后我们注册了一个 Subscriber 来打印收到的数据。这两个操作都是非阻塞的，而 发射数据的计时器是运行在另外一个线程的，但是这个线程不会阻止 JVM 结束当前的程序，所以 如果没有 System.in.read(); 这个阻塞操作，还没发射数据则程序就已经结束运行了。  </p>
+<p>解决办法：多种，此处暂列一种<br>Observable.interval(1, TimeUnit.SECONDS, Schedulers.trampoline())<br>上面代码中的 Schedulers.trampoline()替换为Schedulers.immediate()也是可以运行的，但是这样做是不安全的。<br>具体原因参见<a href="https://blog.csdn.net/u011033906/article/details/59753576" target="_blank" rel="external">https://blog.csdn.net/u011033906/article/details/59753576</a></p>
+<h3 id="BackPressure（背压）"><a href="#BackPressure（背压）" class="headerlink" title="BackPressure（背压）"></a>BackPressure（背压）</h3><p>所谓背压就是生产者（被观察者）的生产速度大于消费者（观察者）消费速度从而导致的问题。</p>
+<p>举一个简单点的例子，如果被观察者快速发送消息，但是观察者处理消息的很缓慢，如果没有特定的流（Flow）控制，就会导致大量消息积压占用系统资源，最终导致十分缓慢。</p>
+<p>怎么优化和减少这种情况后面再探讨，不过可以注意到，Flowable创建的时候已经设置了BackpressureStrategy，而且Subscriber使用了request来控制最大的流量。</p>
+<h3 id="Single和SingleObserver"><a href="#Single和SingleObserver" class="headerlink" title="Single和SingleObserver"></a>Single和SingleObserver</h3><p>如果你使用一个单一连续事件流，即只有一个onNext事件，接着就触发onComplete或者onError，这样你可以使用Single<br>Single只包含两个事件，一个是正常处理成功的onSuccess，另一个是处理失败的onError，它只发送一次消息（当然就不存在背压问题），其中Single类似于Observable<br>Single也可以直接转换成Flowable或者Observable:<br>single.toFlowable();<br>single.toObservable();  </p>
+<h3 id="Completable和CompletableObserver"><a href="#Completable和CompletableObserver" class="headerlink" title="Completable和CompletableObserver"></a>Completable和CompletableObserver</h3><p>如果你的观察者连onNext事件都不关心，你可以使用Completable，他只有onComplete和onError两个事件</p>
+<h3 id="Maybe和MaybeObserver"><a href="#Maybe和MaybeObserver" class="headerlink" title="Maybe和MaybeObserver"></a>Maybe和MaybeObserver</h3><p>如果你有一个需求是可能发送一个数据或者不会发送任何数据，这时候你就需要Maybe，它类似于Single和Completable的混合体。<br>Maybe可能会调用以下其中一种情况（也就是所谓的Maybe）：<br>onSuccess或者onError<br>onComplete或者onError</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/CMake调用jni的基本使用方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -282,7 +4160,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-15T13:54:41+08:00">
                 2018-05-15
@@ -494,152 +4372,13 @@ public class JniUtils {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/29/Android艺术探索-View的事件体系/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Clouse">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Clouse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/29/Android艺术探索-View的事件体系/" itemprop="url">Android艺术探索--View的事件体系</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-29T09:49:13+08:00">
-                2017-06-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="View的基础知识"><a href="#View的基础知识" class="headerlink" title="View的基础知识"></a>View的基础知识</h2><h3 id="1-View的位置参数"><a href="#1-View的位置参数" class="headerlink" title="1.View的位置参数"></a>1.View的位置参数</h3><blockquote>
-<p>   View的位置主要由它的四个顶点来决定，分别对应View的四个属性：left,right,top,bottom。其中left对应的是View的左上角的横坐标，right对应的是右下角的横坐标，top对应的是左上角的纵坐标，bottom对应的是右上角的纵坐标。这些坐标都是相对父容器来说的这四个参数分别对应View的mLeft,mRight,mTop,mBottom成员变量，获取方式分别是getLeft(),getRight(),getTop(),getBottom(),由此可以通过宽度width = right - left 跟高度height = bottom - top</p>
-<p>从Android3.0开始又新增了x,y,translationX,translationY这几个参数，x，y对应的是view左上角的坐标，而translationX和translationY是View左上角相对父容器的偏移量，这几个参数也是相对父容器,translationX和translationY默认值是0，View在平移过程中top跟left表示的是原始左上角的位置信息<br>公式 x= left + translationX<br>公式 y= right + translationY</p>
-<h3 id="2-MotionEvent跟TouchSlop"><a href="#2-MotionEvent跟TouchSlop" class="headerlink" title="2.MotionEvent跟TouchSlop"></a>2.MotionEvent跟TouchSlop</h3><h4 id="MotionEvent"><a href="#MotionEvent" class="headerlink" title="MotionEvent"></a>MotionEvent</h4><p>手指接触屏幕后所产生的事件<br></p>
-<ul>
-<li>ACTION_DOWN：手指刚接触手机屏幕</li>
-<li>ACTION_MOVE：手指在屏幕上移动</li>
-<li>ACTION_UP:手指离开屏幕瞬间</li>
-<li>同时系统提供了两种方法用于获取坐标getX()/getY()跟getRawX()/getRawY(),需要说明的是getX()是相对View自身而言的，getRawX是相对手机屏幕左上角的<h4 id="TouchSlop"><a href="#TouchSlop" class="headerlink" title="TouchSlop"></a>TouchSlop</h4>TouchSlop是系统所能识别出的被认为是滑动的最小距离，即手指在手机屏幕上滑动时，如果两次滑动距离小于这个常量，系统不认为你是在进行滑动操作，而且这个常量跟设备有关，不同设备值可能不一样</li>
-<li>通过ViewConfiguration.get(getContext().getScaledTouchSlop())来获取这个常量的值，利用这个值可以实现更好的用户体验<h4 id="VelocityTracker"><a href="#VelocityTracker" class="headerlink" title="VelocityTracker"></a>VelocityTracker</h4>VelocityTracker用于追踪手指在滑动过程中的速度，包括水平跟竖直方向的速度，获取速度前必须要先计算速度<br>用法：<br>VelocityTracker v = VelocityTracker.obtain();<br><br>v.addMovement(event);<br>v.computeCurrentVelocity(1000);<br>int xVelocity = v.getXVelocity()<br>速度 = （终点位置-起点位置）/时间段<br>最后当不需要使用的时候需要v.clear();v.recycle();huishou ziyuan <h4 id="GestureDetector"><a href="#GestureDetector" class="headerlink" title="GestureDetector"></a>GestureDetector</h4>GestureDetector手势检测，用于辅助检测用户的单击，滑动，长按，双击，等行为使用方式比较简单跟速度追踪VelocityTracker类似，具体可以<strong>参考书的127页</strong><h4 id="Scroller"><a href="#Scroller" class="headerlink" title="Scroller"></a>Scroller</h4>Scroller弹性滑动对象，用于实现View的弹性滑动，scrollTo()跟scrollBy()其实都是一瞬间完成，scroller需要结合view的computeScroll()方法实现弹性滑动，关于scroller的具体使用，可以参考郭霖的这篇博客<a href="http://blog.csdn.net/guolin_blog/article/details/48719871" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/48719871</a><br>###View的滑动<br>####1.实现view的滑动的几种方式</li>
-<li>通过view自身提供的scrollTo/scrollBy方法</li>
-<li>通过动画给view施加平移效果来实现</li>
-<li>通过改变view的layoutparams使得view重新布局从而实现滑动<br><br><br>scrollTo/scrollBy方法<br>这两个属性对应的其实是mScrollX,mScrollY获取可以通过getScrollX()跟getScrollY（）获得这两个字段对应的值，需要理解的是mScrollX对应的是View的左边缘与View内容左边缘在水平方向的距离，mScrollY同理对应两者在竖直方向的距离,因此scrollTo等方法从左向右滑动mScrollX为负值，从上往下滑动mScrollY为负值<br><br><br>通过动画给view施加平移效果来实现<br>使用动画的方式主要是操作View的translationX跟translationY,View动画实际是对view的影像进行操作，并不能真正改变view的宽高/位置参数，如果不是属性动画还必须将fillafter设置为true才能保留动画结束时的状态<br><br><br>通过改变view的layoutparams使得view重新布局从而实现滑动方式比较简单这里不做赘述<br><br><br><strong>几种动画方式的对比</strong><br>View的scrollTo/scrollBy，操作简单，只能对view的内容滑动，而且不影像内容元素的点击事件<br><br>动画，操作简单，试用没有交互的view和实现复杂的动画效果，3.0以上利用属性动画能改变View本身的属性<br><br>改变布局参数：操作稍微复杂，适用于有交互的view<br>###弹性滑动<br>弹性滑动的思想就是将一次滑动分成若干次小的滑动，方法很多，比如通过Scroller,Handler/postDelayed,Thread/sleep等<br>##View的事件分发机制<br>此处先用一个伪代码来做一个Touch事件的过程分析<br><pre><code><br>public boolean dispatchTouchEvent(MotionEvent ev) {<pre><code>boolean consume = false
-if(onInterceptTouchEvent(ev)){
-    consume = onTouchEvent(ev)
-} else {
-    consume = child.dispatchEvent(ev)
-}
-return consume;
-</code></pre>}<br></code></pre><br>####在事件分发过程中，注意OnTouchListener跟OnTouchEvent还有OnClikListener的区别及优先级具体参见艺术探索P142，下面是关于Touch事件的几条结论的总结</li>
-<li>同一个事件序列是指从手指接触屏幕那一刻起，到手指离开屏幕那一刻结束，以down事件开始，中间含有数量不等的move事件，以up事件结束</li>
-<li>正常情况下，一个事件序列只能被一个view拦截且消耗</li>
-<li>某个view一旦决定拦截，那么这一个事件序列都只能由它来处理，并且它的onInterceptTouchEvent不会再被调用</li>
-<li>某个view一旦开始处理事件，如果它不消耗ACTION_DOWN事件（onTouchEvent返回了false），那么同一事件序列中的其它事件都不会再交给它处理</li>
-<li>如果view不消耗除ACTION_DOWN以外的其它事件，那么这个点击事件会消失，此时父view的onTouchEvent并不会被调用，并且当前view可以持续收到后续的事件，最终这些消失的点击事件会传递给activity处理</li>
-<li>viewgroup默认不拦截任何事件，android源码中的viewgroup的onterceptEvent方法默认返回false</li>
-<li>view没有onInterceptEvent方法，一旦有点击事件传给它，那么它的onTouchEvent方法就会被调用<br>view的onTouchEvent默认都会消耗事件，除非它是不可点击的（clickable跟longclickable同时为false），view的longclickable默认都为false，clickable属性要分情况</li>
-<li>view的enable属性不影像onTouchEvent的默认返回值</li>
-<li>onClick会发生的前提是当前view是可点击，并且收到了down和up事件</li>
-<li>事件传递的过程是由外向内的，即事件总是先传递给父元素，再由父元素分发给子view，通过requestDisallowInterceptTouchEvent方法可以在子元素中干预父元素的事件分发过程，但是action_down除外</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -682,8 +4421,8 @@ return consume;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">articles</span>
               </a>
             </div>
           
@@ -741,7 +4480,7 @@ return consume;
 </div>
 
 <div class="theme-info">
-  Theme -
+  Thème -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>

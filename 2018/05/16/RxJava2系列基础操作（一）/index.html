@@ -1,0 +1,790 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="#RxJava2基本操作 #什么是Rxjava：处理异步操作的网络库优点：随着程序逻辑越来越复杂依然能够保持代码逻辑的简洁性，本身是响应式编程的模式响应式编程是一种基于异步数据流概念的编程模式   基本类 Base Classio.reactivex.Flowable: 0..N flows, 支持响应式编程跟背压 io.reactivex.Observable: 0..N flows, 不支持背">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava2系列基础操作（一）">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/RxJava2系列基础操作（一）/index.html">
+<meta property="og:site_name" content="Clouse">
+<meta property="og:description" content="#RxJava2基本操作 #什么是Rxjava：处理异步操作的网络库优点：随着程序逻辑越来越复杂依然能够保持代码逻辑的简洁性，本身是响应式编程的模式响应式编程是一种基于异步数据流概念的编程模式   基本类 Base Classio.reactivex.Flowable: 0..N flows, 支持响应式编程跟背压 io.reactivex.Observable: 0..N flows, 不支持背">
+<meta property="og:updated_time" content="2018-05-18T10:11:05.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava2系列基础操作（一）">
+<meta name="twitter:description" content="#RxJava2基本操作 #什么是Rxjava：处理异步操作的网络库优点：随着程序逻辑越来越复杂依然能够保持代码逻辑的简洁性，本身是响应式编程的模式响应式编程是一种基于异步数据流概念的编程模式   基本类 Base Classio.reactivex.Flowable: 0..N flows, 支持响应式编程跟背压 io.reactivex.Observable: 0..N flows, 不支持背">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/16/RxJava2系列基础操作（一）/"/>
+
+
+
+
+
+  <title>RxJava2系列基础操作（一） | Clouse</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Clouse</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Accueil
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/RxJava2系列基础操作（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RxJava2系列基础操作（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T15:04:41+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#RxJava2基本操作 #<br>什么是Rxjava：处理异步操作的网络库<br>优点：随着程序逻辑越来越复杂依然能够保持代码逻辑的简洁性，本身是响应式编程的模式<br>响应式编程是一种基于异步数据流概念的编程模式  </p>
+<h1 id="基本类-Base-Class"><a href="#基本类-Base-Class" class="headerlink" title="基本类 Base Class"></a>基本类 Base Class</h1><pre><code>io.reactivex.Flowable: 0..N flows, 支持响应式编程跟背压
+io.reactivex.Observable: 0..N flows, 不支持背压
+io.reactivex.Single: a flow of exactly 1 item or an error,
+io.reactivex.Completable: a flow without items but only a completion or error signal,
+io.reactivex.Maybe: a flow with no items, exactly one item or an error.
+</code></pre><h2 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h2><pre><code>Observable.create(new ObservableOnSubscribe&lt;Integer&gt;() {
+    @Override
+    public void subscribe(ObservableEmitter&lt;Integer&gt; emitter) throws Exception {
+        emitter.onNext(1);
+        emitter.onNext(2);
+        emitter.onNext(3);
+        emitter.onComplete();
+    }
+}).subscribe(new Observer&lt;Integer&gt;() {
+    @Override
+    public void onSubscribe(Disposable d) {
+        System.out.println(&quot;start subscribe&quot;);
+    }
+
+    @Override
+    public void onNext(Integer integer) {
+        System.out.println(&quot;receive data &quot;+integer);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        System.out.println(&quot;error&quot;);
+    }
+
+    @Override
+    public void onComplete() {
+        System.out.println(&quot;complete&quot;);
+    }
+});
+</code></pre><p>打印结果：<br>        start subscribe<br>        receive data 1<br>        receive data 2<br>        receive data 3<br>        complete<br>术语解释：<br>Observable：被观察者<br>Observer： 观察者<br>create（）：创建被观察者<br>subscribe（）：观察者开始订阅<br>Disposable：在RxJava 2.x 中，新增的Disposable可以做到切断的操作，让Observer观察者不再接收上游事件  </p>
+<p>Consumer 即消费者，用于接收单个值<br>BiConsumer 则是接收两个值，<br>Function 用于变换对象，<br>Predicate 用于判断。</p>
+<h2 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h2><p>subScribeOn（）： 用于指定 subscribe() 时所发生的线程<br>observeOn（）：方法用于指定下游 Observer 回调发生的线程<br>线程切换需要注意的：<br>1.简单地说，subscribeOn() 指定的就是发射事件的线程，observerOn 指定的就是订阅者接收事件的线程。<br>2.多次指定发射事件的线程只有第一次指定的有效，也就是说多次调用 subscribeOn() 只有第一次的有效，其余的会被忽略。<br>3.但多次指定订阅者接收线程是可以的，也就是说每调用一次 observerOn()，下游的线程就会切换一次。</p>
+<h3 id="RxJava内置了线程选项"><a href="#RxJava内置了线程选项" class="headerlink" title="RxJava内置了线程选项"></a>RxJava内置了线程选项</h3><ul>
+<li>Schedulers.io() 代表io操作的线程, 通常用于网络,读写文件等io密集型的操作</li>
+<li>Schedulers.computation() 代表CPU计算密集型的操作, 例如需要大量计算的操作</li>
+<li>Schedulers.newThread() 代表一个常规的新线程</li>
+<li>AndroidSchedulers.mainThread() 代表Android的主线程<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3>map 操作符可以将一个 Observable 对象通过某种关系转换为另一个Observable 对象<br><pre><br>  Observable.create(new ObservableOnSubscribe<integer>() {<pre><code>    @Override
+    public void subscribe(ObservableEmitter&lt;Integer&gt; emitter) throws Exception {
+        emitter.onNext(new Integer(65));
+        emitter.onNext(new Integer(66));
+        emitter.onNext(new Integer(67));
+        emitter.onComplete();
+    }
+}).map(new Function&lt;Integer, String&gt;() {
+    @Override
+    public String apply(Integer integer) throws Exception {
+        char c = (char) integer.intValue();
+        return new String(new char[]{c});
+    }
+}).subscribe(new Consumer&lt;String&gt;() {
+    @Override
+    public void accept(String s) throws Exception {
+        System.out.println(s);
+    }
+});
+</code></pre></integer></pre><br>输出结果：<br><pre><br>A<br>B<br>C<br></pre><h3 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h3>concat 可以做到不交错的发射两个甚至多个 Observable 的发射事件，两个 Observable 的泛型应当保持一致,并且只有前一个 Observable 终止(onComplete) 后才会订阅下一个 Observable<br><pre><br>public static StringBuffer data = new StringBuffer();<br>  public static void main(String[] args){<pre><code>final String cacheData = null;
+Observable cacheObservable = Observable.create(new ObservableOnSubscribe&lt;String&gt;() {
+    @Override
+    public void subscribe(ObservableEmitter emitter) throws Exception {
+        if(cacheData == null || cacheData.length()&lt;=0){
+            emitter.onComplete();
+        }else{
+            data.append(&quot;cacheObservable从缓存读取数据&quot;);
+            data.append(cacheData);
+            emitter.onNext(cacheData);
+        }
+    }
+});
+Observable netWorkObservable = Observable.create(new ObservableOnSubscribe&lt;String&gt;() {
+    @Override
+    public void subscribe(ObservableEmitter emitter) throws Exception {
+        data.append(&quot;netWorkObservable从网络加载数据&quot;);
+        emitter.onNext(&quot;网络数据&quot;);
+        emitter.onComplete();
+    }
+});
+Observable.concat(cacheObservable,netWorkObservable).subscribe(new Consumer&lt;String&gt;() {
+    @Override
+    public void accept(String s) throws Exception {
+        System.out.println(s+&quot;--&gt;&quot;+data.toString());
+    }
+});
+</code></pre>  }<br></pre><br>此处示例代码主要用于模仿的场景是先读取缓存，然后从从网络请求加载数据，最后刷新UI界面  </li>
+</ul>
+<h3 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a>flatMap</h3><p>flatMap 实现多个网络请求依次依赖<br>flatMap 操作符可以将一个发射数据的 Observable 变换为多个 Observables ，然后将它们发射的数据合并后放到一个单独的 Observable<br>例如用户注册成功后需要自动登录，我们只需要先通过注册接口注册用户信息，注册成功后马上调用登录接口进行自动登录即可  </p>
+<p><pre><br>        Observable registerObserver = Observable.create(new ObservableOnSubscribe<string>() {<br>            @Override<br>            public void subscribe(ObservableEmitter emitter) throws Exception {<br>                emitter.onNext(“注册失败”);<br>                emitter.onComplete();<br>            }<br>        });<br>        final Observable loginObservable = Observable.create(new ObservableOnSubscribe<string>() {<br>            @Override<br>            public void subscribe(ObservableEmitter emitter) throws Exception {<br>                emitter.onNext(“登录成功”);<br>                emitter.onComplete();<br>            }<br>        });<br>        registerObserver.flatMap(new Function<string,observable<string>&gt;() {<br>            @Override<br>            public Observable<string> apply(String s) throws Exception {<br>                if(s.equalsIgnoreCase(“注册成功”)){<br>                    return  loginObservable;<br>                }else{<br>                    return null;<br>                }<br>            }<br>        }).subscribe(new Observer<string>() {<br>            @Override<br>            public void onSubscribe(Disposable d) {</string></string></string,observable<string></string></string></pre></p>
+<pre><code>    }
+
+    @Override
+    public void onNext(String o) {
+        System.out.println(&quot;注册后自动登录成功&quot;);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        System.out.println(&quot;注册后自动登录失败&quot;);
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
+});
+</code></pre><p><br>个人思考，假如是该处代码，如果要知道是登录出错，还是注册出错，判断Throwable e的错误类型就知道了，注册成功后添加一些操作需要在registerObserver添加一个doOnNext()的逻辑  </p>
+<h3 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h3><p>zip 操作符可以将多个 Observable 的数据结合为一个数据源再发射出去。 </p>
+<p><pre><br>Observable intObservable = Observable.create(new ObservableOnSubscribe<integer>() {<br>            @Override<br>            public void subscribe(ObservableEmitter emitter) throws Exception {<br>                emitter.onNext(new Integer(5));<br>                emitter.onComplete();<br>            }<br>        });<br>        final Observable charObservable = Observable.create(new ObservableOnSubscribe<character>() {<br>            @Override<br>            public void subscribe(ObservableEmitter emitter) throws Exception {<br>                emitter.onNext(new Character(‘A’));<br>                emitter.onComplete();<br>            }<br>        });<br>        Observable.zip(intObservable, charObservable, new BiFunction<integer,character,string>() {<br>            @Override<br>            public String apply(Integer integer, Character character) throws Exception {<br>                char tempChar = (char) (character + integer.intValue());<br>                return new String(new char[]{tempChar});<br>            }<br>        }).subscribe(new Consumer<string>() {</string></integer,character,string></character></integer></pre></p>
+<pre><code>    @Override
+    public void accept(String s) throws Exception {
+        System.out.println(&quot;合并后的数据为：&quot;+s);
+    }
+});
+</code></pre><p><br>此处示例代码并没有实际意义，实际例子比说说一个界面需要多个接口的数据返回，然后更新界面，此时可以用zip合并多个请求  </p>
+<h3 id="interval-操作符实现心跳间隔任务"><a href="#interval-操作符实现心跳间隔任务" class="headerlink" title="interval 操作符实现心跳间隔任务"></a>interval 操作符实现心跳间隔任务</h3><p><pre><br>Disposable disposable = Flowable.interval(1, TimeUnit.SECONDS)<br>                .subscribe(new Consumer<long>() {<br>                    @Override<br>                    public void accept(Long aLong) throws Exception {<br>                        System.out.println(aLong + “—-&gt;”);<br>                    }<br>                });<br></long></pre><br>同样的代码运行在eclipse的java代码可能不执行<br>原因是我们的操作不是阻塞的：我们创建了一个每隔一段时间就发射数据的 Observable，然后我们注册了一个 Subscriber 来打印收到的数据。这两个操作都是非阻塞的，而 发射数据的计时器是运行在另外一个线程的，但是这个线程不会阻止 JVM 结束当前的程序，所以 如果没有 System.in.read(); 这个阻塞操作，还没发射数据则程序就已经结束运行了。  </p>
+<p>解决办法：多种，此处暂列一种<br>Observable.interval(1, TimeUnit.SECONDS, Schedulers.trampoline())<br>上面代码中的 Schedulers.trampoline()替换为Schedulers.immediate()也是可以运行的，但是这样做是不安全的。<br>具体原因参见<a href="https://blog.csdn.net/u011033906/article/details/59753576" target="_blank" rel="external">https://blog.csdn.net/u011033906/article/details/59753576</a></p>
+<h3 id="BackPressure（背压）"><a href="#BackPressure（背压）" class="headerlink" title="BackPressure（背压）"></a>BackPressure（背压）</h3><p>所谓背压就是生产者（被观察者）的生产速度大于消费者（观察者）消费速度从而导致的问题。</p>
+<p>举一个简单点的例子，如果被观察者快速发送消息，但是观察者处理消息的很缓慢，如果没有特定的流（Flow）控制，就会导致大量消息积压占用系统资源，最终导致十分缓慢。</p>
+<p>怎么优化和减少这种情况后面再探讨，不过可以注意到，Flowable创建的时候已经设置了BackpressureStrategy，而且Subscriber使用了request来控制最大的流量。</p>
+<h3 id="Single和SingleObserver"><a href="#Single和SingleObserver" class="headerlink" title="Single和SingleObserver"></a>Single和SingleObserver</h3><p>如果你使用一个单一连续事件流，即只有一个onNext事件，接着就触发onComplete或者onError，这样你可以使用Single<br>Single只包含两个事件，一个是正常处理成功的onSuccess，另一个是处理失败的onError，它只发送一次消息（当然就不存在背压问题），其中Single类似于Observable<br>Single也可以直接转换成Flowable或者Observable:<br>single.toFlowable();<br>single.toObservable();  </p>
+<h3 id="Completable和CompletableObserver"><a href="#Completable和CompletableObserver" class="headerlink" title="Completable和CompletableObserver"></a>Completable和CompletableObserver</h3><p>如果你的观察者连onNext事件都不关心，你可以使用Completable，他只有onComplete和onError两个事件</p>
+<h3 id="Maybe和MaybeObserver"><a href="#Maybe和MaybeObserver" class="headerlink" title="Maybe和MaybeObserver"></a>Maybe和MaybeObserver</h3><p>如果你有一个需求是可能发送一个数据或者不会发送任何数据，这时候你就需要Maybe，它类似于Single和Completable的混合体。<br>Maybe可能会调用以下其中一种情况（也就是所谓的Maybe）：<br>onSuccess或者onError<br>onComplete或者onError</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/15/CMake调用jni的基本使用方法/" rel="next" title="CMake调用jni的基本使用方法">
+                <i class="fa fa-chevron-left"></i> CMake调用jni的基本使用方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/22/Kotlin基础语法概述/" rel="prev" title="Kotlin基础语法">
+                Kotlin基础语法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Des Matières
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Ensemble
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Clouse" />
+          <p class="site-author-name" itemprop="name">Clouse</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">articles</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本类-Base-Class"><span class="nav-number">1.</span> <span class="nav-text">基本类 Base Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单示例"><span class="nav-number">1.1.</span> <span class="nav-text">简单示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程调度"><span class="nav-number">1.2.</span> <span class="nav-text">线程调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RxJava内置了线程选项"><span class="nav-number">1.2.1.</span> <span class="nav-text">RxJava内置了线程选项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作符"><span class="nav-number">1.3.</span> <span class="nav-text">操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#map"><span class="nav-number">1.3.1.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#concat"><span class="nav-number">1.3.2.</span> <span class="nav-text">concat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flatMap"><span class="nav-number">1.3.3.</span> <span class="nav-text">flatMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">1.3.4.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interval-操作符实现心跳间隔任务"><span class="nav-number">1.3.5.</span> <span class="nav-text">interval 操作符实现心跳间隔任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BackPressure（背压）"><span class="nav-number">1.3.6.</span> <span class="nav-text">BackPressure（背压）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Single和SingleObserver"><span class="nav-number">1.3.7.</span> <span class="nav-text">Single和SingleObserver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Completable和CompletableObserver"><span class="nav-number">1.3.8.</span> <span class="nav-text">Completable和CompletableObserver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maybe和MaybeObserver"><span class="nav-number">1.3.9.</span> <span class="nav-text">Maybe和MaybeObserver</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Clouse</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Thème -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

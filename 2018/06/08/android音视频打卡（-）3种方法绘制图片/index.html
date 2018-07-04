@@ -93,16 +93,16 @@
 
 
 
-<meta name="description" content="#CMake在android端构建jni应用    CMake是google新推的jni使用工具，结合android studio使用更加简洁，这里简要描述Cmake的    使用规则 ##1.在工程目录的local.properties目录添加配置支持    ndk.dir=D\:\sdk\ndk-bundle    ndk安装目录    sdk.dir=D\:\sdk    sdk安装目录 #">
+<meta name="description" content="在 Android 平台绘制一张图片，使用至少 3 种不同的 API，ImageView，SurfaceView，自定义 ViewImageView task1Iv.setImageResource(R.mipmap.task1);  ## SurfaceView ##      final Paint paint = new Paint();         final Rect rect  =">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CMake调用jni的基本使用方法">
-<meta property="og:url" content="http://yoursite.com/2018/05/15/CMake调用jni的基本使用方法/index.html">
+<meta property="og:title" content="android音视频打卡（-）3种方法绘制图片">
+<meta property="og:url" content="http://yoursite.com/2018/06/08/android音视频打卡（-）3种方法绘制图片/index.html">
 <meta property="og:site_name" content="Clouse">
-<meta property="og:description" content="#CMake在android端构建jni应用    CMake是google新推的jni使用工具，结合android studio使用更加简洁，这里简要描述Cmake的    使用规则 ##1.在工程目录的local.properties目录添加配置支持    ndk.dir=D\:\sdk\ndk-bundle    ndk安装目录    sdk.dir=D\:\sdk    sdk安装目录 #">
-<meta property="og:updated_time" content="2018-05-15T05:55:15.639Z">
+<meta property="og:description" content="在 Android 平台绘制一张图片，使用至少 3 种不同的 API，ImageView，SurfaceView，自定义 ViewImageView task1Iv.setImageResource(R.mipmap.task1);  ## SurfaceView ##      final Paint paint = new Paint();         final Rect rect  =">
+<meta property="og:updated_time" content="2018-06-08T06:29:11.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CMake调用jni的基本使用方法">
-<meta name="twitter:description" content="#CMake在android端构建jni应用    CMake是google新推的jni使用工具，结合android studio使用更加简洁，这里简要描述Cmake的    使用规则 ##1.在工程目录的local.properties目录添加配置支持    ndk.dir=D\:\sdk\ndk-bundle    ndk安装目录    sdk.dir=D\:\sdk    sdk安装目录 #">
+<meta name="twitter:title" content="android音视频打卡（-）3种方法绘制图片">
+<meta name="twitter:description" content="在 Android 平台绘制一张图片，使用至少 3 种不同的 API，ImageView，SurfaceView，自定义 ViewImageView task1Iv.setImageResource(R.mipmap.task1);  ## SurfaceView ##      final Paint paint = new Paint();         final Rect rect  =">
 
 
 
@@ -130,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/15/CMake调用jni的基本使用方法/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/08/android音视频打卡（-）3种方法绘制图片/"/>
 
 
 
 
 
-  <title>CMake调用jni的基本使用方法 | Clouse</title>
+  <title>android音视频打卡（-）3种方法绘制图片 | Clouse</title>
   
 
 
@@ -255,7 +255,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/CMake调用jni的基本使用方法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/android音视频打卡（-）3种方法绘制图片/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Clouse">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CMake调用jni的基本使用方法</h1>
+          <h1 class="post-title" itemprop="name headline">android音视频打卡（-）3种方法绘制图片</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">Posté le</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-15T13:54:41+08:00">
-                2018-05-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-08T10:42:18+08:00">
+                2018-06-08
               </time>
             
 
@@ -319,146 +319,112 @@
       
 
       
-        <p>#CMake在android端构建jni应用<br>    CMake是google新推的jni使用工具，结合android studio使用更加简洁，这里简要描述Cmake的<br>    使用规则</p>
-<p>##1.在工程目录的local.properties目录添加配置支持<br>    ndk.dir=D\:\sdk\ndk-bundle    ndk安装目录<br>    sdk.dir=D\:\sdk    sdk安装目录</p>
-<p>##2.app目录下的build.gradle文件，Cmake主要配置<br>        apply plugin: ‘com.android.application’</p>
-<pre><code>android {
-    compileSdkVersion 26
-    defaultConfig {
-        applicationId &quot;com.gjfax.myjnidemo&quot;
-        minSdkVersion 14
-        targetSdkVersion 26
-        versionCode 1
-        versionName &quot;1.0&quot;
-        testInstrumentationRunner &quot;android.support.test.runner.AndroidJUnitRunner&quot;
-        flavorDimensions &quot;cpuArch&quot;
+        <h1 id="在-Android-平台绘制一张图片，使用至少-3-种不同的-API，ImageView，SurfaceView，自定义-View"><a href="#在-Android-平台绘制一张图片，使用至少-3-种不同的-API，ImageView，SurfaceView，自定义-View" class="headerlink" title="在 Android 平台绘制一张图片，使用至少 3 种不同的 API，ImageView，SurfaceView，自定义 View"></a>在 Android 平台绘制一张图片，使用至少 3 种不同的 API，ImageView，SurfaceView，自定义 View</h1><h2 id="ImageView"><a href="#ImageView" class="headerlink" title="ImageView"></a>ImageView</h2><pre>
+task1Iv.setImageResource(R.mipmap.task1);
+</pre>
+## SurfaceView ##
+<pre>
+    final Paint paint = new Paint();
+        final Rect rect  = new Rect();
+        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.task1);
+
+        SurfaceHolder surfaceHolder = surfaceViewTask1.getHolder();
+        surfaceHolder.addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                surfaceViewTask1.getGlobalVisibleRect(rect);
+                int measuredWidth = surfaceViewTask1.getMeasuredWidth();
+                int width = rect.right - rect.left;
+                Log.e("ccc",measuredWidth+"----"+width);
+                Surface surface = holder.getSurface();
+
+                Canvas canvas =  surface.lockCanvas(rect);
+                canvas.drawBitmap(bitmap,null,rect,paint);
+                surface.unlockCanvasAndPost(canvas);
+                surface.release();
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+
+            }
+        });
+</pre>
+### 扩展surfaceView显示倒计时功能 ###
+<pre>
+public class Task1CustomSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
+    private MyThread mThread;
+    public Task1CustomSurfaceView(Context context) {
+        this(context,null);
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;
-        }
+
+    public Task1CustomSurfaceView(Context context, AttributeSet attrs) {
+        this(context, attrs,0);
     }
-    externalNativeBuild {
-        cmake {
-            path &quot;src/main/cpp/CMakeLists.txt&quot;
-        }
+
+    public Task1CustomSurfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        SurfaceHolder holder = getHolder();
+        holder.addCallback(this);
     }
-    productFlavors {
-        arm7 {
-            dimension &apos;cpuArch&apos;
-            ndk {
-                abiFilter &apos;armeabi-v7a&apos;
-            }
+
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        mThread = new MyThread(holder);
+        mThread.start();
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+
+    }
+    class MyThread extends Thread{
+        private Paint mPaint = new Paint();
+        private SurfaceHolder mHolder;
+        private DisplayMetrics displayMetrics;
+        MyThread(SurfaceHolder holder){
+            this.mHolder = holder;
+            displayMetrics = getResources().getDisplayMetrics();
         }
-        arm8 {
-            dimension &apos;cpuArch&apos;
-            ndk {
-                abiFilters &apos;arm64-v8a&apos;
-            }
-        }
-        x86 {
-            dimension &apos;cpuArch&apos;
-            ndk {
-                abiFilter &apos;x86&apos;
-            }
-        }
-        x86_64 {
-            dimension &apos;cpuArch&apos;
-            ndk {
-                abiFilter &apos;x86_64&apos;
-            }
-        }
-        universal {
-            dimension &apos;cpuArch&apos;
-            // include all default ABIs. with NDK-r16,  it is:
-            //   armeabi-v7a, arm64-v8a, x86, x86_64
-        }
+
+        @Override
+        public void run() {
+            try{
+                for(int i = 0; i<30;i++){ canvas="" canvas.drawcolor(color.white);="" mpaint.setcolor(color.gray);="" mpaint.settextsize(typedvalue.applydimension(typedvalue.complex_unit_sp,16,displaymetrics));="" canvas.drawtext("倒计时："+(30-i),50,50,mpaint);="" mholder.unlockcanvasandpost(canvas);="" thread.sleep(1000);="" }="" }catch="" (exception="" e){="" <="" pre="">
+## 自定义view的方式 ###
+<pre>
+public class MyCustomViewForTask1 extends View{
+    public MyCustomViewForTask1(Context context) {
+        this(context,null);
+    }
+
+    public MyCustomViewForTask1(Context context,AttributeSet attrs) {
+        super(context, attrs,0);
+    }
+
+    public MyCustomViewForTask1(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.drawColor(Color.WHITE);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.task1);
+        canvas.drawBitmap(bitmap,0,0,new Paint());
     }
 }
-
-dependencies {
-    implementation fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])
-    implementation &apos;com.android.support.constraint:constraint-layout:1.1.0&apos;
-    testImplementation &apos;junit:junit:4.12&apos;
-    androidTestImplementation &apos;com.android.support.test:runner:1.0.2&apos;
-    androidTestImplementation &apos;com.android.support.test.espresso:espresso-core:3.0.2&apos;
-}
-</code></pre><p>关键地方解释<br>flavorDimensions “cpuArch”    此处的值必须与flavorDimensions内的dimension保持一致<br>externalNativeBuild-&gt;cmake-&gt;path为CMakeLists以及C代码存放位置<br>productFlavors    值为需要支持的不同平台的CPU架构，用于生成支持不同平台cpu的so文件</p>
-<p>##CMakeLists主要内容<br>    cmake_minimum_required(VERSION 3.4.1)</p>
-<pre><code>add_library(hello-jni SHARED
-            hello-jni.c)
-
-# Include libraries needed for hello-jni lib
-target_link_libraries(hello-jni
-                      android
-                      log)
-</code></pre><p>##hello-jni.c主要内容，存放目录与hello-jni.c一致</p>
-<pre><code>#include &lt;jni.h&gt;
-#include &lt;string.h&gt;
-/* This is a trivial JNI example where we use a native method
- * to return a new VM String. See the corresponding Java source
- * file located at:
- *
- *   hello-jni/app/src/main/java/com/example/hellojni/HelloJni.java
- */
-JNIEXPORT jstring JNICALL
-Java_com_gjfax_myjnidemo_jni_JniUtils_stringFromJNI( JNIEnv* env,
-                                                  jobject thiz )
-{
-#if defined(__arm__)
-    #if defined(__ARM_ARCH_7A__)
-    #if defined(__ARM_NEON__)
-      #if defined(__ARM_PCS_VFP)
-        #define ABI &quot;armeabi-v7a/NEON (hard-float)&quot;
-      #else
-        #define ABI &quot;armeabi-v7a/NEON&quot;
-      #endif
-    #else
-      #if defined(__ARM_PCS_VFP)
-        #define ABI &quot;armeabi-v7a (hard-float)&quot;
-      #else
-        #define ABI &quot;armeabi-v7a&quot;
-      #endif
-    #endif
-  #else
-   #define ABI &quot;armeabi&quot;
-  #endif
-#elif defined(__i386__)
-#define ABI &quot;x86&quot;
-#elif defined(__x86_64__)
-#define ABI &quot;x86_64&quot;
-#elif defined(__mips64)  /* mips64el-* toolchain defines __mips__ too */
-#define ABI &quot;mips64&quot;
-#elif defined(__mips__)
-#define ABI &quot;mips&quot;
-#elif defined(__aarch64__)
-#define ABI &quot;arm64-v8a&quot;
-#else
-#define ABI &quot;unknown&quot;
-#endif
-
-    return (*env)-&gt;NewStringUTF(env, &quot;Hello from JNI !  Compiled with ABI &quot; ABI &quot;.&quot;);
-}
-</code></pre><p>##调用的地方jni.util<br>    package com.gjfax.myjnidemo.jni;</p>
-<pre><code>/**
- * ClassName  JniUtils
- * Create By ChenHao On 2018/5/12 0012 下午 3:46
- * Description:Jni工具类
- */
-
-public class JniUtils {
-    static {
-        System.loadLibrary(&quot;hello-jni&quot;);
-    }
-    /* A native method that is implemented by the
-     * &apos;hello-jni&apos; native library, which is packaged
-     * with this application.
-     */
-    public static native String  stringFromJNI();
-}
-</code></pre><p>最后生成so文件的地方<br>app-&gt;build-&gt;intermediate-&gt;cmake-&gt;debug/release</p>
-
+</pre></30;i++){></pre>
       
     </div>
 
@@ -494,8 +460,8 @@ public class JniUtils {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/29/Android艺术探索-View的事件体系/" rel="next" title="Android艺术探索--View的事件体系">
-                <i class="fa fa-chevron-left"></i> Android艺术探索--View的事件体系
+              <a href="/2018/06/08/C-primer-学习笔记（一）/" rel="next" title="C++ primer 学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> C++ primer 学习笔记（一）
               </a>
             
           </div>
@@ -504,8 +470,8 @@ public class JniUtils {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/16/RxJava2系列基础操作（一）/" rel="prev" title="RxJava2系列基础操作（一）">
-                RxJava2系列基础操作（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/11/android音视频打卡（二）AudioRecord-和-AudioTrack-API-完成音频-PCM-数据的采集和播放/" rel="prev" title="android音视频打卡（二）AudioRecord 和 AudioTrack API 完成音频 PCM 数据的采集和播放">
+                android音视频打卡（二）AudioRecord 和 AudioTrack API 完成音频 PCM 数据的采集和播放 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -553,8 +519,17 @@ public class JniUtils {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Des Matières
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Ensemble
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -598,6 +573,22 @@ public class JniUtils {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在-Android-平台绘制一张图片，使用至少-3-种不同的-API，ImageView，SurfaceView，自定义-View"><span class="nav-number">1.</span> <span class="nav-text">在 Android 平台绘制一张图片，使用至少 3 种不同的 API，ImageView，SurfaceView，自定义 View</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ImageView"><span class="nav-number">1.1.</span> <span class="nav-text">ImageView</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

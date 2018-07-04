@@ -1,0 +1,1143 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="泛型Kotlin 中的类也可以有类型参数：    class Box(t: T) {     var value = t } val box: Box = Box(1)  但是如果类型参数可以推断出来，例如从构造函数的参数或者从其他途径，允许省略类型参 数：    val box = Box(1) // 1 具有类型 Int，所以编译器知道我们说的是 Box。  ### 型变 ### Java 类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kotlin基础（2）-类与对象(2)">
+<meta property="og:url" content="http://yoursite.com/2018/05/25/Kotlin基础（2）-类与对象-2/index.html">
+<meta property="og:site_name" content="Clouse">
+<meta property="og:description" content="泛型Kotlin 中的类也可以有类型参数：    class Box(t: T) {     var value = t } val box: Box = Box(1)  但是如果类型参数可以推断出来，例如从构造函数的参数或者从其他途径，允许省略类型参 数：    val box = Box(1) // 1 具有类型 Int，所以编译器知道我们说的是 Box。  ### 型变 ### Java 类">
+<meta property="og:updated_time" content="2018-05-29T03:57:56.044Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kotlin基础（2）-类与对象(2)">
+<meta name="twitter:description" content="泛型Kotlin 中的类也可以有类型参数：    class Box(t: T) {     var value = t } val box: Box = Box(1)  但是如果类型参数可以推断出来，例如从构造函数的参数或者从其他途径，允许省略类型参 数：    val box = Box(1) // 1 具有类型 Int，所以编译器知道我们说的是 Box。  ### 型变 ### Java 类">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/25/Kotlin基础（2）-类与对象-2/"/>
+
+
+
+
+
+  <title>Kotlin基础（2）-类与对象(2) | Clouse</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Clouse</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Accueil
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/25/Kotlin基础（2）-类与对象-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kotlin基础（2）-类与对象(2)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-25T16:05:12+08:00">
+                2018-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>Kotlin 中的类也可以有类型参数：  </p>
+<pre>
+class Box<t>(t: T) {
+    var value = t
+}
+val box: Box<int> = Box<int>(1)
+</int></int></t></pre>
+但是如果类型参数可以推断出来，例如从构造函数的参数或者从其他途径，允许省略类型参
+数：  
+<pre>
+val box = Box(1) // 1 具有类型 Int，所以编译器知道我们说的是 Box<int>。
+</int></pre>
+### 型变 ###
+Java 类型系统中最棘手的部分之一是通配符类型（参见 Java Generics FAQ） 。 而 Kotlin 中
+没有。 相反，它有两个其他的东西：声明处型变（declaration-site variance） 与类型投影
+（type projections） 。   
+首先，让我们思考为什么 Java 需要那些神秘的通配符。在 Effective Java 解释了该问题——
+第28条：利用有限制通配符来提升 API 的灵活性。 首先，Java 中的泛型是不型变的，这意
+味着 List<string> 并不是 List<object> 的子类型。 为什么这样？ 如果 List 不是不型变
+的，它就没比 Java 的数组好到哪去，因为如下代码会通过编译然后导致运行时异常：
+<pre>
+// Java
+List<string> strs = new ArrayList<string>();
+List<object> objs = strs; // ！！！即将来临的问题的原因就在这里。Java 禁止这样！
+objs.add(1); // 这里我们把一个整数放入一个字符串列表
+String s = strs.get(0); // ！！！ ClassCastException：无法将整数转换为字符串
+</object></string></string></pre>
+#### 声明处型变 ####
+我们可以标注 Source
+的类型参数 T 来确保它仅从 Source<t> 成员中返回（生产） ，并从不被消费。 为此，我们
+提供 out 修饰符：  
+<pre>
+abstract class Source<out t=""> {
+abstract fun nextT(): T
+} 
+fun demo(strs: Source<string>) {
+    val objects: Source<any> = strs // 这个没问题，因为 T 是一个 out-参数
+    // ……
+}
+</any></string></out></pre>
+一般原则是：当一个类 C 的类型参数 T 被声明为 out 时，它就只能出现在 C 的成员的输
+出-位置，但回报是 C<base> 可以安全地作为 C<derived> 的超类。   
+out修饰符称为型变注解，并且由于它在类型参数声明处提供，所以我们讲声明处型变。 这与
+Java 的使用处型变相反，其类型用途通配符使得类型协变。
+
+另外除了 out，Kotlin 又补充了一个型变注释：in。它使得一个类型参数逆变：只可以被消费
+而不可以被生产。逆变类的一个很好的例子是 Comparable ：  
+<pre>
+abstract class Comparable<in t=""> {
+    abstract fun compareTo(other: T): Int
+} 
+fun demo(x: Comparable<number>) {
+x.compareTo(1.0) // 1.0 拥有类型 Double，它是 Number 的子类型
+// 因此，我们可以将 x 赋给类型为 Comparable <double> 的变量
+val y: Comparable<double> = x // OK！
+}
+</double></double></number></in></pre>
+#### 类型投影 ####
+这里我们遇到同样熟悉的问题： Array <t> 在 T 上是不型变的，因此 Array <int> 和
+Array <any> 都不是另一个的子类型。为什么？ 再次重复，因为 copy 可能做坏事，也就是
+说，例如它可能尝试写一个 String 到 from ， 并且如果我们实际上传递一个 Int 的数组，
+一段时间后将会抛出一个 ClassCastException 异常。  
+那么，我们唯一要确保的是 copy() 不会做任何坏事。我们想阻止它写到 from ，我们可
+以：  
+<pre>
+fun copy(from: Array<out any="">, to: Array<any>) {
+// ……
+}
+</any></out></pre>  
+这里发生的事情称为类型投影：我们说 from 不仅仅是一个数组，而是一个受限制的（投影
+的） 数组：我们只可以调用返回类型为类型参数 T 的方法，如上，这意味着我们只能调用
+get() 。这就是我们的使用处型变的用法，并且是对应于 Java 的 Array<? extends
+Object> 、 但使用更简单些的方式。
+你也可以使用 in 投影一个类型：  
+<pre>
+fun fill(dest: Array<in string="">, value: String) {
+// ……
+}
+</in></pre>
+Array<in string=""> 对应于 Java 的 Array<? super String> ，也就是说，你可以传递一个
+CharSequence 数组或一个 Object 数组给 fill() 函数。 
+#### 泛型函数 ####
+<pre>
+fun <t> singletonList(item: T): List<t> {
+// ……
+} 
+fun <t> T.basicToString() : String { // 扩展函数
+// ……
+}
+</t></t></t></pre>
+#### 泛型约束 ####
+能够替换给定类型参数的所有可能类型的集合可以由泛型约束限制。  
+上界  
+<pre>
+fun <t :="" comparable<t="">> sort(list: List<t>) {
+// ……
+}
+</t></t></pre>
+冒号之后指定的类型是上界：只有 Comparable<t> 的子类型可以替代 T 。   
+默认的上界（如果没有声明） 是 Any? 。在尖括号中只能指定一个上界。 如果同一类型参数
+需要多个上界，我们需要一个单独的 where-子句：  
+<pre>
+fun <t> cloneWhenGreater(list: List<t>, threshold: T): List<t>
+where T : Comparable,
+T : Cloneable {
+    return list.filter { it > threshold }.map { it.clone() }
+}
+</t></t></t></pre>  
+### 嵌套类与内部类 ###
+类可以嵌套在其他类中：
+<pre>
+class Outer {
+private val bar: Int = 1
+    class Nested {
+        fun foo() = 2
+    }
+} 
+val demo = Outer.Nested().foo() // == 2
+</pre>
+**内部类**
+类可以标记为 inner 以便能够访问外部类的成员。内部类会带有一个对外部类的对象的引
+用：  
+<pre>
+class Outer {
+    private val bar: Int = 1
+    inner class Inner {
+        fun foo() = bar
+    }
+} 
+val demo = Outer().Inner().foo() // == 1
+</pre>
+**匿名内部类**
+使用对象表达式创建匿名内部类实例：  
+<pre>
+window.addMouseListener(object: MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) {
+        // ……
+    } 
+    override fun mouseEntered(e: MouseEvent) {
+        // ……
+    }
+})
+</pre>
+如果对象是函数式 Java 接口（即具有单个抽象方法的 Java 接口） 的实例， 你可以使用带接
+口类型前缀的lambda表达式创建它：  
+<pre>
+val listener = ActionListener { println("clicked") }
+</pre>
+#### 枚举类 ####
+枚举类的最基本的用法是实现类型安全的枚举： 
+<pre>
+enum class Direction {
+    NORTH, SOUTH, WEST, EAST
+}
+</pre>
+每个枚举常量都是一个对象。枚举常量用逗号分隔。  
+**初始化**
+因为每一个枚举都是枚举类的实例，所以他们可以是这样初始化过的：
+<pre>
+enum class Color(val rgb: Int) {
+    RED(0xFF0000),
+    GREEN(0x00FF00),
+    BLUE(0x0000FF)
+}
+</pre>
+匿名类
+枚举常量也可以声明自己的匿名类：  
+<pre>
+enum class ProtocolState {
+    WAITING {
+        override fun signal() = TALKING
+    },
+    TALKING {
+        override fun signal() = WAITING
+    };
+    abstract fun signal(): ProtocolState
+}
+</pre>
+及相应的方法、以及覆盖基类的方法。注意，如果枚举类定义任何成员，要使用分号将成员
+定义中的枚举常量定义分隔开，就像在 Java 中一样
+
+**使用枚举常量**
+就像在 Java 中一样，Kotlin 中的枚举类也有合成方法允许列出定义的枚举常量以及通过名称
+获取枚举常量。这些方法的签名如下（假设枚举类的名称是 EnumClass ） ：
+<pre>
+EnumClass.valueOf(value: String): EnumClass
+EnumClass.values(): Array<enumclass>
+</enumclass></pre>
+如果指定的名称与类中定义的任何枚举常量均不匹配， valueOf() 方法将抛出
+IllegalArgumentException 异常。  
+
+
+自 Kotlin 1.1 起，可以使用 enumValues<t>() 和 enumValueOf<t>() 函数以泛型的方式访问枚
+举类中的常量 ：
+<pre>
+enum class RGB { RED, GREEN, BLUE }
+inline fun <reified t="" :="" enum<t="">> printAllValues() {
+    print(enumValues<t>().joinToString { it.name })
+}
+printAllValues<rgb>() // 输出 RED, GREEN, BLUE
+</rgb></t></reified></pre>
+每个枚举常量都具有在枚举类声明中获取其名称和位置的属性：
+<pre>
+val name: String
+val ordinal: Int
+</pre>
+枚举常量还实现了 Comparable 接口， 其中自然顺序是它们在枚举类中定义的顺序  
+### 对象表达式和对象声明 ###
+有时候，我们需要创建一个对某个类做了轻微改动的类的对象，而不用为之显式声明新的子
+类。 Java 用匿名内部类 处理这种情况。 Kotlin 用对象表达式和对象声明对这个概念稍微概
+括了下。  
+#### 对象表达式  ####
+要创建一个继承自某个（或某些） 类型的匿名类的对象，我们会这么写：
+<pre>
+window.addMouseListener(object : MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) {
+        // ……
+    } 
+    override fun mouseEntered(e: MouseEvent) {
+        // ……
+    }
+})
+</pre>
+如果超类型有一个构造函数，则必须传递适当的构造函数参数给它。 多个超类型可以由跟在
+冒号后面的逗号分隔的列表指定：  
+<pre>
+open class A(x: Int) {
+    public open val y: Int = x
+} 
+interface B {……}
+val ab: A = object : A(1), B {
+    override val y = 15
+}
+</pre>
+任何时候，如果我们只需要“一个对象而已”，并不需要特殊超类型，那么我们可以简单地写：  
+<pre>
+fun foo() {
+    val adHoc = object {
+    var x: Int = 0
+    var y: Int = 0
+} 
+print(adHoc.x + adHoc.y)
+}
+</pre>
+请注意，匿名对象可以用作只在本地和私有作用域中声明的类型。如果你使用匿名对象作为
+公有函数的返回类型或者用作公有属性的类型，那么该函数或属性的实际类型会是匿名对象
+声明的超类型，如果你没有声明任何超类型，就会是 Any 。在匿名对象中添加的成员将无法
+访问。  
+<pre>
+class C {
+    // 私有函数，所以其返回类型是匿名对象类型
+    private fun foo() = object {
+    val x: String = "x"
+} 
+// 公有函数，所以其返回类型是 Any
+fun publicFoo() = object {
+    val x: String = "x"
+} 
+fun bar() {
+    val x1 = foo().x // 没问题
+    val x2 = publicFoo().x // 错误：未能解析的引用“x”
+}
+}
+</pre>
+就像 Java 匿名内部类一样，对象表达式中的代码可以访问来自包含它的作用域的变量。
+（与 Java 不同的是，这不仅限于 final 变量。）  
+**对象声明**
+单例模式是一种非常有用的模式，而 Kotlin（继 Scala 之后） 使单例声明变得很容易：  
+<pre>
+object DataProviderManager {
+    fun registerDataProvider(provider: DataProvider) {
+    // ……
+} 
+val allDataProviders: Collection<dataprovider>
+    get() = // ……
+}
+</dataprovider></pre>
+这称为对象声明。并且它总是在 object 关键字后跟一个名称。 就像变量声明一样，对象声
+明不是一个表达式，不能用在赋值语句的右边。  
+要引用该对象，我们直接使用其名称即可： DataProviderManager.registerDataProvider(……)
+这些对象可以有超类型，
+注意：对象声明不能在局部作用域（即直接嵌套在函数内部） ，但是它们可以嵌套到其他对
+象声明或非内部类中。  
+
+#### 伴生对象 ####
+类内部的对象声明可以用 companion 关键字标记：  
+<pre>
+class MyClass {
+    companion object Factory {
+        fun create(): MyClass = MyClass()
+    }
+}
+</pre>
+该伴生对象的成员可通过只使用类名作为限定符来调用  
+val instance = MyClass.create()  
+可以省略伴生对象的名称，在这种情况下将使用名称 Companion ：
+<pre>
+class MyClass {
+    companion object {
+    }
+} 
+val x = MyClass.Companion
+</pre>
+请注意，即使伴生对象的成员看起来像其他语言的静态成员，在运行时他们仍然是真实对象
+的实例成员，而且，例如还可以实现接口：
+<pre>
+interface Factory<t> {
+    fun create(): T
+} 
+class MyClass {
+    companion object : Factory<myclass> {
+        override fun create(): MyClass = MyClass()
+    }
+}
+</myclass></t></pre>
+对象表达式和对象声明之间的语义差异
+<li>对象表达式是在使用他们的地方立即执行（及初始化） 的；
+</li><li>对象声明是在第一次被访问到时延迟初始化的；
+</li><li>伴生对象的初始化是在相应的类被加载（解析） 时，与 Java 静态初始化器的语义相匹
+配。
+
+
+### 委托 ###
+#### 类委托 #####
+委托模式已经证明是实现继承的一个很好的替代方式， 而 Kotlin 可以零样板代码地原生支持
+它。 类 Derived 可以继承一个接口 Base ，并将其所有共有的方法委托给一个指定的对象：  
+<pre>
+interface Base {
+    fun print()
+} 
+class BaseImpl(val x: Int) : Base {
+    override fun print() { print(x) }
+} 
+class Derived(b: Base) : Base by b
+    fun main(args: Array<string>) {
+    val b = BaseImpl(10)
+    Derived(b).print() // 输出 10
+}
+</string></pre>
+Derived 的超类型列表中的 by -子句表示 b 将会在 Derived 中内部存储。 并且编译器将
+生成转发给 b 的所有 Base 的方法。  
+请注意，覆盖会以你所期望的方式工作：编译器会使用你的 override 实现取代委托对象中
+的实现。如果我们为 Derived 添加 override fun print() { print("abc") } ，该程序会输
+出“abc”而不是“10”。  
+#### 委托属性 ####
+有一些常见的属性类型，虽然我们可以在每次需要的时候手动实现它们， 但是如果能够为大
+家把他们只实现一次并放入一个库会更好。例如包括：  
+</li><li>延迟属性（lazy properties） : 其值只在首次访问时计算；
+</li><li>可观察属性（observable properties） : 监听器会收到有关此属性变更的通知；
+</li><li>把多个属性储存在一个映射（map） 中，而不是每个存在单独的字段中。
+为了涵盖这些（以及其他） 情况，Kotlin 支持 委托属性:  
+<pre>
+class Example {
+    var p: String by Delegate()
+}
+</pre>
+语法是： val/var <属性名>: <类型> by <表达式> 。在 by 后面的表达式是该 委托， 因为属性
+对应的 get() （和 set() ） 会被委托给它的 getValue() 和 setValue() 方法。 属性的委
+托不必实现任何的接口，但是需要提供一个 getValue() 函数（和 setValue() ——对于
+var 属性） 。 例如:  
+<pre>
+class Delegate {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+        return "$thisRef, thank you for delegating '${property.name}' to me!"
+    } 
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        println("$value has been assigned to '${property.name} in $thisRef.'")
+    }
+}
+</*></*></pre>
+#### 延迟属性 Lazy ####
+lazy() 是接受一个 lambda 并返回一个 Lazy <t> 实例的函数，返回的实例可以作为实现延
+迟属性的委托： 第一次调用 get() 会执行已传递给 lazy() 的 lambda 表达式并记录结
+果， 后续调用 get() 只是返回记录的结果。  
+<pre>
+val lazyValue: String by lazy {
+    println("computed!")
+    "Hello"
+} 
+fun main(args: Array<string>) {
+    println(lazyValue)
+    println(lazyValue)
+}
+输出结果：
+computed!
+Hello
+Hello
+</string></pre>
+默认情况下，对于 lazy 属性的求值是同步锁的（synchronized） ：该值只在一个线程中计
+算，并且所有线程会看到相同的值。如果初始化委托的同步锁不是必需的，这样多个线程可
+以同时执行，那么将 LazyThreadSafetyMode.PUBLICATION 作为参数传递给 lazy() 函数。 而
+如果你确定初始化将总是发生在单个线程，那么你可以使用 LazyThreadSafetyMode.NONE 模
+式， 它不会有任何线程安全的保证和相关的开销。  
+
+可观察属性 Observable  
+Delegates.observable() 接受两个参数：初始值和修改时处理程序（handler） 。 每当我们给
+属性赋值时会调用该处理程序（在赋值后执行） 。它有三个参数：被赋值的属性、旧值和新
+值：  
+<pre>
+import kotlin.properties.Delegates
+class User {
+    var name: String by Delegates.observable("<no name="">") {
+        prop, old, new ->
+        println("$old -> $new")
+    }
+} 
+fun main(args: Array<string>) {
+    val user = User()
+    user.name = "first"
+    user.name = "second"
+}
+</string></no></pre>
+如果你想能够截获一个赋值并“否决”它，就使用 vetoable() 取代 observable() 。 在属性被
+赋新值生效之前会调用传递给 vetoable 的处理程序。  
+
+**把属性储存在映射中**
+一个常见的用例是在一个映射（map） 里存储属性的值。 这经常出现在像解析 JSON 或者做
+其他“动态”事情的应用中。 在这种情况下，你可以使用映射实例自身作为委托来实现委托属
+性。  
+<pre>
+class User(val map: Map<string, any?="">) {
+    val name: String by map
+    val age: Int by map
+}
+val user = User(mapOf(
+    "name" to "John Doe",
+    "age" to 25
+))
+
+</string,></pre>
+这也适用于 var 属性，如果把只读的 Map 换成 MutableMap 的话：
+<pre>
+class MutableUser(val map: MutableMap<string, any?="">) {
+    var name: String by map
+    var age: Int by map
+}
+</string,></pre>
+**局部委托属性（自 1.1 起）**
+你可以将局部变量声明为委托属性。 例如，你可以使一个局部变量惰性初始化：  
+<pre>
+fun example(computeFoo: () -> Foo) {
+    val memoizedFoo by lazy(computeFoo)
+    if (someCondition && memoizedFoo.isValid()) {
+        memoizedFoo.doSomething()
+    }
+}
+</pre>
+**属性委托要求**
+对于一个只读属性（即 val 声明的） ，委托必须提供一个名为 getValue 的函数，该函数接
+受以下参数：  
+<li>thisRef —— 必须与 属性所有者 类型（对于扩展属性——指被扩展的类型） 相同或者
+是它的超类型；
+</li><li>property —— 必须是类型 KProperty<*> 或其超类型。
+
+这个函数必须返回与属性相同的类型（或其子类型） 。  
+对于一个可变属性（即 var 声明的） ，委托必须额外提供一个名为 setValue 的函数，该函
+数接受以下参数：  
+<li>thisRef —— 同 getValue() ；
+</li><li>property —— 同 getValue() ；
+</li><li>new value —— 必须和属性同类型或者是它的超类型。
+getValue() 或/和 setValue() 函数可以通过委托类的成员函数提供或者由扩展函数提供。
+当你需要委托属性到原本未提供的这些函数的对象时后者会更便利。 两函数都需要用
+operator 关键字来进行标记   
+委托类可以实现包含所需 operator 方法的 ReadOnlyProperty 或 ReadWriteProperty 接口之
+一。 这俩接口是在 Kotlin 标准库中声明的：
+<pre>
+interface ReadOnlyProperty<in r,="" out="" t=""> {
+    operator fun getValue(thisRef: R, property: KProperty<*>): T
+} 
+interface ReadWriteProperty<in r,="" t=""> {
+    operator fun getValue(thisRef: R, property: KProperty<*>): T
+    operator fun setValue(thisRef: R, property: KProperty<*>, value: T)
+}
+</*></*></in></*></in></pre>
+
+<p><strong>提供委托（自 1.1 起）</strong><br>通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右<br>侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来创建属性<br>委托实例。<br>provideDelegate 的一个可能的使用场景是在创建属性时（而不仅在其 getter 或 setter 中）<br>检查属性一致性。<br>例如，如果要在绑定之前检查属性名称，可以这样写：  </p>
+<p><pre><br>class ResourceLoader<t>(id: ResourceID<t>) {<br>    operator fun provideDelegate(<br>    thisRef: MyUI,<br>    prop: KProperty&lt;*&gt;<br>    ): ReadOnlyProperty<myui, t=""> {<br>        checkProperty(thisRef, prop.name)<br>        // 创建委托<br>}<br>    private fun checkProperty(thisRef: MyUI, name: String) { …… }<br>}<br>fun <t> bindResource(id: ResourceID<t>): ResourceLoader<t> { …… }<br>class MyUI {<br>    val image by bindResource(ResourceID.image_id)<br>    val text by bindResource(ResourceID.text_id)<br>}<br></t></t></t></myui,></t></t></pre><br>provideDelegate 的参数与 getValue 相同：  </p>
+<p><li>thisRef —— 必须与 属性所有者 类型（对于扩展属性——指被扩展的类型） 相同或者<br>是它的超类型；</li></p>
+<p><li>property —— 必须是类型 KProperty&lt;*&gt; 或其超类型<br>在创建 MyUI 实例期间，为每个属性调用 provideDelegate 方法，并立即执行必要的验证。<br>如果没有这种拦截属性与其委托之间的绑定的能力，为了实现相同的功能， 你必须显式传递<br>属性名，这不是很方便<br>请注意， provideDelegate 方法只影响辅助属性的创建，并不会影响为 getter 或 setter 生成<br>的代码。</li></p>
+</li></*></li></t></表达式></类型></属性名></li></t></t></t></in></any></int></t></derived></t></object></string>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/23/Kotlin基础（2）-类与对象/" rel="next" title="Kotlin基础（2）-类与对象">
+                <i class="fa fa-chevron-left"></i> Kotlin基础（2）-类与对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/30/kotlin基础-函数与lambda表达式/" rel="prev" title="kotlin基础-函数与lambda表达式">
+                kotlin基础-函数与lambda表达式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Des Matières
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Ensemble
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Clouse" />
+          <p class="site-author-name" itemprop="name">Clouse</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">articles</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number">1.</span> <span class="nav-text">泛型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Clouse</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Thème -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

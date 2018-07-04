@@ -1,0 +1,1294 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="函数函数声明Kotlin 中的函数使用 fun 关键字声明：  fun double(x: Int): Int {     return 2*x }  函数用法   调用函数使用传统的方法：    val result = double(2)  调用成员函数使用点表示法：  Sample().foo() // 创建类 Sample 实例并调用 foo  参数   函数参数使用 Pascal 表示法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kotlin基础-函数与lambda表达式">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/kotlin基础-函数与lambda表达式/index.html">
+<meta property="og:site_name" content="Clouse">
+<meta property="og:description" content="函数函数声明Kotlin 中的函数使用 fun 关键字声明：  fun double(x: Int): Int {     return 2*x }  函数用法   调用函数使用传统的方法：    val result = double(2)  调用成员函数使用点表示法：  Sample().foo() // 创建类 Sample 实例并调用 foo  参数   函数参数使用 Pascal 表示法">
+<meta property="og:updated_time" content="2018-06-04T03:11:27.594Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kotlin基础-函数与lambda表达式">
+<meta name="twitter:description" content="函数函数声明Kotlin 中的函数使用 fun 关键字声明：  fun double(x: Int): Int {     return 2*x }  函数用法   调用函数使用传统的方法：    val result = double(2)  调用成员函数使用点表示法：  Sample().foo() // 创建类 Sample 实例并调用 foo  参数   函数参数使用 Pascal 表示法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/kotlin基础-函数与lambda表达式/"/>
+
+
+
+
+
+  <title>kotlin基础-函数与lambda表达式 | Clouse</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Clouse</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Accueil
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/kotlin基础-函数与lambda表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Clouse">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clouse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">kotlin基础-函数与lambda表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T09:11:31+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><p>Kotlin 中的函数使用 fun 关键字声明：</p>
+<pre>
+fun double(x: Int): Int {
+    return 2*x
+}
+</pre>
+函数用法  
+调用函数使用传统的方法：  
+<pre>
+val result = double(2)
+</pre>
+调用成员函数使用点表示法：
+<pre>
+Sample().foo() // 创建类 Sample 实例并调用 foo
+</pre>
+参数  
+函数参数使用 Pascal 表示法定义，即 name: type。参数用逗号隔开。每个参数必须有显式类
+型：  
+<pre>
+fun powerOf(number: Int, exponent: Int) {
+    ……
+}
+</pre>
+默认参数  
+函数参数可以有默认值，当省略相应的参数时使用默认值。与其他语言相比，这可以减少重
+载数量：  
+<pre>
+fun read(b: Array<byte>, off: Int = 0, len: Int = b.size) {
+    ……
+}    
+</byte></pre>
+默认值通过类型后面的 = 及给出的值来定义。  
+覆盖方法总是使用与基类型方法相同的默认参数值。 当覆盖一个带有默认参数值的方法时，
+必须从签名中省略默认参数值：  
+<pre>
+open class A {
+    open fun foo(i: Int = 10) { …… }
+} 
+class B : A() {
+    override fun foo(i: Int) { …… } // 不能有默认值
+}    
+</pre>
+#### 命名参数 ####
+可以在调用函数时使用命名的函数参数。当一个函数有大量的参数或默认参数时这会非常方
+便。
+给定以下函数：  
+<pre>
+fun reformat(str: String,
+    normalizeCase: Boolean = true,
+    upperCaseFirstLetter: Boolean = true,
+    divideByCamelHumps: Boolean = false,
+    wordSeparator: Char = ' ') {
+        ……
+}
+</pre>
+我们可以使用默认参数来调用它：  
+reformat(str)  
+然而，当使用非默认参数调用它时，该调用看起来就像：  
+reformat(str, true, true, false, '_')  
+使用命名参数我们可以使代码更具有可读性：  
+<pre>
+reformat(str,
+    normalizeCase = true,
+    upperCaseFirstLetter = true,
+    divideByCamelHumps = false,
+    wordSeparator = '_'
+)
+</pre>
+并且如果我们不需要所有的参数：  
+reformat(str, wordSeparator = '_')  
+当一个函数调用混用位置参数与命名参数时，所有位置参数都要放在第一个命名参数之前。
+例如，允许调用 f(1, y = 2) 但不允许 f(x = 1, 2) 。  
+可以通过使用星号操作符将可变数量参数（vararg ） 以命名形式传入：  
+<pre>
+fun foo(vararg strings: String) { /* …… */ }
+foo(strings = *arrayOf("a", "b", "c"))
+foo(strings = "a") // 对于单个值不需要星号
+</pre>  
+请注意，在调用 Java 函数时不能使用命名参数语法，因为 Java 字节码并不总是保留函数参
+数的名称。  
+#### 返回 Unit 的函数 ####
+如果一个函数不返回任何有用的值，它的返回类型是 Unit 。 Unit 是一种只有一个值
+—— Unit 的类型。这个值不需要显式返回：  
+<pre>
+fun printHello(name: String?): Unit {
+    if (name != null)
+        println("Hello ${name}")
+    else
+        println("Hi there!")
+    // `return Unit` 或者 `return` 是可选的
+}
+Unit 返回类型声明也是可选的。上面的代码等同于：
+fun printHello(name: String?) {
+    ……
+}
+</pre>
+
+<p>单表达式函数<br>当函数返回单个表达式时，可以省略花括号并且在 = 符号之后指定代码体即可：</p>
+<pre>
+fun double(x: Int): Int = x * 2
+</pre>
+当返回值类型可由编译器推断时，显式声明返回类型是可选的：
+<pre>
+fun double(x: Int) = x * 2
+</pre>
+显式返回类型  
+具有块代码体的函数必须始终显式指定返回类型，除非他们旨在返回 Unit ，在这种情况下
+它是可选的。 Kotlin 不推断具有块代码体的函数的返回类型，因为这样的函数在代码体中可
+能有复杂的控制流，并且返回类型对于读者（有时甚至对于编译器） 是不明显的。  
+
+可变数量的参数（Varargs）  
+函数的参数（通常是最后一个） 可以用 vararg 修饰符标记：  
+<pre>
+fun <t> asList(vararg ts: T): List<t> {
+    val result = ArrayList<t>()
+    for (t in ts) // ts is an Array
+        result.add(t)
+    return result
+}
+</t></t></t></pre>
+允许将可变数量的参数传递给函数：  
+<pre>
+val list = asList(1, 2, 3)
+</pre>
+在函数内部，类型 T 的 vararg 参数的可见方式是作为 T 数组，即上例中的 ts 变量具
+有类型 Array <out t=""> 。
+只有一个参数可以标注为 vararg 。如果 vararg 参数不是列表中的最后一个参数， 可以使
+用命名参数语法传递其后的参数的值，或者，如果参数具有函数类型，则通过在括号外部传
+一个 lambda。
+当我们调用 vararg -函数时，我们可以一个接一个地传参，例如 asList(1, 2, 3) ，或者，
+如果我们已经有一个数组并希望将其内容传给该函数，我们使用伸展（spread） 操作符（在
+数组前面加 * ） ：
+<pre>
+val a = arrayOf(1, 2, 3)
+val list = asList(-1, 0, *a, 4)
+</pre>
+中缀表示法
+函数还可以用中缀表示法调用，当  
+<li>他们是成员函数或扩展函数；
+</li><li>他们只有一个参数；
+</li><li>他们用 infix 关键字标注。  
+<pre>
+// 给 Int 定义扩展
+infix fun Int.shl(x: Int): Int {
+    ……
+} /
+/ 用中缀表示法调用扩展函数
+1 shl 2
+// 等同于这样
+1.shl(2)
+</pre>
+函数作用域
+在 Kotlin 中函数可以在文件顶层声明，这意味着你不需要像一些语言如 Java、C# 或 Scala
+那样创建一个类来保存一个函数。此外除了顶层函数，Kotlin 中函数也可以声明在局部作用
+域、作为成员函数以及扩展函数  
+
+局部函数   
+Kotlin 支持局部函数，即一个函数在另一个函数内部：
+<pre>
+fun dfs(graph: Graph) {
+    fun dfs(current: Vertex, visited: Set<vertex>) {
+        if (!visited.add(current)) return
+        for (v in current.neighbors)
+            dfs(v, visited)
+    } 
+    dfs(graph.vertices[0], HashSet())
+}
+</vertex></pre>
+局部函数可以访问外部函数（即闭包） 的局部变量，所以在上例中，visited 可以是局部变
+量：  
+<pre>
+fun dfs(graph: Graph) {
+    val visited = HashSet<vertex>()
+    fun dfs(current: Vertex) {
+        if (!visited.add(current)) return
+        for (v in current.neighbors)
+            dfs(v)
+    } 
+dfs(graph.vertices[0])
+}
+</vertex></pre>
+成员函数  
+成员函数是在类或对象内部定义的函数：  
+<pre>
+class Sample() {
+    fun foo() { print("Foo") }
+}
+</pre>
+成员函数以点表示法调用：  
+<pre>
+Sample().foo() // 创建类 Sample 实例并调用 foo
+</pre>
+泛型函数  
+函数可以有泛型参数，通过在函数名前使用尖括号指定：  
+<pre>
+fun <t> singletonList(item: T): List<t> {
+    // ……
+}
+</t></t></pre>
+尾递归函数  
+Kotlin 支持一种称为尾递归的函数式编程风格。 这允许一些通常用循环写的算法改用递归函
+数来写，而无堆栈溢出的风险。 当一个函数用 tailrec 修饰符标记并满足所需的形式时，编
+译器会优化该递归，留下一个快速而高效的基于循环的版本：  
+<pre>
+tailrec fun findFixPoint(x: Double = 1.0): Double
+= if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
+</pre>
+这段代码计算余弦的不动点（fixpoint of cosine） ，这是一个数学常数。 它只是重复地从 1.0
+开始调用 Math.cos，直到结果不再改变，产生0.7390851332151607的结果。最终代码相当
+于这种更传统风格的代码：  
+<pre>
+private fun findFixPoint(): Double {
+    var x = 1.0
+    while (true) {
+        val y = Math.cos(x)
+        if (x == y) return y
+        x = y
+    }
+}
+</pre>
+要符合 tailrec 修饰符的条件的话，函数必须将其自身调用作为它执行的最后一个操作。在
+递归调用后有更多代码时，不能使用尾递归，并且不能用在 try/catch/finally 块中。目前尾部
+递归只在 JVM 后端中支持。  
+
+### 高阶函数 ###
+高阶函数是将函数用作参数或返回值的函数。 这种函数的一个很好的例子是 lock() ，它接
+受一个锁对象和一个函数，获取锁，运行函数并释放锁：  
+<pre>
+fun <t> lock(lock: Lock, body: () -> T): T {
+    lock.lock()
+    try {
+        return body()
+    } 
+    finally {
+        lock.unlock()
+    }
+}
+</t></pre>
+让我们来检查上面的代码： body 拥有函数类型： () -> T ， 所以它应该是一个不带参数并
+且返回 T 类型值的函数。 它在 try -代码块内部调用、被 lock 保护，其结果
+由 lock（） 函数返回。   
+如果我们想调用 lock() 函数，我们可以把另一个函数传给它作为参数（参见函数引用） ：  
+<pre>
+fun toBeSynchronized() = sharedResource.operation()
+val result = lock(lock, ::toBeSynchronized)
+</pre>
+通常会更方便的另一种方式是传一个 lambda 表达式：  
+<pre>
+val result = lock(lock, { sharedResource.operation() })
+</pre>
+</li><li>Lambda 表达式在下文会有更详细的描述，但为了继续这一段，让我们看一个简短的概述：  
+</li><li>lambda 表达式总是被大括号括着；
+</li><li>其参数（如果有的话） 在 -> 之前声明（参数类型可以省略） ；
+</li><li>函数体（如果存在的话） 在 -> 后面。  
+在 Kotlin 中有一个约定，如果函数的最后一个参数是一个函数，并且你传递一个 lambda 表达
+式作为相应的参数，你可以在圆括号之外指定它：
+<pre>
+lock (lock) {
+    sharedResource.operation()
+}
+</pre>
+高阶函数的另一个例子是 map() ：  
+<pre>
+fun <t, r=""> List<t>.map(transform: (T) -> R): List<r> {
+    val result = arrayListOf<r>()
+    for (item in this)
+        result.add(transform(item))
+    return result
+}
+</r></r></t></t,></pre>
+该函数可以如下调用:  
+<pre>
+val doubled = ints.map { value -> value * 2 }
+</pre>
+请注意，如果 lambda 是该调用的唯一参数，则调用中的圆括号可以完全省略。
+
+
+it ：单个参数的隐式名称
+另一个有用的约定是，如果函数字面值只有一个参数， 那么它的声明可以省略（连同 -> ） ，其名称是 it 。   
+<pre>
+ints.map { it * 2 }
+</pre>
+这些约定可以写LINQ-风格的代码:  
+<pre>
+strings.filter { it.length == 5 }.sortedBy { it }.map { it.toUpperCase() }
+</pre>
+下划线用于未使用的变量（自 1.1 起）  
+如果 lambda 表达式的参数未使用，那么可以用下划线取代其名称：  
+<pre>
+map.forEach { _, value -> println("$value!") }
+</pre>
+
+<h4 id="Lambda-表达式与匿名函数"><a href="#Lambda-表达式与匿名函数" class="headerlink" title="Lambda 表达式与匿名函数"></a>Lambda 表达式与匿名函数</h4><p>一个 lambda 表达式或匿名函数是一个“函数字面值”，即一个未声明的函数， 但立即做为表达<br>式传递。考虑下面的例子  </p>
+<pre>
+max(strings, { a, b -> a.length < b.length })
+</pre>
+函数 max 是一个高阶函数，换句话说它接受一个函数作为第二个参数。 其第二个参数是一
+个表达式，它本身是一个函数，即函数字面值。写成函数的话，它相当于：
+<pre>
+fun compare(a: String, b: String): Boolean = a.length < b.length
+</pre>
+**函数类型**
+对于接受另一个函数作为参数的函数，我们必须为该参数指定函数类型。 例如上述函数 max
+定义如下：  
+<pre>
+fun <t> max(collection: Collection<t>, less: (T, T) -> Boolean): T? {
+    var max: T? = null
+    for (it in collection)
+        if (max == null || less(max, it))
+            max = it
+    return max
+}
+</t></t></pre>
+参数 less 的类型是 (T, T) -> Boolean ，即一个接受两个类型 T 的参数并返回一个布尔值
+的函数： 如果第一个参数小于第二个那么该函数返回 true。
+在上面第 4 行代码中， less 作为一个函数使用：通过传入两个 T 类型的参数来调用。
+如上所写的是就函数类型，或者可以有命名参数，如果你想文档化每个参数的含义的话。  
+<pre>
+val compare: (x: T, y: T) -> Int = ……
+</pre>
+如要声明一个函数类型的可空变量，请将整个函数类型括在括号中并在其后加上问号：  
+var sum: ((Int, Int) -> Int)? = null  
+
+#### Lambda 表达式语法 ####
+Lambda 表达式的完整语法形式，即函数类型的字面值如下：  
+<pre>
+val sum = { x: Int, y: Int -> x + y }
+</pre>
+lambda 表达式总是被大括号括着， 完整语法形式的参数声明放在大括号内，并有可选的类型
+标注， 函数体跟在一个 -> 符号之后。如果推断出的该 lambda 的返回类型不是 Unit ，那
+么该 lambda 主体中的最后一个（或可能是单个） 表达式会视为返回值。  
+如果我们把所有可选标注都留下，看起来如下：  
+<pre>
+val sum: (Int, Int) -> Int = { x, y -> x + y }
+</pre>
+一个 lambda 表达式只有一个参数是很常见的。 如果 Kotlin 可以自己计算出签名，它允许我
+们不声明唯一的参数，并且将隐含地为我们声明其名称为 it ：  
+ints.filter { it > 0 } // 这个字面值是“(it: Int) -> Boolean”类型的  
+我们可以使用限定的返回语法从 lambda 显式返回一个值。否则，将隐式返回最后一个表达式
+的值。因此，以下两个片段是等价的：  
+<pre>
+ints.filter {
+    val shouldFilter = it > 0
+    shouldFilter
+} 
+ints.filter {
+    val shouldFilter = it > 0
+    return@filter shouldFilter
+}
+</pre>
+#### 匿名函数 ####
+上面提供的 lambda 表达式语法缺少的一个东西是指定函数的返回类型的能力。在大多数情况
+下，这是不必要的。因为返回类型可以自动推断出来。然而，如果确实需要显式指定，可以
+使用另一种语法： 匿名函数 。   
+<pre>
+fun(x: Int, y: Int): Int = x + y
+</pre>
+匿名函数看起来非常像一个常规函数声明，除了其名称省略了。其函数体可以是表达式（如
+上所示） 或代码块：  
+<pre>
+fun(x: Int, y: Int): Int {
+    return x + y
+}
+</pre>
+参数和返回类型的指定方式与常规函数相同，除了能够从上下文推断出的参数类型可以省
+略：  
+<pre>
+ints.filter(fun(item) = item > 0)
+</pre>
+匿名函数的返回类型推断机制与正常函数一样：对于具有表达式函数体的匿名函数将自动推
+断返回类型，而具有代码块函数体的返回类型必须显式指定（或者已假定为 Unit ） 。
+请注意，匿名函数参数总是在括号内传递。 允许将函数留在圆括号外的简写语法仅适用于
+lambda 表达式。
+Lambda表达式与匿名函数之间的另一个区别是非局部返回的行为。一个不带标签的 return
+语句总是在用 fun 关键字声明的函数中返回。这意味着 lambda 表达式中的 return 将从包
+含它的函数返回，而匿名函数中的 return 将从匿名函数自身返回。  
+#### 闭包 ####
+Lambda 表达式或者匿名函数（以及局部函数和对象表达式） 可以访问其 闭包 ，即在外部作
+用域中声明的变量。 与 Java 不同的是可以修改闭包中捕获的变量：
+<pre>
+var sum = 0
+ints.filter { it > 0 }.forEach {
+    sum += it
+} 
+print(sum)
+</pre>
+Kotlin 提供了使用指定的 接收者对象 调用函数字面值的功能。 在函数字面值的函数体中，可
+以调用该接收者对象上的方法而无需任何额外的限定符。 这类似于扩展函数，它允许你在函
+数体内访问接收者对象的成员。 其用法的最重要的示例之一是类型安全的 Groovy-风格构建
+器。
+这样的函数字面值的类型是一个带有接收者的函数类型：  
+<pre>
+sum : Int.(other: Int) -> Int
+该函数字面值可以这样调用，就像它是接收者对象上的一个方法一样：
+1.sum(2)
+</pre>
+匿名函数语法允许你直接指定函数字面值的接收者类型。 如果你需要使用带接收者的函数类
+型声明一个变量，并在之后使用它，这将非常有用。  
+<pre>
+val sum = fun Int.(other: Int): Int = this + other
+</pre>
+当接收者类型可以从上下文推断时，lambda 表达式可以用作带接收者的函数字面值。  
+<pre>
+class HTML {
+    fun body() { …… }
+} 
+fun html(init: HTML.() -> Unit): HTML {
+val html = HTML() // 创建接收者对象
+html.init() // 将该接收者对象传给该 lambda
+return html
+} 
+html { // 带接收者的 lambda 由此开始
+    body() // 调用该接收者对象的一个方法
+}
+</pre>
+#### 内联函数 ####
+使用高阶函数会带来一些运行时的效率损失：每一个函数都是一个对象，并且会捕获一个闭
+包。 即那些在函数体内会访问到的变量。 内存分配（对于函数对象和类） 和虚拟调用会引入
+运行时间开销。
+但是在许多情况下通过内联化 lambda 表达式可以消除这类的开销。 下述函数是这种情况的
+很好的例子。即 lock() 函数可以很容易地在调用处内联。 考虑下面的情况：  
+<pre>
+lock(l) { foo() }
+</pre>
+编译器没有为参数创建一个函数对象并生成一个调用。取而代之，编译器可以生成以下代
+码：  
+<pre>
+l.lock()
+try {
+    foo()
+} 
+finally {
+    l.unlock()
+}
+</pre>
+这个不是我们从一开始就想要的吗？
+为了让编译器这么做，我们需要使用 inline 修饰符标记 lock() 函数：  
+<pre>
+inline fun lock<t>(lock: Lock, body: () -> T): T {
+    // ……
+}
+</t></pre>
+inline 修饰符影响函数本身和传给它的 lambda 表达式：所有这些都将内联到调用处。
+内联可能导致生成的代码增加；不过如果我们使用得当（即避免内联过大函数） ，性能上会
+有所提升，尤其是在循环中的“超多态（megamorphic） ”调用处  
+
+禁用内联
+如果你只想被（作为参数） 传给一个内联函数的 lamda 表达式中只有一些被内联，你可以用
+noinline 修饰符标记一些函数参数：  
+<pre>
+inline fun foo(inlined: () -> Unit, noinline notInlined: () -> Unit) {
+    // ……
+}
+</pre>
+可以内联的 lambda 表达式只能在内联函数内部调用或者作为可内联的参数传递， 但是
+noinline 的可以以任何我们喜欢的方式操作：存储在字段中、传送它等等。
+需要注意的是，如果一个内联函数没有可内联的函数参数并且没有具体化的类型参数，编译
+器会产生一个警告，因为内联这样的函数很可能并无益处（如果你确认需要内联，则可以用
+@Suppress("NOTHING_TO_INLINE") 注解关掉该警告） 。  
+#### 非局部返回 ####
+在 Kotlin 中，我们可以只使用一个正常的、非限定的 return 来退出一个命名或匿名函数。
+这意味着要退出一个 lambda 表达式，我们必须使用一个标签，并且在 lambda 表达式内部禁
+止使用裸 return ，因为 lambda 表达式不能使包含它的函数返回：  
+<pre>
+fun foo() {
+    ordinaryFunction {
+        return // 错误：不能使 `foo` 在此处返回
+    }
+}
+</pre>
+但是如果 lambda 表达式传给的函数是内联的，该 return 也可以内联，所以它是允许的：  
+<pre>
+fun foo() {
+    inline Function {
+        return // OK：该 lambda 表达式是内联的
+    }
+}
+</pre>
+这种返回（位于 lambda 表达式中，但退出包含它的函数） 称为非局部返回。 我们习惯了在
+循环中用这种结构，其内联函数通常包含：  
+<pre>
+fun hasZeros(ints: List<int>): Boolean {
+    ints.forEach {
+    if (it == 0) 
+        return true // 从 hasZeros 返回
+    } 
+    return false
+}
+</int></pre>
+请注意，一些内联函数可能调用传给它们的不是直接来自函数体、而是来自另一个执行上下
+文的 lambda 表达式参数，例如来自局部对象或嵌套函数。在这种情况下，该 lambda 表达式
+中也不允许非局部控制流。为了标识这种情况，该 lambda 表达式参数需要用 crossinline
+修饰符标记:  
+<pre>
+inline fun f(crossinline body: () -> Unit) {
+    val f = object: Runnable {
+        override fun run() = body()
+    } 
+    // ……
+}
+</pre>
+**break 和 continue 在内联的 lambda 表达式中还不可用，但我们也计划支持它们。  **
+
+#### 具体化的类型参数 ####
+有时候我们需要访问一个作为参数传给我们的一个类型：  
+<pre>
+inline fun <reified t=""> TreeNode.findParentOfType(): T? {
+    var p = parent
+    while (p != null && p !is T) {
+        p = p.parent
+    } 
+    return p as T?
+}
+</reified></pre>
+我们使用 reified 修饰符来限定类型参数，现在可以在函数内部访问它了， 几乎就像是一个
+普通的类一样。由于函数是内联的，不需要反射，正常的操作符如 !is 和 as 现在都能用
+了。此外，我们还可以按照上面提到的方式调用
+它： myTree.findParentOfType<mytreenodetype>() 。
+
+内联属性（自 1.1 起）  
+inline 修饰符可用于没有幕后字段的属性的访问器。 你可以标注独立的属性访问器：  
+你也可以标注整个属性，将它的两个访问器都标记为内联  
+<pre>
+val foo: Foo
+    inline get() = Foo()
+var bar: Bar
+    get() = ……
+    inline set(v) { …… }
+
+
+
+inline var bar: Bar
+    get() = ……
+    set(v) { …… }
+</pre>
+**公有 API 内联函数的限制**
+当一个内联函数是 public 或 protected 而不是 private 或 internal 声明的一部分时，
+就会认为它是一个模块级的公有 API。可以在其他模块中调用它，并且也可以在调用处内联这
+样的调用。
+这带来了一些由模块做这样变更时导致的二进制兼容的风险——声明一个内联函数但调用它
+的模块在它修改后并没有重新编译。
+为了消除这种由非公有 API 变更引入的不兼容的风险，公有 API 内联函数体内不允许使用非
+公有声明，即，不允许使用 private 与 internal 声明以及其部件。
+一个 internal 声明可以由 @PublishedApi 标注，这会允许它在公有 API 内联函数中使用。
+当一个 internal 内联函数标记有 @PublishedApi 时，也会像公有函数一样检查其函数体  
+
+### 协程 ###
+#### 阻塞 vs 挂起 ####
+**挂起函数**
+当我们调用标记有特殊修饰符 suspend 的函数时，会发生挂起：  
+<pre>
+suspend fun doSomething(foo: Foo): Bar {
+……
+}
+</pre>
+kotlin.coroutines.experimental 中仅有的“应用程序级”函数是  
+<li>buildSequence()
+</li><li>buildIterator()  
+<pre>
+import kotlin.coroutines.experimental.*
+fun main(args: Array<string>) {
+    //sampleStart
+    val fibonacciSeq = buildSequence {
+        var a = 0
+        var b = 1
+        yield(1)
+        while (true) {
+            yield(a + b)
+            val tmp = a + b
+            a = b
+            b = tmp
+        }
+    }
+    //sampleEnd
+    // 输出前五个斐波纳契数字
+    println(fibonacciSeq.take(8).toList())
+}
+</string></pre>
+这通过创建一个协程生成一个惰性的、潜在无限的斐波那契数列，该协程通过调用 yield()
+函数来产生连续的斐波纳契数。当在这样的序列的迭代器上迭代每一步，都会执行生成下一
+个数的协程的另一部分。因此，我们可以从该序列中取出任何有限的数字列表，例如
+fibonacciSeq.take(8).toList() 结果是 [1, 1, 2, 3, 5, 8, 13, 21] 。协程足够廉价使这很
+实用。  
+
+buildIterator() 的工作方式类似于 buildSequence() ，但返回一个惰性迭代器。
+可以通过为 SequenceBuilder 类写挂起扩展（带有上文描述的 @RestrictsSuspension 注解）
+来为 buildSequence() 添加自定义生产逻辑（custom yielding logic） 
+
+kotlin 的协程怎么用
+在 kotlin 上，使用协程你只需要知道两个方法和他们的返回类型，就可以很熟练的用上协程了。分别是：  
+<pre>
+fun launch(): Job
+fun async(): Deferred
+</pre>
+从方法名我们就能看出，launch表示启动一个协程。  
+<pre>
+public fun launch(
+    context: CoroutineContext,
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    block: suspend CoroutineScope.() -> Unit
+): Job {
+}
+</pre>
+
+<p>launch()方法接收三个参数，通常很少用到第二个参数。<br>第一个参数是一个协程的上下文，CoroutineContext不仅可以用于在协程跳转的时刻传递数据，同时最主要的功能，是用于表明协程运行与恢复时的上下文环境。<br>通常Android在用的时候都是传一个UI就表示在 UI 线程启动协程，或者传一个CommonPool表示在异步启动协程，还有一个是Unconfined表示不指定，在哪个线程调用就在哪个线程恢复。  </p>
+<p><pre><br>fun test() {<br>    launch(UI) {<br>        val isUIThread = Thread.currentThread() == Looper.getMainLooper().thread<br>        println(“UI::===$isUIThread”)<br>    }<br>    launch(CommonPool) {<br>        val isUIThread = Thread.currentThread() == Looper.getMainLooper().thread<br>        println(“CommonPool::===$isUIThread”)<br>    }<br>}<br></pre><br>Job对象<br>launch()方法会返回一个job对象，job对象常用的方法有三个，叫start、join和cancel。分别对应了协程的启动、切换至当前协程、取消。<br>例如下面是start()方法的使用示例：  </p>
+<p><pre><br>fun test() {<br>    //当启动类型设置成LAZY时，协程不会立即启动，而是手动调用start()后他才会启动。<br>    val job = launch(UI, CoroutineStart.LAZY) {<br>        println(“hello”)<br>    }<br>    job.start()<br>}<br></pre><br>join()方法就比较特殊，他是一个suspend方法。suspend 修饰的方法(或闭包)只能调用被suspend修饰过的方法(或闭包)。 方法声明如下：  </p>
+<p><pre><br>public suspend fun join()<br></pre><br>因此，join()方法只能在协程体内部使用，跟他的功能：切换至当前协程所吻合。  </p>
+<p><pre><br>fun test() {<br>    val job1 = launch(UI, CoroutineStart.LAZY) {<br>        println(“hello1”)<br>    }<br>    val job2 = launch(UI) {<br>        println(“hello2”)<br>        job1.join()<br>        println(“hello3”)<br>    }<br>}</pre></p>
+<p>这段代码执行后将会输出<br>hello2<br>hello1<br>hello3<br><br>async()方法<br>async()方法也是创建一个协程并启动，甚至连方法的声明都跟launch()方法一模一样。<br>不同的是，async()方法的返回值，返回的是一个Deferred对象。这个接口是Job接口的子类。<br>因此上文介绍的所有方法，都可以用于Deferred的对象。</p>
+<p>Deferred最大的用处在于他特有的一个方法await()：  </p>
+<p><pre><br>public suspend fun await(): T<br></pre><br>await()可以返回当前协程的执行结果，也就是你可以这样写代码：  </p>
+<p><pre><br>fun test() {<br>    val deferred1 = async(CommonPool) {<br>        “hello1”<br>    }<br>    val deferred2 = async(UI) {<br>        println(“hello2”)<br>        println(deferred1.await())<br>    }<br>}<br></pre><br>你发现神奇的地方了吗，我让一个工作在主线程的协程，获取到了一个异步协程的返回值。<br>这意味着，我们以后网络请求、图片加载、数据库、文件操作什么的，都可以丢到一个异步的协程中去，然后在同步代码中直接取返回值，而不再需要去写回调了。<br>这就是我们经常使用的一个最大特性。<br><strong>kotlin 协程使用示例</strong>  </p>
+<p><pre><br>fun test() {<br>    //每秒输出两个数字<br>    val job1 = launch(Unconfined, CoroutineStart.LAZY) {<br>        var count = 0<br>        while (true) {<br>            count++<br>            //delay()表示将这个协程挂起500ms<br>            delay(500)<br>            println(“count::$count”)<br>        }<br>    }</pre></p>
+<pre><code>//job2会立刻启动
+val job2 = async(CommonPool) {
+    job1.start()
+    &quot;ZhangTao&quot;
+}
+
+launch(UI) {
+    delay(3000)
+    job1.cancel()
+    //await()的规则是：如果此刻job2已经执行完则立刻返回结果，否则等待job2执行
+    println(job2.await())
+}
+</code></pre><p>}<br><br><strong>kotlin协程补充</strong></p>
+<p><pre><br>launch (UI){<br>        folders.listFiles().filter {<br>            it.name.endsWith(“png”)<br>        }.forEach {<br>            val job1 = async(CommonPool) {<br>                getImgeFromFile(it.absoluteFile)<br>            }<br>            imageLayout.loadImg(job1.await())<br>        }<br>    }<br></pre><br>kotlin 的语法会让很多人觉得launch()、async()是两个协程方法。其实不然，真正的协程是launch()传入的闭包参数。当launch()调用的时候，会启动一个协程（本质上并不一定是立即启动，下一篇文章解释）。<br>async()方法调用的时候又启动了一个协程，此刻外部协程的状态(包括CPU、方法调用、变量信息)会被暂存，进而切换到async()启动的协程执行。<br>在本例子中，launch()、async()这两个方法都显式传入了两个参数：</p>
+<p>1、第一个参数是一个协程的上下文，类型是CoroutineContext。<br>CoroutineContext不仅可以用于在协程跳转的时刻传递数据，同时最主要的功能，也是在本例中的作用是用于表明协程运行与恢复时的上下文环境。<br>例如launch()方法中的UI参数，他实际上是一个封装了Handle的CoroutineContext对象。<br><strong>suspend</strong><br>一个协程方法(或闭包)必须被 suspend 修饰，同时 suspend 修饰的方法(或闭包)只能被suspend修饰过的方法(或闭包)调用。<br>suspend修饰后代码发生了怎样的变化？</p>
+<p>我们知道，kotlin的闭包(lambda)在被编译后是转换成了内部类的对象，而一个被suspend修饰的闭包，就是一个特殊的内部类。例如这段例子：<br>原理请参考：<br><a href="https://kymjs.com/code/2017/11/06/01/" target="_blank" rel="external">https://kymjs.com/code/2017/11/06/01/</a></p>
+</li></mytreenodetype></li></out>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/25/Kotlin基础（2）-类与对象-2/" rel="next" title="Kotlin基础（2）-类与对象(2)">
+                <i class="fa fa-chevron-left"></i> Kotlin基础（2）-类与对象(2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/08/C-primer-学习笔记（一）/" rel="prev" title="C++ primer 学习笔记（一）">
+                C++ primer 学习笔记（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Des Matières
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Ensemble
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Clouse" />
+          <p class="site-author-name" itemprop="name">Clouse</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">articles</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数声明"><span class="nav-number">1.1.</span> <span class="nav-text">函数声明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lambda-表达式与匿名函数"><span class="nav-number">1.1.1.</span> <span class="nav-text">Lambda 表达式与匿名函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Clouse</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Thème -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

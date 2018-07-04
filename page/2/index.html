@@ -93,16 +93,12 @@
 
 
 
-<meta name="description" content="View的基础知识1.View的位置参数    View的位置主要由它的四个顶点来决定，分别对应View的四个属性：left,right,top,bottom。其中left对应的是View的左上角的横坐标，right对应的是右下角的横坐标，top对应的是左上角的纵坐标，bottom对应的是右上角的纵坐标。这些坐标都是相对父容器来说的这四个参数分别对应View的mLeft,mRight,mTop,m">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android艺术探索--View的事件体系">
-<meta property="og:url" content="http://yoursite.com/2017/06/29/Android艺术探索-View的事件体系/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Clouse">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Clouse">
-<meta property="og:description" content="View的基础知识1.View的位置参数    View的位置主要由它的四个顶点来决定，分别对应View的四个属性：left,right,top,bottom。其中left对应的是View的左上角的横坐标，right对应的是右下角的横坐标，top对应的是左上角的纵坐标，bottom对应的是右上角的纵坐标。这些坐标都是相对父容器来说的这四个参数分别对应View的mLeft,mRight,mTop,m">
-<meta property="og:updated_time" content="2017-07-03T01:28:26.266Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android艺术探索--View的事件体系">
-<meta name="twitter:description" content="View的基础知识1.View的位置参数    View的位置主要由它的四个顶点来决定，分别对应View的四个属性：left,right,top,bottom。其中left对应的是View的左上角的横坐标，right对应的是右下角的横坐标，top对应的是左上角的纵坐标，bottom对应的是右上角的纵坐标。这些坐标都是相对父容器来说的这四个参数分别对应View的mLeft,mRight,mTop,m">
+<meta name="twitter:title" content="Clouse">
 
 
 
@@ -130,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/29/Android艺术探索-View的事件体系/"/>
+  <link rel="canonical" href="http://yoursite.com/page/2/"/>
 
 
 
 
 
-  <title>Android艺术探索--View的事件体系 | Clouse</title>
+  <title>Clouse</title>
   
 
 
@@ -161,7 +157,9 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,9 +242,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -272,7 +270,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android艺术探索--View的事件体系</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/29/Android艺术探索-View的事件体系/" itemprop="url">Android艺术探索--View的事件体系</a></h1>
         
 
         <div class="post-meta">
@@ -319,7 +319,9 @@
       
 
       
-        <h2 id="View的基础知识"><a href="#View的基础知识" class="headerlink" title="View的基础知识"></a>View的基础知识</h2><h3 id="1-View的位置参数"><a href="#1-View的位置参数" class="headerlink" title="1.View的位置参数"></a>1.View的位置参数</h3><blockquote>
+        
+          
+            <h2 id="View的基础知识"><a href="#View的基础知识" class="headerlink" title="View的基础知识"></a>View的基础知识</h2><h3 id="1-View的位置参数"><a href="#1-View的位置参数" class="headerlink" title="1.View的位置参数"></a>1.View的位置参数</h3><blockquote>
 <p>   View的位置主要由它的四个顶点来决定，分别对应View的四个属性：left,right,top,bottom。其中left对应的是View的左上角的横坐标，right对应的是右下角的横坐标，top对应的是左上角的纵坐标，bottom对应的是右上角的纵坐标。这些坐标都是相对父容器来说的这四个参数分别对应View的mLeft,mRight,mTop,mBottom成员变量，获取方式分别是getLeft(),getRight(),getTop(),getBottom(),由此可以通过宽度width = right - left 跟高度height = bottom - top</p>
 <p>从Android3.0开始又新增了x,y,translationX,translationY这几个参数，x，y对应的是view左上角的坐标，而translationX和translationY是View左上角相对父容器的偏移量，这几个参数也是相对父容器,translationX和translationY默认值是0，View在平移过程中top跟left表示的是原始左上角的位置信息<br>公式 x= left + translationX<br>公式 y= right + translationY</p>
 <h3 id="2-MotionEvent跟TouchSlop"><a href="#2-MotionEvent跟TouchSlop" class="headerlink" title="2.MotionEvent跟TouchSlop"></a>2.MotionEvent跟TouchSlop</h3><h4 id="MotionEvent"><a href="#MotionEvent" class="headerlink" title="MotionEvent"></a>MotionEvent</h4><p>手指接触屏幕后所产生的事件<br></p>
@@ -352,27 +354,20 @@ return consume;
 </ul>
 </blockquote>
 
+          
+        
       
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
-      
-        
-
       
     </div>
 
@@ -380,38 +375,25 @@ return consume;
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/15/CMake调用jni的基本使用方法/" rel="prev" title="CMake调用jni的基本使用方法">
-                CMake调用jni的基本使用方法 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -419,10 +401,6 @@ return consume;
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -442,17 +420,8 @@ return consume;
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table Des Matières
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Ensemble
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -496,22 +465,6 @@ return consume;
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#View的基础知识"><span class="nav-number">1.</span> <span class="nav-text">View的基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-View的位置参数"><span class="nav-number">1.1.</span> <span class="nav-text">1.View的位置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-MotionEvent跟TouchSlop"><span class="nav-number">1.2.</span> <span class="nav-text">2.MotionEvent跟TouchSlop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MotionEvent"><span class="nav-number">1.2.1.</span> <span class="nav-text">MotionEvent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TouchSlop"><span class="nav-number">1.2.2.</span> <span class="nav-text">TouchSlop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VelocityTracker"><span class="nav-number">1.2.3.</span> <span class="nav-text">VelocityTracker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GestureDetector"><span class="nav-number">1.2.4.</span> <span class="nav-text">GestureDetector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scroller"><span class="nav-number">1.2.5.</span> <span class="nav-text">Scroller</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -625,10 +578,10 @@ return consume;
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-
+  
 
   
 
